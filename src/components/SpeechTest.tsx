@@ -15,7 +15,7 @@ interface SpeechTestProps {
 
 type TestState = 'intro' | 'recording' | 'review' | 'complete' | 'permission-denied'
 
-const PROMPT_TEXT = "The quick brown fox jumps over the lazy dog. She sells seashells by the seashore. Peter Piper picked a peck of pickled peppers."
+const PROMPT_TEXT = "The sun was setting behind the mountains, painting the sky in shades of orange and pink. A gentle breeze rustled through the trees as birds returned to their nests for the evening. In the distance, a dog barked and children played in the park, their laughter echoing across the quiet neighborhood."
 const MIN_DURATION = 10000 // 10 seconds
 const MAX_DURATION = 15000 // 15 seconds
 

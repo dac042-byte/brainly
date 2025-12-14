@@ -21,7 +21,7 @@ interface ReactionTimeTestProps {
 
 type TestState = 'intro' | 'ready' | 'waiting' | 'stimulus' | 'response' | 'early' | 'complete'
 
-const PRACTICE_TRIALS = 2
+const PRACTICE_TRIALS = 0
 const MEASURED_TRIALS = 10
 const MIN_DELAY = 1000
 const MAX_DELAY = 3000
@@ -195,7 +195,7 @@ export function ReactionTimeTest({ onComplete, onCancel }: ReactionTimeTestProps
             <li>Stay focused - the test pauses if you switch windows</li>
           </ul>
           <p className="text-sm text-gray-600 dark:text-gray-400">
-            You'll do {PRACTICE_TRIALS} practice trials, then {MEASURED_TRIALS} measured trials.
+            You'll complete {MEASURED_TRIALS} trials. Each trial takes just a few seconds.
           </p>
         </div>
         <div className="mt-6 flex space-x-4">
