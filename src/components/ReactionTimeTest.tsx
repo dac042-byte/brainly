@@ -114,7 +114,7 @@ export function ReactionTimeTest({ onComplete, onCancel }: ReactionTimeTestProps
         } else {
           setState('complete')
         }
-      }, 1000)
+      }, 3000)
     }
   }, [state, currentTrialIndex, totalTrials, resetTrial, startTrial])
 
