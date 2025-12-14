@@ -111,6 +111,7 @@ export function ReactionTimeTest({ onComplete, onCancel }: ReactionTimeTestProps
       setTimeout(() => {
         if (currentTrialIndex + 1 < totalTrials) {
           setCurrentTrialIndex(prev => prev + 1)
+          setState('ready')
         } else {
           setState('complete')
         }
