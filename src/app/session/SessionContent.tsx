@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import type { UserProfile } from '@/lib/types'
 import { ReactionTimeTest } from '@/components/ReactionTimeTest'
 import { MemoryTest } from '@/components/MemoryTest'
+import { SpeechTest } from '@/components/SpeechTest'
 import {
   createSession,
   saveReactionTrials,
@@ -17,7 +18,7 @@ interface SessionContentProps {
   profile: UserProfile
 }
 
-type SessionState = 'warning' | 'intro' | 'memory-encoding' | 'reaction' | 'memory-recall' | 'processing' | 'complete'
+type SessionState = 'warning' | 'intro' | 'memory-encoding' | 'reaction' | 'speech' | 'memory-recall' | 'processing' | 'complete'
 
 export function SessionContent({ profile }: SessionContentProps) {
   const router = useRouter()
@@ -27,6 +28,13 @@ export function SessionContent({ profile }: SessionContentProps) {
   const [loading, setLoading] = useState(true)
   const [memoryWordSequence, setMemoryWordSequence] = useState<string[]>([])
   const [memoryScore, setMemoryScore] = useState<number>(0)
+  const [speechMetrics, setSpeechMetrics] = useState<{
+    wordCount: number
+    wordsPerMinute: number
+    pauseCount: number
+    averagePauseDuration: number
+    totalDuration: number
+  } | null>(null)
 
   useEffect(() => {
     async function checkSessions() {
@@ -56,11 +64,42 @@ export function SessionContent({ profile }: SessionContentProps) {
 
     try {
       await saveReactionTrials(sessionId, trials, focusLossCount)
-      setState('memory-recall')
+      setState('speech')
     } catch (error) {
       console.error('Failed to save reaction trials:', error)
       alert('Failed to save reaction time data. Please try again.')
       setState('reaction')
+    }
+  }
+
+  const handleSpeechComplete = async (metrics: {
+    wordCount: number
+    wordsPerMinute: number
+    pauseCount: number
+    averagePauseDuration: number
+    totalDuration: number
+  }) => {
+    if (!sessionId) return
+
+    try {
+      const supabase = createClient()
+
+      // Save speech metrics
+      await supabase.from('speech_tests').insert({
+        session_id: sessionId,
+        word_count: metrics.wordCount,
+        words_per_minute: metrics.wordsPerMinute,
+        pause_count: metrics.pauseCount,
+        average_pause_duration: metrics.averagePauseDuration,
+        total_duration: metrics.totalDuration
+      })
+
+      setSpeechMetrics(metrics)
+      setState('memory-recall')
+    } catch (error) {
+      console.error('Failed to save speech metrics:', error)
+      alert('Failed to save speech data. Please try again.')
+      setState('speech')
     }
   }
 
@@ -155,11 +194,12 @@ export function SessionContent({ profile }: SessionContentProps) {
           </h2>
           <div className="space-y-4 text-gray-300">
             <p>
-              This session includes memory encoding, reaction time testing, and delayed memory recall.
+              This session includes memory encoding, reaction time testing, speech analysis, and delayed memory recall.
             </p>
             <ol className="list-decimal list-inside space-y-2">
               <li>Memorize words (20 seconds)</li>
               <li>Complete reaction time test</li>
+              <li>Record speech sample</li>
               <li>Recall the words from memory</li>
             </ol>
             <div className="bg-pink-900/20 border border-pink-500/30 rounded-xl p-4">
@@ -212,6 +252,10 @@ export function SessionContent({ profile }: SessionContentProps) {
         />
       </div>
     )
+  }
+
+  if (state === 'speech') {
+    return <SpeechTest onComplete={handleSpeechComplete} />
   }
 
   if (state === 'memory-recall') {
