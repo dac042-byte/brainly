@@ -22,7 +22,7 @@ interface ReactionTimeTestProps {
 type TestState = 'intro' | 'ready' | 'waiting' | 'stimulus' | 'response' | 'early' | 'complete'
 
 const PRACTICE_TRIALS = 0
-const MEASURED_TRIALS = 10
+const MEASURED_TRIALS = 5
 const MIN_DELAY = 1000
 const MAX_DELAY = 3000
 

@@ -48,6 +48,52 @@ export function SessionContent({ profile }: SessionContentProps) {
     checkSessions()
   }, [])
 
+  // Detect session abandonment (user leaving mid-test)
+  useEffect(() => {
+    let abandonedSession = false
+
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        // User left the page - check if session is in progress
+        const inProgressStates: SessionState[] = ['memory-encoding', 'reaction', 'speech', 'memory-recall']
+        if (sessionId && inProgressStates.includes(state)) {
+          // Session abandoned - delete it
+          abandonedSession = true
+          const supabase = createClient()
+          supabase.from('sessions').delete().eq('id', sessionId).then(() => {
+            console.log('Session abandoned and deleted')
+          })
+        }
+      } else if (abandonedSession) {
+        // User came back - reset to intro
+        setSessionId(null)
+        setState('intro')
+        setMemoryWordSequence([])
+        setMemoryScore(0)
+        setSpeechMetrics(null)
+        abandonedSession = false
+        alert('Your previous session was cancelled because you left the page. Please start a new session.')
+      }
+    }
+
+    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+      const inProgressStates: SessionState[] = ['memory-encoding', 'reaction', 'speech', 'memory-recall']
+      if (sessionId && inProgressStates.includes(state)) {
+        e.preventDefault()
+        e.returnValue = 'Your session progress will be lost. Are you sure you want to leave?'
+        return e.returnValue
+      }
+    }
+
+    document.addEventListener('visibilitychange', handleVisibilityChange)
+    window.addEventListener('beforeunload', handleBeforeUnload)
+
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange)
+      window.removeEventListener('beforeunload', handleBeforeUnload)
+    }
+  }, [sessionId, state])
+
   const handleStartSession = async () => {
     const session = await createSession()
     setSessionId(session.id)
