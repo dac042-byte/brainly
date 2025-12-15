@@ -36,6 +36,13 @@ export function SettingsContent({ profile, user }: SettingsContentProps) {
     setSaving(false)
   }
 
+  const handleLogout = async () => {
+    const supabase = createClient()
+    await supabase.auth.signOut()
+    router.push('/login')
+    router.refresh()
+  }
+
   return (
     <DashboardLayout>
       <div className="p-8">
@@ -90,6 +97,14 @@ export function SettingsContent({ profile, user }: SettingsContentProps) {
                   disabled
                   className="w-full px-3 py-2 border border-gray-700 rounded-lg bg-gray-800/50 text-gray-400 cursor-not-allowed"
                 />
+              </div>
+              <div className="pt-4 border-t border-gray-700">
+                <button
+                  onClick={handleLogout}
+                  className="w-full px-6 py-3 rounded-xl border border-red-500/30 bg-red-900/20 hover:bg-red-900/30 font-medium text-red-300 hover:text-red-200 transition-all"
+                >
+                  Log Out
+                </button>
               </div>
             </div>
           </div>
