@@ -192,11 +192,11 @@ export function NewDashboardContent({ data, profile }: DashboardContentProps) {
             )}
 
             {/* Progress Banner */}
-            {!baseline && sessions.length < 3 && (
+            {!baseline && sessions.length < 1 && (
               <div className="bg-gradient-to-r from-pink-900/40 to-rose-900/40 backdrop-blur-xl rounded-2xl border border-pink-500/30 p-6">
                 <h3 className="text-lg font-bold text-white mb-2">Building Your Baseline</h3>
                 <p className="text-pink-200">
-                  Complete {3 - sessions.length} more session{3 - sessions.length > 1 ? 's' : ''} to establish your personal baseline.
+                  Complete {1 - sessions.length} more session{1 - sessions.length > 1 ? 's' : ''} to establish your personal baseline.
                 </p>
               </div>
             )}

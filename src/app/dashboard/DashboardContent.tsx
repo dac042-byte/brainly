@@ -87,13 +87,13 @@ export function DashboardContent({ data, profile }: DashboardContentProps) {
         </div>
       </div>
 
-      {!baseline && sessions.length < 3 && (
+      {!baseline && sessions.length < 1 && (
         <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4 mb-6">
           <h3 className="text-sm font-medium text-blue-900 dark:text-blue-200 mb-1">
             Building Your Baseline
           </h3>
           <p className="text-sm text-blue-800 dark:text-blue-300">
-            Complete {3 - sessions.length} more session{3 - sessions.length > 1 ? 's' : ''} to establish your personal baseline.
+            Complete {1 - sessions.length} more session{1 - sessions.length > 1 ? 's' : ''} to establish your personal baseline.
             Your baseline will be used to track changes over time.
           </p>
         </div>
