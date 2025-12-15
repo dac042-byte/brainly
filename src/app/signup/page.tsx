@@ -22,6 +22,9 @@ export default async function SignupPage() {
           </p>
         </div>
         <SignupForm />
+        <p className="text-center text-xs text-gray-500 dark:text-gray-400">
+          For personal tracking only. Not a medical device.
+        </p>
       </div>
     </div>
   )

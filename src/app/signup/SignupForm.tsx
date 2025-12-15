@@ -100,19 +100,6 @@ export function SignupForm() {
         </div>
       </div>
 
-      <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-md p-4">
-        <h3 className="text-sm font-medium text-blue-900 dark:text-blue-200 mb-2">
-          Important Information
-        </h3>
-        <ul className="text-sm text-blue-800 dark:text-blue-300 space-y-1 list-disc list-inside">
-          <li>This app is for personal self-tracking only</li>
-          <li>It does not provide medical advice or assessment</li>
-          <li>It does not detect, predict, or prevent any medical condition</li>
-          <li>Data is compared only to your own personal baseline</li>
-          <li>Consult healthcare professionals for medical concerns</li>
-        </ul>
-      </div>
-
       <div className="space-y-3">
         <div className="flex items-start">
           <div className="flex items-center h-5">
@@ -123,12 +110,12 @@ export function SignupForm() {
               required
               checked={consentAccepted}
               onChange={(e) => setConsentAccepted(e.target.checked)}
-              className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+              className="h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 rounded"
             />
           </div>
           <div className="ml-3 text-sm">
             <label htmlFor="consent" className="font-medium text-gray-700 dark:text-gray-300">
-              I understand this is not a medical device and provides no information about my health
+              I agree to use this for personal tracking only
             </label>
           </div>
         </div>
@@ -141,12 +128,12 @@ export function SignupForm() {
               type="checkbox"
               checked={audioStorageEnabled}
               onChange={(e) => setAudioStorageEnabled(e.target.checked)}
-              className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+              className="h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 rounded"
             />
           </div>
           <div className="ml-3 text-sm">
             <label htmlFor="audio-storage" className="font-medium text-gray-700 dark:text-gray-300">
-              Optional: Store audio recordings for my own review (recommended: leave unchecked)
+              Store audio recordings (optional, not recommended)
             </label>
           </div>
         </div>

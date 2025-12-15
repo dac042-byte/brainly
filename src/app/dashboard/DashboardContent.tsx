@@ -5,6 +5,7 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContai
 import type { DashboardData, UserProfile } from '@/lib/types'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
+import { ThemeToggle } from '@/components/ThemeToggle'
 
 interface DashboardContentProps {
   data: DashboardData
@@ -63,12 +64,15 @@ export function DashboardContent({ data, profile }: DashboardContentProps) {
             Track your cognitive performance over time
           </p>
         </div>
-        <button
-          onClick={handleSignOut}
-          className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700"
-        >
-          Sign Out
-        </button>
+        <div className="flex items-center gap-3">
+          <ThemeToggle />
+          <button
+            onClick={handleSignOut}
+            className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-gray-300 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-all"
+          >
+            Sign Out
+          </button>
+        </div>
       </div>
 
       {!baseline && sessions.length < 3 && (
@@ -240,24 +244,12 @@ export function DashboardContent({ data, profile }: DashboardContentProps) {
           </p>
           <a
             href="/session"
-            className="inline-block bg-indigo-600 text-white px-6 py-3 rounded-md hover:bg-indigo-700 font-medium"
+            className="inline-block bg-gradient-to-r from-purple-600 to-blue-600 text-white px-8 py-3 rounded-lg hover:from-purple-700 hover:to-blue-700 font-medium shadow-lg hover:shadow-xl transition-all duration-200"
           >
             Start First Session
           </a>
         </div>
       )}
-
-      <div className="mt-8 bg-gray-50 dark:bg-gray-900 rounded-lg p-6">
-        <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-          About Your Data
-        </h3>
-        <ul className="text-sm text-gray-600 dark:text-gray-400 space-y-1">
-          <li>• All measurements compare to your personal baseline only</li>
-          <li>• Data represents timing patterns, not health status</li>
-          <li>• Changes are shown as percentage from your own baseline</li>
-          <li>• For best results, test under similar conditions each time</li>
-        </ul>
-      </div>
     </div>
   )
 }
