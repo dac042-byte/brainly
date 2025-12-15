@@ -12,7 +12,7 @@ export function Sidebar() {
   ]
 
   return (
-    <div className="w-80 min-h-screen bg-gray-900/95 backdrop-blur-xl border-r border-gray-800/50 flex flex-col">
+    <div className="w-80 min-h-screen bg-gray-900/95 backdrop-blur-xl border-r border-slate-750/50 flex flex-col">
       {/* Logo */}
       <div className="p-6">
         <div className="flex items-center gap-3 mb-2">
@@ -21,12 +21,12 @@ export function Sidebar() {
           </div>
           <div>
             <h1 className="text-xl font-bold text-white">BrainGauge</h1>
-            <p className="text-xs text-gray-400">Performance tracker</p>
+            <p className="text-xs text-slate-400">Performance tracker</p>
           </div>
         </div>
 
-        <div className="mt-4 px-3 py-2 bg-pink-500/20 rounded-lg border border-pink-500/30">
-          <p className="text-xs text-pink-300 font-medium">✓ Baseline established</p>
+        <div className="mt-4 px-3 py-2 bg-pink-500/20 rounded-lg border border-rose-700/30">
+          <p className="text-xs text-rose-400 font-medium">✓ Baseline established</p>
         </div>
       </div>
 
@@ -39,7 +39,7 @@ export function Sidebar() {
             className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all ${
               pathname === item.path
                 ? 'bg-pink-600 text-white shadow-lg shadow-pink-500/50'
-                : 'text-gray-400 hover:bg-gray-800/50 hover:text-white'
+                : 'text-slate-400 hover:bg-gray-800/50 hover:text-white'
             }`}
           >
             <span className="text-lg">{item.icon}</span>
@@ -50,9 +50,9 @@ export function Sidebar() {
 
       {/* Bottom section */}
       <div className="p-6">
-        <div className="border-t border-gray-800 pt-4">
+        <div className="border-t border-slate-750 pt-4">
           <p className="text-xs text-gray-500 leading-relaxed">
-            <strong className="text-gray-400">Not a medical device.</strong><br />
+            <strong className="text-slate-400">Not a medical device.</strong><br />
             BrainGauge is for performance monitoring and trend awareness only.
           </p>
         </div>

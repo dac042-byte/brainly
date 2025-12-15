@@ -51,7 +51,7 @@ export function SettingsContent({ profile, user }: SettingsContentProps) {
           <h1 className="text-3xl font-bold text-white mb-2">
             Settings
           </h1>
-          <p className="text-gray-400">
+          <p className="text-slate-400">
             Manage your account preferences
           </p>
         </div>
@@ -68,37 +68,37 @@ export function SettingsContent({ profile, user }: SettingsContentProps) {
 
         <div className="space-y-6">
           {/* Account Section */}
-          <div className="bg-gray-900/60 backdrop-blur-xl rounded-2xl border border-gray-800/50 p-6">
+          <div className="bg-slate-850/80 backdrop-blur-xl rounded-2xl border border-slate-750/50 p-6">
             <h2 className="text-xl font-bold text-white mb-4">
               Account
             </h2>
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-1">
+                <label className="block text-sm font-medium text-slate-300 mb-1">
                   Email
                 </label>
                 <input
                   type="email"
                   value={user.email || ''}
                   disabled
-                  className="w-full px-3 py-2 border border-gray-700 rounded-lg bg-gray-800/50 text-gray-400 cursor-not-allowed"
+                  className="w-full px-3 py-2 border border-slate-750 rounded-lg bg-gray-800/50 text-slate-400 cursor-not-allowed"
                 />
                 <p className="text-xs text-gray-500 mt-1">
                   Email cannot be changed
                 </p>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-1">
+                <label className="block text-sm font-medium text-slate-300 mb-1">
                   Account Created
                 </label>
                 <input
                   type="text"
                   value={new Date(profile.created_at).toLocaleDateString()}
                   disabled
-                  className="w-full px-3 py-2 border border-gray-700 rounded-lg bg-gray-800/50 text-gray-400 cursor-not-allowed"
+                  className="w-full px-3 py-2 border border-slate-750 rounded-lg bg-gray-800/50 text-slate-400 cursor-not-allowed"
                 />
               </div>
-              <div className="pt-4 border-t border-gray-700">
+              <div className="pt-4 border-t border-slate-750">
                 <button
                   onClick={handleLogout}
                   className="w-full px-6 py-3 rounded-xl border border-red-500/30 bg-red-900/20 hover:bg-red-900/30 font-medium text-red-300 hover:text-red-200 transition-all"
@@ -110,7 +110,7 @@ export function SettingsContent({ profile, user }: SettingsContentProps) {
           </div>
 
           {/* Privacy Section */}
-          <div className="bg-gray-900/60 backdrop-blur-xl rounded-2xl border border-gray-800/50 p-6">
+          <div className="bg-slate-850/80 backdrop-blur-xl rounded-2xl border border-slate-750/50 p-6">
             <h2 className="text-xl font-bold text-white mb-4">
               Privacy
             </h2>
@@ -120,7 +120,7 @@ export function SettingsContent({ profile, user }: SettingsContentProps) {
                   <p className="font-medium text-white">
                     Audio Storage
                   </p>
-                  <p className="text-sm text-gray-400 mt-1">
+                  <p className="text-sm text-slate-400 mt-1">
                     Store audio recordings from speech tests. When disabled, only timing metrics are saved.
                   </p>
                 </div>
@@ -137,7 +137,7 @@ export function SettingsContent({ profile, user }: SettingsContentProps) {
               <button
                 onClick={handleSavePrivacy}
                 disabled={saving}
-                className="w-full bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-700 hover:to-rose-700 text-white px-6 py-3 rounded-xl font-medium shadow-lg shadow-pink-500/30 transition-all disabled:opacity-50"
+                className="w-full bg-gradient-to-r from-rose-700 to-rose-600 hover:from-pink-700 hover:to-rose-700 text-white px-6 py-3 rounded-xl font-medium shadow-lg shadow-rose-900/20 transition-all disabled:opacity-50"
               >
                 {saving ? 'Saving...' : 'Save Privacy Settings'}
               </button>
@@ -145,11 +145,11 @@ export function SettingsContent({ profile, user }: SettingsContentProps) {
           </div>
 
           {/* Data Section */}
-          <div className="bg-gray-900/60 backdrop-blur-xl rounded-2xl border border-gray-800/50 p-6">
+          <div className="bg-slate-850/80 backdrop-blur-xl rounded-2xl border border-slate-750/50 p-6">
             <h2 className="text-xl font-bold text-white mb-4">
               Your Data
             </h2>
-            <div className="space-y-3 text-sm text-gray-400">
+            <div className="space-y-3 text-sm text-slate-400">
               <p>• All data is stored securely and is only accessible by you</p>
               <p>• Measurements are compared only to your personal baseline</p>
               <p>• No data is shared with third parties</p>
@@ -158,11 +158,11 @@ export function SettingsContent({ profile, user }: SettingsContentProps) {
           </div>
 
           {/* About Section */}
-          <div className="bg-gray-900/60 backdrop-blur-xl rounded-2xl border border-gray-800/50 p-6">
+          <div className="bg-slate-850/80 backdrop-blur-xl rounded-2xl border border-slate-750/50 p-6">
             <h2 className="text-xl font-bold text-white mb-4">
               About
             </h2>
-            <div className="space-y-2 text-sm text-gray-400">
+            <div className="space-y-2 text-sm text-slate-400">
               <p><strong className="text-gray-200">Braingauge v1</strong></p>
               <p>Privacy-first cognitive self-tracking</p>
               <p className="text-xs pt-2 text-gray-500">For personal tracking only. Not a medical device.</p>

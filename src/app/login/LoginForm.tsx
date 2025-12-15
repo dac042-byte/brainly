@@ -60,10 +60,10 @@ export function LoginForm() {
         <button
           type="button"
           onClick={() => setUseMagicLink(false)}
-          className={`px-4 py-2 text-sm font-medium rounded-lg transition-all ${
+          className={`px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${
             !useMagicLink
-              ? 'bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-md'
-              : 'bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-300'
+              ? 'bg-gradient-to-r from-rose-700 to-rose-600 text-white shadow-md shadow-rose-900/30'
+              : 'bg-slate-800/50 text-slate-400 hover:bg-slate-800'
           }`}
         >
           Email & Password
@@ -71,10 +71,10 @@ export function LoginForm() {
         <button
           type="button"
           onClick={() => setUseMagicLink(true)}
-          className={`px-4 py-2 text-sm font-medium rounded-lg transition-all ${
+          className={`px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${
             useMagicLink
-              ? 'bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-md'
-              : 'bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-300'
+              ? 'bg-gradient-to-r from-rose-700 to-rose-600 text-white shadow-md shadow-rose-900/30'
+              : 'bg-slate-800/50 text-slate-400 hover:bg-slate-800'
           }`}
         >
           Magic Link
@@ -95,7 +95,7 @@ export function LoginForm() {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 dark:border-gray-700 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-gray-100 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm dark:bg-gray-800"
+              className="appearance-none rounded-none relative block w-full px-3 py-2 border border-slate-750 placeholder-slate-500 text-white rounded-t-md focus:outline-none focus:ring-1 focus:ring-rose-600 focus:border-rose-600 focus:z-10 sm:text-sm bg-slate-850/80 transition-all duration-200"
               placeholder="Email address"
             />
           </div>
@@ -112,7 +112,7 @@ export function LoginForm() {
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 dark:border-gray-700 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-gray-100 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm dark:bg-gray-800"
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-slate-750 placeholder-slate-500 text-white rounded-b-md focus:outline-none focus:ring-1 focus:ring-rose-600 focus:border-rose-600 focus:z-10 sm:text-sm bg-slate-850/80 transition-all duration-200"
                 placeholder="Password"
               />
             </div>
@@ -120,11 +120,11 @@ export function LoginForm() {
         </div>
 
         {message && (
-          <div className={`rounded-md p-4 ${
-            message.type === 'error' ? 'bg-red-50 dark:bg-red-900/20' : 'bg-green-50 dark:bg-green-900/20'
+          <div className={`rounded-xl p-4 border animate-slide-up ${
+            message.type === 'error' ? 'bg-status-concern/10 border-status-concern/30' : 'bg-status-stable/10 border-status-stable/30'
           }`}>
             <p className={`text-sm ${
-              message.type === 'error' ? 'text-red-800 dark:text-red-200' : 'text-green-800 dark:text-green-200'
+              message.type === 'error' ? 'text-status-concern' : 'text-status-stable'
             }`}>
               {message.text}
             </p>
@@ -135,7 +135,7 @@ export function LoginForm() {
           <button
             type="submit"
             disabled={loading}
-            className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg transition-all"
+            className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-xl text-white bg-gradient-to-r from-rose-700 to-rose-600 hover:from-rose-800 hover:to-rose-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-950 focus:ring-rose-600 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-rose-900/30 transition-all duration-200"
           >
             {loading ? 'Loading...' : useMagicLink ? 'Send Magic Link' : 'Sign In'}
           </button>
@@ -144,7 +144,7 @@ export function LoginForm() {
         <div className="text-center">
           <a
             href="/signup"
-            className="font-medium text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300"
+            className="font-medium text-rose-500 hover:text-rose-400 transition-colors duration-200"
           >
             Don't have an account? Sign up
           </a>

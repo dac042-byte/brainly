@@ -183,7 +183,7 @@ export function ReactionTimeTest({ onComplete, onCancel }: ReactionTimeTestProps
         <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-gray-100">
           Reaction Time Test
         </h2>
-        <div className="space-y-4 text-gray-700 dark:text-gray-300">
+        <div className="space-y-4 text-gray-700 dark:text-slate-300">
           <p>
             This test measures how quickly you respond to a visual stimulus.
           </p>
@@ -194,7 +194,7 @@ export function ReactionTimeTest({ onComplete, onCancel }: ReactionTimeTestProps
             <li>Don't click early - wait for the green circle</li>
             <li>Stay focused - the test pauses if you switch windows</li>
           </ul>
-          <p className="text-sm text-gray-600 dark:text-gray-400">
+          <p className="text-sm text-gray-600 dark:text-slate-400">
             You'll complete {MEASURED_TRIALS} trials. Each trial takes just a few seconds.
           </p>
         </div>
@@ -208,7 +208,7 @@ export function ReactionTimeTest({ onComplete, onCancel }: ReactionTimeTestProps
           {onCancel && (
             <button
               onClick={onCancel}
-              className="px-6 py-3 rounded-md border border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 font-medium text-gray-700 dark:text-gray-300"
+              className="px-6 py-3 rounded-md border border-gray-300 dark:border-slate-750 hover:bg-gray-50 dark:hover:bg-gray-700 font-medium text-gray-700 dark:text-slate-300"
             >
               Cancel
             </button>
@@ -226,10 +226,10 @@ export function ReactionTimeTest({ onComplete, onCancel }: ReactionTimeTestProps
           <h2 className="text-2xl font-bold mb-2 text-red-600 dark:text-red-400">
             Too Early!
           </h2>
-          <p className="text-gray-700 dark:text-gray-300">
+          <p className="text-gray-700 dark:text-slate-300">
             Wait for the green circle before clicking.
           </p>
-          <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
+          <p className="text-sm text-gray-500 dark:text-slate-400 mt-2">
             Restarting trial...
           </p>
         </div>
@@ -243,7 +243,7 @@ export function ReactionTimeTest({ onComplete, onCancel }: ReactionTimeTestProps
         onClick={handleResponse}
         className="max-w-2xl mx-auto h-96 bg-gray-100 dark:bg-gray-900 rounded-lg shadow-lg cursor-pointer flex items-center justify-center"
       >
-        <p className="text-gray-500 dark:text-gray-400 text-lg">
+        <p className="text-gray-500 dark:text-slate-400 text-lg">
           Wait for it...
         </p>
       </div>
@@ -270,7 +270,7 @@ export function ReactionTimeTest({ onComplete, onCancel }: ReactionTimeTestProps
           <h2 className="text-2xl font-bold mb-2 text-green-600 dark:text-green-400">
             {lastTrial.reaction_time_ms}ms
           </h2>
-          <p className="text-gray-600 dark:text-gray-400">
+          <p className="text-gray-600 dark:text-slate-400">
             {isPractice ? 'Practice' : 'Trial'} {currentTrialIndex + 1} of {totalTrials}
           </p>
         </div>
@@ -284,7 +284,7 @@ export function ReactionTimeTest({ onComplete, onCancel }: ReactionTimeTestProps
         <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-gray-100">
           Get Ready
         </h2>
-        <p className="text-gray-600 dark:text-gray-400">
+        <p className="text-gray-600 dark:text-slate-400">
           {isPractice ? 'Practice' : 'Trial'} {currentTrialIndex + 1} of {totalTrials}
         </p>
         {focusLossCount > 0 && (

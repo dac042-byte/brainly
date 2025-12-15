@@ -91,16 +91,16 @@ export function SpeechTest({ onComplete, onSkip }: SpeechTestProps) {
 
   if (state === 'intro') {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-pink-950 flex items-center justify-center p-4">
-        <div className="max-w-2xl w-full bg-gray-900/60 backdrop-blur-xl rounded-2xl border border-gray-800/50 p-8">
+      <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-850 flex items-center justify-center p-4">
+        <div className="max-w-2xl w-full bg-slate-850/80 backdrop-blur-xl rounded-2xl border border-slate-750/50 p-8">
           <h2 className="text-3xl font-bold text-white mb-4">Speech Test</h2>
 
-          <div className="bg-pink-900/20 border border-pink-500/30 rounded-xl p-6 mb-6">
-            <p className="text-sm text-pink-300 mb-3">Read this passage aloud:</p>
+          <div className="bg-rose-900/20 border border-rose-700/30 rounded-xl p-6 mb-6">
+            <p className="text-sm text-rose-400 mb-3">Read this passage aloud:</p>
             <p className="text-white leading-relaxed">{PROMPT_TEXT}</p>
           </div>
 
-          <div className="space-y-3 text-sm text-gray-400 mb-6">
+          <div className="space-y-3 text-sm text-slate-400 mb-6">
             <p>• Click "Start Recording" when ready</p>
             <p>• Read the passage at your natural pace</p>
             <p>• Click "Stop" when finished</p>
@@ -109,14 +109,14 @@ export function SpeechTest({ onComplete, onSkip }: SpeechTestProps) {
           <div className="flex gap-3">
             <button
               onClick={startRecording}
-              className="flex-1 bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-700 hover:to-rose-700 text-white px-6 py-3 rounded-xl font-medium shadow-lg shadow-pink-500/30 transition-all"
+              className="flex-1 bg-gradient-to-r from-rose-700 to-rose-600 hover:from-rose-800 hover:to-rose-700 text-white px-6 py-3 rounded-xl font-medium shadow-lg shadow-rose-900/20 transition-all duration-200"
             >
               Start Recording
             </button>
             {onSkip && (
               <button
                 onClick={onSkip}
-                className="px-6 py-3 rounded-xl border border-gray-700 hover:bg-gray-800/50 font-medium text-gray-300 transition-all"
+                className="px-6 py-3 rounded-xl border border-slate-750 hover:bg-slate-800/50 font-medium text-slate-300 transition-all duration-200"
               >
                 Skip
               </button>
@@ -129,28 +129,28 @@ export function SpeechTest({ onComplete, onSkip }: SpeechTestProps) {
 
   if (state === 'recording') {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-pink-950 flex items-center justify-center p-4">
-        <div className="max-w-2xl w-full bg-gray-900/60 backdrop-blur-xl rounded-2xl border border-gray-800/50 p-8 text-center">
+      <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-850 flex items-center justify-center p-4">
+        <div className="max-w-2xl w-full bg-slate-850/80 backdrop-blur-xl rounded-2xl border border-slate-750/50 p-8 text-center">
           <div className="mb-6">
             <div className="w-20 h-20 mx-auto mb-4 relative">
-              <div className="absolute inset-0 bg-pink-500 rounded-full animate-ping opacity-75"></div>
-              <div className="relative w-20 h-20 bg-pink-600 rounded-full flex items-center justify-center">
-                <div className="w-4 h-4 bg-white rounded-full"></div>
+              <div className="absolute inset-0 bg-rose-600/60 rounded-full animate-pulse-recording"></div>
+              <div className="relative w-20 h-20 bg-rose-700 rounded-full flex items-center justify-center">
+                <div className="w-4 h-4 bg-white rounded-full animate-pulse-recording"></div>
               </div>
             </div>
             <p className="text-2xl font-bold text-white">Recording...</p>
-            <p className="text-4xl font-mono text-pink-300 mt-2">
+            <p className="text-4xl font-mono text-rose-400 mt-2">
               {Math.floor(recordingTime / 60)}:{(recordingTime % 60).toString().padStart(2, '0')}
             </p>
           </div>
 
-          <div className="bg-pink-900/20 border border-pink-500/30 rounded-xl p-4 mb-6">
-            <p className="text-sm text-pink-200">{PROMPT_TEXT}</p>
+          <div className="bg-rose-900/20 border border-rose-700/30 rounded-xl p-4 mb-6">
+            <p className="text-sm text-rose-300">{PROMPT_TEXT}</p>
           </div>
 
           <button
             onClick={stopRecording}
-            className="bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-700 hover:to-rose-700 text-white px-8 py-3 rounded-xl font-medium shadow-lg shadow-pink-500/30 transition-all"
+            className="bg-gradient-to-r from-rose-700 to-rose-600 hover:from-rose-800 hover:to-rose-700 text-white px-8 py-3 rounded-xl font-medium shadow-lg shadow-rose-900/20 transition-all duration-200"
           >
             Stop Recording
           </button>
@@ -161,9 +161,9 @@ export function SpeechTest({ onComplete, onSkip }: SpeechTestProps) {
 
   if (state === 'processing') {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-pink-950 flex items-center justify-center p-4">
-        <div className="max-w-2xl w-full bg-gray-900/60 backdrop-blur-xl rounded-2xl border border-gray-800/50 p-8 text-center">
-          <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-pink-500 mx-auto mb-4"></div>
+      <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-850 flex items-center justify-center p-4">
+        <div className="max-w-2xl w-full bg-slate-850/80 backdrop-blur-xl rounded-2xl border border-slate-750/50 p-8 text-center">
+          <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-rose-600 mx-auto mb-4"></div>
           <p className="text-white text-lg">Analyzing your speech...</p>
         </div>
       </div>

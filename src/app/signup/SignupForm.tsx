@@ -78,7 +78,7 @@ export function SignupForm() {
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 dark:border-gray-700 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-gray-100 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm dark:bg-gray-800"
+            className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 dark:border-slate-750 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-gray-100 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm dark:bg-gray-800"
             placeholder="Email address"
           />
         </div>
@@ -94,7 +94,7 @@ export function SignupForm() {
             required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 dark:border-gray-700 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-gray-100 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm dark:bg-gray-800"
+            className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 dark:border-slate-750 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-gray-100 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm dark:bg-gray-800"
             placeholder="Password (min 6 characters)"
           />
         </div>
@@ -114,7 +114,7 @@ export function SignupForm() {
             />
           </div>
           <div className="ml-3 text-sm">
-            <label htmlFor="consent" className="font-medium text-gray-700 dark:text-gray-300">
+            <label htmlFor="consent" className="font-medium text-gray-700 dark:text-slate-300">
               I agree to use this for personal tracking only
             </label>
           </div>
@@ -132,7 +132,7 @@ export function SignupForm() {
             />
           </div>
           <div className="ml-3 text-sm">
-            <label htmlFor="audio-storage" className="font-medium text-gray-700 dark:text-gray-300">
+            <label htmlFor="audio-storage" className="font-medium text-gray-700 dark:text-slate-300">
               Store audio recordings (optional, not recommended)
             </label>
           </div>
