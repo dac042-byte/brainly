@@ -4,7 +4,6 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import type { UserProfile } from '@/lib/types'
-import { useTheme } from '@/components/ThemeProvider'
 import type { User } from '@supabase/supabase-js'
 import { DashboardLayout } from '@/components/DashboardLayout'
 
@@ -15,7 +14,6 @@ interface SettingsContentProps {
 
 export function SettingsContent({ profile, user }: SettingsContentProps) {
   const router = useRouter()
-  const { theme, toggleTheme } = useTheme()
   const [audioStorageEnabled, setAudioStorageEnabled] = useState(profile.audio_storage_enabled)
   const [saving, setSaving] = useState(false)
   const [message, setMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null)
@@ -96,27 +94,6 @@ export function SettingsContent({ profile, user }: SettingsContentProps) {
             </div>
           </div>
 
-          {/* Appearance Section */}
-          <div className="bg-gray-900/60 backdrop-blur-xl rounded-2xl border border-gray-800/50 p-6">
-            <h2 className="text-xl font-bold text-white mb-4">
-              Appearance
-            </h2>
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="font-medium text-white">Theme</p>
-                <p className="text-sm text-gray-400">
-                  Switch between light and dark mode
-                </p>
-              </div>
-              <button
-                onClick={toggleTheme}
-                className="px-4 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white rounded-xl font-medium shadow-lg shadow-indigo-500/30 transition-all"
-              >
-                {theme === 'light' ? 'Switch to Dark' : 'Switch to Light'}
-              </button>
-            </div>
-          </div>
-
           {/* Privacy Section */}
           <div className="bg-gray-900/60 backdrop-blur-xl rounded-2xl border border-gray-800/50 p-6">
             <h2 className="text-xl font-bold text-white mb-4">
@@ -139,13 +116,13 @@ export function SettingsContent({ profile, user }: SettingsContentProps) {
                     onChange={(e) => setAudioStorageEnabled(e.target.checked)}
                     className="sr-only peer"
                   />
-                  <div className="w-11 h-6 bg-gray-700 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-purple-500/30 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-purple-600"></div>
+                  <div className="w-11 h-6 bg-gray-700 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-pink-500/30 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-pink-600"></div>
                 </label>
               </div>
               <button
                 onClick={handleSavePrivacy}
                 disabled={saving}
-                className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white px-6 py-3 rounded-xl font-medium shadow-lg shadow-indigo-500/30 transition-all disabled:opacity-50"
+                className="w-full bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-700 hover:to-rose-700 text-white px-6 py-3 rounded-xl font-medium shadow-lg shadow-pink-500/30 transition-all disabled:opacity-50"
               >
                 {saving ? 'Saving...' : 'Save Privacy Settings'}
               </button>

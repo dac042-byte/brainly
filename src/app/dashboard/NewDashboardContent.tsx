@@ -71,7 +71,7 @@ export function NewDashboardContent({ data, profile }: DashboardContentProps) {
             <div className="flex gap-3">
               <button
                 onClick={() => router.push('/session')}
-                className="px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-medium rounded-xl shadow-lg shadow-indigo-500/30 transition-all"
+                className="px-6 py-3 bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-700 hover:to-rose-700 text-white font-medium rounded-xl shadow-lg shadow-pink-500/30 transition-all"
               >
                 Start This Week
               </button>
@@ -106,15 +106,15 @@ export function NewDashboardContent({ data, profile }: DashboardContentProps) {
                   </div>
 
                   {latestReactionMetric && (
-                    <div className="bg-purple-900/20 rounded-xl p-4 border border-purple-500/20">
+                    <div className="bg-pink-900/20 rounded-xl p-4 border border-pink-500/20">
                       <div className="flex items-baseline gap-2 mb-1">
-                        <span className="text-4xl font-bold text-purple-300">
+                        <span className="text-4xl font-bold text-pink-300">
                           {Number(latestReactionMetric.median_rt_ms).toFixed(0)}
                         </span>
-                        <span className="text-sm text-purple-400">ms</span>
+                        <span className="text-sm text-pink-400">ms</span>
                       </div>
                       <div className="flex items-center gap-2">
-                        <span className="text-xs text-purple-400">Reaction</span>
+                        <span className="text-xs text-pink-400">Reaction</span>
                         <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${reactionStatus.color}`}>
                           {reactionStatus.label}
                         </span>
@@ -144,9 +144,9 @@ export function NewDashboardContent({ data, profile }: DashboardContentProps) {
 
             {/* Progress Banner */}
             {!baseline && sessions.length < 3 && (
-              <div className="bg-gradient-to-r from-indigo-900/40 to-purple-900/40 backdrop-blur-xl rounded-2xl border border-indigo-500/30 p-6">
+              <div className="bg-gradient-to-r from-pink-900/40 to-rose-900/40 backdrop-blur-xl rounded-2xl border border-pink-500/30 p-6">
                 <h3 className="text-lg font-bold text-white mb-2">Building Your Baseline</h3>
-                <p className="text-indigo-200">
+                <p className="text-pink-200">
                   Complete {3 - sessions.length} more session{3 - sessions.length > 1 ? 's' : ''} to establish your personal baseline.
                 </p>
               </div>
@@ -162,7 +162,7 @@ export function NewDashboardContent({ data, profile }: DashboardContentProps) {
                   </div>
                   <div className="flex gap-4 text-xs">
                     <div className="flex items-center gap-2">
-                      <div className="w-3 h-3 rounded-full bg-purple-500"></div>
+                      <div className="w-3 h-3 rounded-full bg-pink-500"></div>
                       <span className="text-gray-400">Reaction Time</span>
                     </div>
                   </div>
@@ -192,9 +192,9 @@ export function NewDashboardContent({ data, profile }: DashboardContentProps) {
                     <Line
                       type="monotone"
                       dataKey="reactionTime"
-                      stroke="#A78BFA"
+                      stroke="#F472B6"
                       strokeWidth={3}
-                      dot={{ r: 4, fill: '#A78BFA' }}
+                      dot={{ r: 4, fill: '#F472B6' }}
                       activeDot={{ r: 6 }}
                     />
                   </LineChart>
@@ -268,7 +268,7 @@ export function NewDashboardContent({ data, profile }: DashboardContentProps) {
 
                   <button
                     onClick={() => router.push('/session')}
-                    className="w-full px-4 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-xl transition-all"
+                    className="w-full px-4 py-3 bg-pink-600 hover:bg-pink-700 text-white font-medium rounded-xl transition-all"
                   >
                     Start Check-In
                   </button>
