@@ -130,15 +130,15 @@ export function DashboardContent({ data, profile }: DashboardContentProps) {
                     </p>
                     <p className="text-sm text-gray-600 dark:text-gray-400">Median</p>
                   </div>
-                  {baseline && latestDelta?.reaction_median_delta_pct !== null && (
+                  {baseline && latestDelta?.reaction_median_delta_pct !== null && latestDelta?.reaction_median_delta_pct !== undefined && (
                     <div className="text-sm">
                       <span className={
-                        Number(latestDelta.reaction_median_delta_pct) > 0
+                        Number(latestDelta?.reaction_median_delta_pct) > 0
                           ? 'text-gray-700 dark:text-gray-300'
                           : 'text-gray-700 dark:text-gray-300'
                       }>
-                        {Number(latestDelta.reaction_median_delta_pct) > 0 ? '+' : ''}
-                        {Number(latestDelta.reaction_median_delta_pct).toFixed(1)}% from baseline
+                        {Number(latestDelta?.reaction_median_delta_pct) > 0 ? '+' : ''}
+                        {Number(latestDelta?.reaction_median_delta_pct).toFixed(1)}% from baseline
                       </span>
                     </div>
                   )}
@@ -158,15 +158,15 @@ export function DashboardContent({ data, profile }: DashboardContentProps) {
                     </p>
                     <p className="text-sm text-gray-600 dark:text-gray-400">Activity Ratio</p>
                   </div>
-                  {baseline && latestDelta?.speech_activity_delta_pct !== null && (
+                  {baseline && latestDelta?.speech_activity_delta_pct !== null && latestDelta?.speech_activity_delta_pct !== undefined && (
                     <div className="text-sm">
                       <span className={
-                        Number(latestDelta.speech_activity_delta_pct) > 0
+                        Number(latestDelta?.speech_activity_delta_pct) > 0
                           ? 'text-gray-700 dark:text-gray-300'
                           : 'text-gray-700 dark:text-gray-300'
                       }>
-                        {Number(latestDelta.speech_activity_delta_pct) > 0 ? '+' : ''}
-                        {Number(latestDelta.speech_activity_delta_pct).toFixed(1)}% from baseline
+                        {Number(latestDelta?.speech_activity_delta_pct) > 0 ? '+' : ''}
+                        {Number(latestDelta?.speech_activity_delta_pct).toFixed(1)}% from baseline
                       </span>
                     </div>
                   )}
