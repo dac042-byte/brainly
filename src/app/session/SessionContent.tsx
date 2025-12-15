@@ -4,18 +4,20 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import type { UserProfile } from '@/lib/types'
 import { ReactionTimeTest } from '@/components/ReactionTimeTest'
+import { MemoryTest } from '@/components/MemoryTest'
 import {
   createSession,
   saveReactionTrials,
   completeSession,
   checkRecentSessions,
 } from '@/lib/actions/session'
+import { createClient } from '@/lib/supabase/client'
 
 interface SessionContentProps {
   profile: UserProfile
 }
 
-type SessionState = 'warning' | 'intro' | 'reaction' | 'processing' | 'complete'
+type SessionState = 'warning' | 'intro' | 'memory-encoding' | 'reaction' | 'memory-recall' | 'processing' | 'complete'
 
 export function SessionContent({ profile }: SessionContentProps) {
   const router = useRouter()
@@ -23,6 +25,8 @@ export function SessionContent({ profile }: SessionContentProps) {
   const [sessionId, setSessionId] = useState<string | null>(null)
   const [recentSessionCount, setRecentSessionCount] = useState(0)
   const [loading, setLoading] = useState(true)
+  const [memoryWordSequence, setMemoryWordSequence] = useState<string[]>([])
+  const [memoryScore, setMemoryScore] = useState<number>(0)
 
   useEffect(() => {
     async function checkSessions() {
@@ -39,22 +43,61 @@ export function SessionContent({ profile }: SessionContentProps) {
   const handleStartSession = async () => {
     const session = await createSession()
     setSessionId(session.id)
+    setState('memory-encoding')
+  }
+
+  const handleMemoryEncodingComplete = (wordSequence: string[]) => {
+    setMemoryWordSequence(wordSequence)
     setState('reaction')
   }
 
   const handleReactionComplete = async (trials: any[], focusLossCount: number) => {
     if (!sessionId) return
 
-    setState('processing')
-
     try {
       await saveReactionTrials(sessionId, trials, focusLossCount)
-      await completeSession(sessionId)
-      setState('complete')
+      setState('memory-recall')
     } catch (error) {
       console.error('Failed to save reaction trials:', error)
       alert('Failed to save reaction time data. Please try again.')
       setState('reaction')
+    }
+  }
+
+  const handleMemoryRecallComplete = async (score: number, totalWords: number, userRecall: string) => {
+    if (!sessionId) return
+
+    setState('processing')
+
+    try {
+      const supabase = createClient()
+
+      // Save memory test results
+      await supabase.from('memory_tests').insert({
+        session_id: sessionId,
+        word_sequence: memoryWordSequence,
+        user_recall: userRecall,
+        score: score,
+        total_words: totalWords
+      })
+
+      // Update streak
+      const { data: { user } } = await supabase.auth.getUser()
+      if (user) {
+        await supabase.rpc('update_user_streak', {
+          p_user_id: user.id,
+          p_test_date: new Date().toISOString().split('T')[0]
+        })
+      }
+
+      // Complete session
+      await completeSession(sessionId)
+      setMemoryScore(score)
+      setState('complete')
+    } catch (error) {
+      console.error('Failed to save memory test:', error)
+      alert('Failed to save memory test data. Please try again.')
+      setState('memory-recall')
     }
   }
 
@@ -112,17 +155,22 @@ export function SessionContent({ profile }: SessionContentProps) {
           </h2>
           <div className="space-y-4 text-gray-300">
             <p>
-              This session will test your reaction time with 10 trials.
+              This session includes memory encoding, reaction time testing, and delayed memory recall.
             </p>
+            <ol className="list-decimal list-inside space-y-2">
+              <li>Memorize words (20 seconds)</li>
+              <li>Complete reaction time test</li>
+              <li>Recall the words from memory</li>
+            </ol>
             <div className="bg-pink-900/20 border border-pink-500/30 rounded-xl p-4">
               <h3 className="text-sm font-medium text-pink-300 mb-2">
                 Tips for Best Results
               </h3>
               <ul className="text-sm text-pink-200/80 space-y-1">
-                <li>• Test at the same time of day when possible</li>
+                <li>• Test at the same time each week to maintain your streak</li>
                 <li>• Find a quiet, comfortable environment</li>
                 <li>• Avoid testing when tired or distracted</li>
-                <li>• Stay focused throughout the test</li>
+                <li>• Stay focused throughout all tests</li>
               </ul>
             </div>
           </div>
@@ -145,6 +193,16 @@ export function SessionContent({ profile }: SessionContentProps) {
     )
   }
 
+  if (state === 'memory-encoding') {
+    return (
+      <MemoryTest
+        mode="encoding"
+        onEncodingComplete={handleMemoryEncodingComplete}
+        onRecallComplete={() => {}}
+      />
+    )
+  }
+
   if (state === 'reaction') {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-950 via-gray-900 to-pink-950 px-4 py-8">
@@ -153,6 +211,17 @@ export function SessionContent({ profile }: SessionContentProps) {
           onCancel={handleBackToDashboard}
         />
       </div>
+    )
+  }
+
+  if (state === 'memory-recall') {
+    return (
+      <MemoryTest
+        mode="recall"
+        wordSequence={memoryWordSequence}
+        onEncodingComplete={() => {}}
+        onRecallComplete={handleMemoryRecallComplete}
+      />
     )
   }
 
@@ -180,8 +249,19 @@ export function SessionContent({ profile }: SessionContentProps) {
           <h2 className="text-3xl font-bold mb-2 text-white">
             Session Complete!
           </h2>
+          <div className="bg-pink-900/20 border border-pink-500/30 rounded-xl p-4 mb-6 mx-auto max-w-md">
+            <p className="text-pink-300 text-sm mb-2">Memory Score</p>
+            <p className="text-3xl font-bold text-white">
+              {memoryScore} / {memoryWordSequence.length}
+            </p>
+            <p className="text-pink-200/60 text-xs mt-1">
+              {memoryWordSequence.length > 0
+                ? `${Math.round((memoryScore / memoryWordSequence.length) * 100)}% recalled`
+                : '0% recalled'}
+            </p>
+          </div>
           <p className="text-gray-400 mb-6">
-            Your results have been saved and your dashboard has been updated.
+            Your results have been saved and your streak has been updated.
           </p>
           <button
             onClick={handleBackToDashboard}

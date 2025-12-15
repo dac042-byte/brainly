@@ -1,5 +1,6 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import { format } from 'date-fns'
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
 import type { DashboardData, UserProfile } from '@/lib/types'
@@ -12,9 +13,32 @@ interface DashboardContentProps {
   profile: UserProfile
 }
 
+interface UserStreak {
+  current_streak: number
+  longest_streak: number
+  last_test_date: string | null
+}
+
 export function NewDashboardContent({ data, profile }: DashboardContentProps) {
   const router = useRouter()
   const { sessions, baseline, latestSession } = data
+  const [streak, setStreak] = useState<UserStreak | null>(null)
+
+  useEffect(() => {
+    const fetchStreak = async () => {
+      const supabase = createClient()
+      const { data: streakData } = await supabase
+        .from('user_streaks')
+        .select('*')
+        .single()
+
+      if (streakData) {
+        setStreak(streakData)
+      }
+    }
+
+    fetchStreak()
+  }, [])
 
   const handleSignOut = async () => {
     const supabase = createClient()
@@ -84,6 +108,31 @@ export function NewDashboardContent({ data, profile }: DashboardContentProps) {
             </div>
           </div>
         </div>
+
+        {/* Weekly Streak */}
+        {streak && (
+          <div className="bg-gradient-to-r from-pink-900/40 to-rose-900/40 backdrop-blur-xl rounded-2xl border border-pink-500/30 p-6 mb-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <h3 className="text-lg font-bold text-white mb-1">Weekly Streak</h3>
+                <p className="text-pink-200/80 text-sm">
+                  Test once per week to maintain your streak
+                </p>
+              </div>
+              <div className="flex items-center gap-6">
+                <div className="text-center">
+                  <div className="text-4xl font-bold text-pink-300">{streak.current_streak}</div>
+                  <div className="text-xs text-pink-200/60 mt-1">Current</div>
+                </div>
+                <div className="w-px h-12 bg-pink-500/30"></div>
+                <div className="text-center">
+                  <div className="text-4xl font-bold text-pink-300">{streak.longest_streak}</div>
+                  <div className="text-xs text-pink-200/60 mt-1">Best</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
 
         <div className="grid grid-cols-3 gap-6">
           {/* Main Content - 2 columns */}
