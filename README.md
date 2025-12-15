@@ -7,7 +7,7 @@ Privacy-first cognitive self-tracking web application for measuring reaction tim
 Braingauge v1 is a web app that helps users track their cognitive performance over time through:
 - **Reaction Time Tests**: Measures response latency to visual stimuli
 - **Speech Recording**: Captures speech timing patterns (duration, pauses, activity ratio)
-- **Personal Baseline Tracking**: All comparisons are made against the user's own baseline (first 3 sessions)
+- **Personal Baseline Tracking**: All comparisons are made against the user's own baseline (first session)
 
 **Important**: This app does NOT provide medical advice, diagnosis, or predictions about health conditions.
 
@@ -241,7 +241,7 @@ Ensure environment variables are set in your hosting platform.
 
 ### Data Interpretation
 
-- All data compares to YOUR baseline (first 3 sessions)
+- All data compares to YOUR baseline (first session)
 - Changes indicate variation, not health status
 - No diagnostic value or medical meaning
 - Consult healthcare professionals for medical concerns

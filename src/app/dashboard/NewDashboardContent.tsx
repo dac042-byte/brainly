@@ -89,7 +89,7 @@ export function NewDashboardContent({ data, profile }: DashboardContentProps) {
               <p className="text-gray-400">
                 {baseline
                   ? 'Performance metrics compared to your baseline.'
-                  : 'Complete 3 sessions to establish your baseline.'}
+                  : 'Complete 1 session to establish your baseline.'}
               </p>
             </div>
             <div className="flex gap-3">

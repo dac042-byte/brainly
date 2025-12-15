@@ -225,9 +225,9 @@ async function computeBaseline(userId: string) {
     .eq('is_baseline_eligible', true)
     .not('completed_at', 'is', null)
     .order('created_at', { ascending: true })
-    .limit(3)
+    .limit(1)
 
-  if (!sessions || sessions.length < 3) {
+  if (!sessions || sessions.length < 1) {
     return
   }
 
@@ -236,19 +236,19 @@ async function computeBaseline(userId: string) {
     .map((s: any) => s.reaction_metrics?.[0])
     .filter(Boolean)
 
-  if (reactionMetrics.length < 3) {
+  if (reactionMetrics.length < 1) {
     return
   }
 
-  const baselineMedianRt = reactionMetrics.reduce((sum: number, m: any) => sum + Number(m.median_rt_ms), 0) / 3
-  const baselineStdDev = reactionMetrics.reduce((sum: number, m: any) => sum + Number(m.std_dev_ms), 0) / 3
+  const baselineMedianRt = reactionMetrics.reduce((sum: number, m: any) => sum + Number(m.median_rt_ms), 0) / 1
+  const baselineStdDev = reactionMetrics.reduce((sum: number, m: any) => sum + Number(m.std_dev_ms), 0) / 1
 
   const speechMetrics = sessions
     .map((s: any) => s.speech_metrics?.[0])
     .filter(Boolean)
 
-  const baselineSpeechActivity = speechMetrics.length >= 3
-    ? speechMetrics.reduce((sum: number, m: any) => sum + Number(m.speech_activity_ratio), 0) / 3
+  const baselineSpeechActivity = speechMetrics.length >= 1
+    ? speechMetrics.reduce((sum: number, m: any) => sum + Number(m.speech_activity_ratio), 0) / 1
     : null
 
   const { error } = await supabase

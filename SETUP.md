@@ -152,7 +152,7 @@ In Supabase → Authentication → URL Configuration:
 
 ## Next Steps
 
-1. Complete 3 sessions to establish baseline
+1. Complete 1 session to establish baseline
 2. Continue weekly sessions to track trends
 3. Review dashboard for personal tracking
 4. (Optional) Implement real speech analysis
