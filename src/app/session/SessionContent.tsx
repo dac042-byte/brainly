@@ -197,7 +197,7 @@ export function SessionContent({ profile }: SessionContentProps) {
               This session includes memory encoding, reaction time testing, speech analysis, and delayed memory recall.
             </p>
             <ol className="list-decimal list-inside space-y-2">
-              <li>Memorize words (20 seconds)</li>
+              <li>Memorize words (10 seconds)</li>
               <li>Complete reaction time test</li>
               <li>Record speech sample</li>
               <li>Recall the words from memory</li>

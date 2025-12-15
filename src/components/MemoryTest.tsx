@@ -9,7 +9,7 @@ interface MemoryTestProps {
   onRecallComplete: (score: number, totalWords: number, userRecall: string) => void
 }
 
-const ENCODING_DURATION = 20 // seconds
+const ENCODING_DURATION = 10 // seconds
 
 export function MemoryTest({ mode, wordSequence, onEncodingComplete, onRecallComplete }: MemoryTestProps) {
   const [words, setWords] = useState<string[]>([])
