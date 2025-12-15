@@ -81,9 +81,9 @@ export function SettingsContent({ profile, user }: SettingsContentProps) {
                   type="email"
                   value={user.email || ''}
                   disabled
-                  className="w-full px-3 py-2 border border-slate-750 rounded-lg bg-gray-800/50 text-slate-400 cursor-not-allowed"
+                  className="w-full px-3 py-2 border border-slate-750 rounded-lg bg-slate-800/50 text-slate-400 cursor-not-allowed"
                 />
-                <p className="text-xs text-gray-500 mt-1">
+                <p className="text-xs text-slate-500 mt-1">
                   Email cannot be changed
                 </p>
               </div>
@@ -95,7 +95,7 @@ export function SettingsContent({ profile, user }: SettingsContentProps) {
                   type="text"
                   value={new Date(profile.created_at).toLocaleDateString()}
                   disabled
-                  className="w-full px-3 py-2 border border-slate-750 rounded-lg bg-gray-800/50 text-slate-400 cursor-not-allowed"
+                  className="w-full px-3 py-2 border border-slate-750 rounded-lg bg-slate-800/50 text-slate-400 cursor-not-allowed"
                 />
               </div>
               <div className="pt-4 border-t border-slate-750">
@@ -131,13 +131,13 @@ export function SettingsContent({ profile, user }: SettingsContentProps) {
                     onChange={(e) => setAudioStorageEnabled(e.target.checked)}
                     className="sr-only peer"
                   />
-                  <div className="w-11 h-6 bg-gray-700 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-pink-500/30 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-pink-600"></div>
+                  <div className="w-11 h-6 bg-slate-700 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-rose-600/20 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all duration-200 peer-checked:bg-rose-700"></div>
                 </label>
               </div>
               <button
                 onClick={handleSavePrivacy}
                 disabled={saving}
-                className="w-full bg-gradient-to-r from-rose-700 to-rose-600 hover:from-pink-700 hover:to-rose-700 text-white px-6 py-3 rounded-xl font-medium shadow-lg shadow-rose-900/20 transition-all disabled:opacity-50"
+                className="w-full bg-gradient-to-r from-rose-700 to-rose-600 hover:from-rose-800 hover:to-rose-700 text-white px-6 py-3 rounded-xl font-medium shadow-lg shadow-rose-900/20 hover:shadow-rose-900/30 transition-all duration-200 disabled:opacity-50"
               >
                 {saving ? 'Saving...' : 'Save Privacy Settings'}
               </button>
@@ -163,9 +163,9 @@ export function SettingsContent({ profile, user }: SettingsContentProps) {
               About
             </h2>
             <div className="space-y-2 text-sm text-slate-400">
-              <p><strong className="text-gray-200">Braingauge v1</strong></p>
+              <p><strong className="text-white">Braingauge v1</strong></p>
               <p>Privacy-first cognitive self-tracking</p>
-              <p className="text-xs pt-2 text-gray-500">For personal tracking only. Not a medical device.</p>
+              <p className="text-xs pt-2 text-slate-500">For personal tracking only. Not a medical device.</p>
             </div>
           </div>
         </div>

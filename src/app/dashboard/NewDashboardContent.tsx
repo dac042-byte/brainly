@@ -80,9 +80,9 @@ export function NewDashboardContent({ data, profile }: DashboardContentProps) {
 
   return (
     <DashboardLayout>
-      <div className="p-8">
+      <div className="p-8 animate-fade-in">
         {/* Header */}
-        <div className="mb-8">
+        <div className="mb-8 animate-slide-up">
           <div className="flex items-start justify-between mb-2">
             <div>
               <h1 className="text-3xl font-bold text-white mb-2">Dashboard</h1>
@@ -95,13 +95,13 @@ export function NewDashboardContent({ data, profile }: DashboardContentProps) {
             <div className="flex gap-3">
               <button
                 onClick={() => router.push('/session')}
-                className="px-6 py-3 bg-gradient-to-r from-rose-700 to-rose-600 hover:from-rose-800 hover:to-rose-700 text-white font-medium rounded-xl shadow-lg shadow-rose-900/20 transition-all duration-200"
+                className="px-6 py-3 bg-gradient-to-r from-rose-700 to-rose-600 hover:from-rose-800 hover:to-rose-700 text-white font-medium rounded-xl shadow-lg shadow-rose-900/20 hover:shadow-rose-900/30 transition-all duration-200 hover:scale-[1.02]"
               >
                 Start This Week
               </button>
               <button
                 onClick={handleSignOut}
-                className="px-4 py-3 bg-gray-800/50 hover:bg-gray-800 text-slate-300 rounded-xl transition-all"
+                className="px-4 py-3 bg-slate-800/50 hover:bg-slate-800 text-slate-300 rounded-xl transition-all duration-200"
               >
                 Sign Out
               </button>
@@ -111,7 +111,7 @@ export function NewDashboardContent({ data, profile }: DashboardContentProps) {
 
         {/* Weekly Streak */}
         {streak && (
-          <div className="bg-gradient-to-r from-pink-900/40 to-rose-900/40 backdrop-blur-xl rounded-2xl border border-rose-700/30 p-6 mb-6">
+          <div className="bg-gradient-to-r from-rose-900/40 to-rose-900/30 backdrop-blur-xl rounded-2xl border border-rose-700/30 p-6 mb-6 hover:border-rose-700/40 transition-all duration-300 animate-slide-up">
             <div className="flex items-center justify-between">
               <div>
                 <h3 className="text-lg font-bold text-white mb-1">Weekly Streak</h3>
@@ -121,12 +121,12 @@ export function NewDashboardContent({ data, profile }: DashboardContentProps) {
               </div>
               <div className="flex items-center gap-6">
                 <div className="text-center">
-                  <div className="text-4xl font-bold text-rose-400">{streak.current_streak}</div>
+                  <div className="text-4xl font-bold text-rose-400 animate-count-up">{streak.current_streak}</div>
                   <div className="text-xs text-rose-300/60 mt-1">Current</div>
                 </div>
-                <div className="w-px h-12 bg-pink-500/30"></div>
+                <div className="w-px h-12 bg-rose-700/30"></div>
                 <div className="text-center">
-                  <div className="text-4xl font-bold text-rose-400">{streak.longest_streak}</div>
+                  <div className="text-4xl font-bold text-rose-400 animate-count-up">{streak.longest_streak}</div>
                   <div className="text-xs text-rose-300/60 mt-1">Best</div>
                 </div>
               </div>
@@ -139,14 +139,14 @@ export function NewDashboardContent({ data, profile }: DashboardContentProps) {
           <div className="col-span-2 space-y-6">
             {/* Performance Score */}
             {baseline && (
-              <div className="bg-slate-850/80 backdrop-blur-xl rounded-2xl border border-slate-750/50 p-6">
+              <div className="bg-slate-850/80 backdrop-blur-xl rounded-2xl border border-slate-750/50 p-6 hover:border-slate-750/70 transition-all duration-300 animate-slide-up">
                 <h2 className="text-xl font-bold text-white mb-4">Performance Score</h2>
                 <p className="text-sm text-slate-400 mb-6">
                   Weighted average of reaction time and speech metrics. Higher = better performance.
                 </p>
 
                 <div className="grid grid-cols-3 gap-4">
-                  <div className="bg-gray-800/50 rounded-xl p-4">
+                  <div className="bg-slate-800/50 rounded-xl p-4 hover:bg-slate-800/70 transition-colors duration-200">
                     <div className="flex items-baseline gap-2 mb-1">
                       <span className="text-4xl font-bold text-white">{Math.round(performanceScore)}</span>
                       <span className="text-sm text-slate-400">/ 100</span>
@@ -193,7 +193,7 @@ export function NewDashboardContent({ data, profile }: DashboardContentProps) {
 
             {/* Progress Banner */}
             {!baseline && sessions.length < 1 && (
-              <div className="bg-gradient-to-r from-pink-900/40 to-rose-900/40 backdrop-blur-xl rounded-2xl border border-rose-700/30 p-6">
+              <div className="bg-gradient-to-r from-rose-900/40 to-rose-900/30 backdrop-blur-xl rounded-2xl border border-rose-700/30 p-6 hover:border-rose-700/40 transition-all duration-300 animate-slide-up">
                 <h3 className="text-lg font-bold text-white mb-2">Building Your Baseline</h3>
                 <p className="text-rose-300">
                   Complete {1 - sessions.length} more session{1 - sessions.length > 1 ? 's' : ''} to establish your personal baseline.
@@ -203,7 +203,7 @@ export function NewDashboardContent({ data, profile }: DashboardContentProps) {
 
             {/* History Chart */}
             {reactionTimeData.length > 0 && (
-              <div className="bg-slate-850/80 backdrop-blur-xl rounded-2xl border border-slate-750/50 p-6">
+              <div className="bg-slate-850/80 backdrop-blur-xl rounded-2xl border border-slate-750/50 p-6 hover:border-slate-750/70 transition-all duration-300 animate-slide-up">
                 <div className="flex items-start justify-between mb-6">
                   <div>
                     <h2 className="text-xl font-bold text-white mb-1">History</h2>
@@ -287,14 +287,14 @@ export function NewDashboardContent({ data, profile }: DashboardContentProps) {
           {/* Right Sidebar */}
           <div className="space-y-6">
             {/* This Week's Plan */}
-            <div className="bg-slate-850/80 backdrop-blur-xl rounded-2xl border border-slate-750/50 p-6">
+            <div className="bg-slate-850/80 backdrop-blur-xl rounded-2xl border border-slate-750/50 p-6 hover:border-slate-750/70 transition-all duration-300 animate-slide-up">
               <h2 className="text-lg font-bold text-white mb-3">This Week's Plan</h2>
               <p className="text-sm text-slate-400 mb-6">
                 Complete your session to track your cognitive performance.
               </p>
 
               <div className="space-y-4">
-                <div className="bg-gray-800/50 rounded-xl p-4">
+                <div className="bg-slate-800/50 rounded-xl p-4 hover:bg-slate-800/70 transition-colors duration-200">
                   <h3 className="text-sm font-semibold text-white mb-3">Weekly Check-In</h3>
                   <p className="text-xs text-slate-400 mb-4">
                     ~4-6 minutes total. Try to do it at the same time of day.
@@ -317,7 +317,7 @@ export function NewDashboardContent({ data, profile }: DashboardContentProps) {
 
                   <button
                     onClick={() => router.push('/session')}
-                    className="w-full px-4 py-3 bg-pink-600 hover:bg-pink-700 text-white font-medium rounded-xl transition-all"
+                    className="w-full px-4 py-3 bg-gradient-to-r from-rose-700 to-rose-600 hover:from-rose-800 hover:to-rose-700 text-white font-medium rounded-xl shadow-lg shadow-rose-900/20 hover:shadow-rose-900/30 transition-all duration-200 hover:scale-[1.02]"
                   >
                     Start Check-In
                   </button>
@@ -327,7 +327,7 @@ export function NewDashboardContent({ data, profile }: DashboardContentProps) {
 
             {/* Quick Stats */}
             {sessions.length > 0 && (
-              <div className="bg-slate-850/80 backdrop-blur-xl rounded-2xl border border-slate-750/50 p-6">
+              <div className="bg-slate-850/80 backdrop-blur-xl rounded-2xl border border-slate-750/50 p-6 hover:border-slate-750/70 transition-all duration-300 animate-slide-up">
                 <h2 className="text-lg font-bold text-white mb-4">Quick Stats</h2>
 
                 <div className="space-y-3">
