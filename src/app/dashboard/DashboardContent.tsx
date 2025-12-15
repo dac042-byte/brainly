@@ -65,6 +65,18 @@ export function DashboardContent({ data, profile }: DashboardContentProps) {
           </p>
         </div>
         <div className="flex items-center gap-3">
+          <a
+            href="/history"
+            className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-gray-300 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-all"
+          >
+            History
+          </a>
+          <a
+            href="/settings"
+            className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-gray-300 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-all"
+          >
+            Settings
+          </a>
           <ThemeToggle />
           <button
             onClick={handleSignOut}

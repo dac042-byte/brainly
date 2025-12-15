@@ -26,18 +26,21 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     } else if (prefersDark) {
       setTheme('dark')
       document.documentElement.classList.add('dark')
+    } else {
+      document.documentElement.classList.remove('dark')
     }
   }, [])
+
+  useEffect(() => {
+    if (mounted) {
+      document.documentElement.classList.toggle('dark', theme === 'dark')
+    }
+  }, [theme, mounted])
 
   const toggleTheme = () => {
     const newTheme = theme === 'light' ? 'dark' : 'light'
     setTheme(newTheme)
     localStorage.setItem('theme', newTheme)
-    document.documentElement.classList.toggle('dark', newTheme === 'dark')
-  }
-
-  if (!mounted) {
-    return <>{children}</>
   }
 
   return (
@@ -50,8 +53,6 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 export function useTheme() {
   const context = useContext(ThemeContext)
   if (context === undefined) {
-    // Return a default theme state if provider is not available
-    // This can happen during initial SSR
     return {
       theme: 'light' as Theme,
       toggleTheme: () => {},
