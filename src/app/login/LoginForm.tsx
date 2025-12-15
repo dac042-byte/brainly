@@ -60,9 +60,9 @@ export function LoginForm() {
         <button
           type="button"
           onClick={() => setUseMagicLink(false)}
-          className={`px-4 py-2 text-sm font-medium rounded-md ${
+          className={`px-4 py-2 text-sm font-medium rounded-lg transition-all ${
             !useMagicLink
-              ? 'bg-indigo-600 text-white'
+              ? 'bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-md'
               : 'bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-300'
           }`}
         >
@@ -71,9 +71,9 @@ export function LoginForm() {
         <button
           type="button"
           onClick={() => setUseMagicLink(true)}
-          className={`px-4 py-2 text-sm font-medium rounded-md ${
+          className={`px-4 py-2 text-sm font-medium rounded-lg transition-all ${
             useMagicLink
-              ? 'bg-indigo-600 text-white'
+              ? 'bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-md'
               : 'bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-300'
           }`}
         >
@@ -135,7 +135,7 @@ export function LoginForm() {
           <button
             type="submit"
             disabled={loading}
-            className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg transition-all"
           >
             {loading ? 'Loading...' : useMagicLink ? 'Send Magic Link' : 'Sign In'}
           </button>

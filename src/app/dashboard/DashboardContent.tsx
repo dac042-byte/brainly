@@ -86,14 +86,14 @@ export function DashboardContent({ data, profile }: DashboardContentProps) {
       <div className="mb-6">
         <a
           href="/session"
-          className="inline-block bg-indigo-600 text-white px-6 py-3 rounded-md hover:bg-indigo-700 font-medium"
+          className="inline-block bg-gradient-to-r from-purple-600 to-blue-600 text-white px-8 py-3 rounded-lg hover:from-purple-700 hover:to-blue-700 font-medium shadow-lg hover:shadow-xl transition-all duration-200"
         >
           Run Today's Session
         </a>
       </div>
 
       {latestSession && (
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6 mb-6">
+        <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 p-6 mb-6">
           <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-4">
             Latest Session
           </h2>
@@ -162,22 +162,29 @@ export function DashboardContent({ data, profile }: DashboardContentProps) {
       )}
 
       {reactionTimeData.length > 0 && (
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6 mb-6">
+        <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 p-6 mb-6">
           <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-4">
             Reaction Time Trend
           </h2>
           <ResponsiveContainer width="100%" height={300}>
             <LineChart data={reactionTimeData}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="date" />
-              <YAxis label={{ value: 'Milliseconds', angle: -90, position: 'insideLeft' }} />
-              <Tooltip />
+              <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" opacity={0.5} />
+              <XAxis dataKey="date" stroke="#6b7280" />
+              <YAxis label={{ value: 'Milliseconds', angle: -90, position: 'insideLeft' }} stroke="#6b7280" />
+              <Tooltip
+                contentStyle={{
+                  backgroundColor: 'rgba(255, 255, 255, 0.95)',
+                  border: '1px solid #e5e7eb',
+                  borderRadius: '8px'
+                }}
+              />
               <Line
                 type="monotone"
                 dataKey="medianRt"
-                stroke="#4f46e5"
-                strokeWidth={2}
-                dot={{ r: 4 }}
+                stroke="#8b5cf6"
+                strokeWidth={3}
+                dot={{ r: 5, fill: '#8b5cf6' }}
+                activeDot={{ r: 7 }}
                 name="Median RT"
               />
             </LineChart>
@@ -191,22 +198,29 @@ export function DashboardContent({ data, profile }: DashboardContentProps) {
       )}
 
       {speechActivityData.length > 0 && (
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6 mb-6">
+        <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 p-6 mb-6">
           <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-4">
             Speech Activity Trend
           </h2>
           <ResponsiveContainer width="100%" height={300}>
             <LineChart data={speechActivityData}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="date" />
-              <YAxis label={{ value: 'Activity %', angle: -90, position: 'insideLeft' }} />
-              <Tooltip />
+              <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" opacity={0.5} />
+              <XAxis dataKey="date" stroke="#6b7280" />
+              <YAxis label={{ value: 'Activity %', angle: -90, position: 'insideLeft' }} stroke="#6b7280" />
+              <Tooltip
+                contentStyle={{
+                  backgroundColor: 'rgba(255, 255, 255, 0.95)',
+                  border: '1px solid #e5e7eb',
+                  borderRadius: '8px'
+                }}
+              />
               <Line
                 type="monotone"
                 dataKey="activityRatio"
-                stroke="#10b981"
-                strokeWidth={2}
-                dot={{ r: 4 }}
+                stroke="#3b82f6"
+                strokeWidth={3}
+                dot={{ r: 5, fill: '#3b82f6' }}
+                activeDot={{ r: 7 }}
                 name="Activity Ratio"
               />
             </LineChart>
