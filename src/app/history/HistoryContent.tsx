@@ -43,6 +43,7 @@ export function HistoryContent({ sessions, baseline }: HistoryContentProps) {
             {sessions.map((session, index) => {
               const reactionMetric = session.reaction_metrics?.[0]
               const speechMetric = session.speech_metrics?.[0]
+              const memoryMetric = session.memory_metrics?.[0]
               const delta = session.session_deltas?.[0]
               const isBaseline = baseline?.baseline_session_ids.includes(session.id)
 
@@ -67,85 +68,121 @@ export function HistoryContent({ sessions, baseline }: HistoryContentProps) {
                     )}
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                     {/* Reaction Time */}
                     {reactionMetric && (
-                      <div className="bg-purple-900/20 rounded-xl p-4 border border-purple-500/20">
-                        <h4 className="text-sm font-medium text-purple-300 mb-2">
-                          Reaction Time
+                      <div className="bg-rose-900/20 rounded-xl p-4 border border-rose-700/30">
+                        <h4 className="text-sm font-medium text-rose-400 mb-3">
+                          Reaction Time (50%)
                         </h4>
-                        <div className="space-y-1">
+                        <div className="space-y-2">
                           <div>
-                            <p className="text-2xl font-bold text-purple-200">
+                            <p className="text-2xl font-bold text-rose-200">
                               {Number(reactionMetric.median_rt_ms).toFixed(0)}ms
                             </p>
-                            <p className="text-xs text-purple-400">Median</p>
+                            <p className="text-xs text-rose-400">Median</p>
                           </div>
                           {delta?.reaction_median_delta_pct !== null && delta?.reaction_median_delta_pct !== undefined && (
-                            <p className="text-sm text-purple-300">
+                            <p className="text-sm text-rose-300">
                               {Number(delta.reaction_median_delta_pct) > 0 ? '+' : ''}
                               {Number(delta.reaction_median_delta_pct).toFixed(1)}% from baseline
                             </p>
                           )}
-                          <p className="text-xs text-purple-400 pt-1">
+                          <p className="text-xs text-rose-400">
                             Variability: ±{Number(reactionMetric.std_dev_ms).toFixed(0)}ms
                           </p>
                         </div>
                       </div>
                     )}
 
-                    {/* Speech Activity */}
+                    {/* Speech Metrics */}
                     {speechMetric && !session.speech_skipped && (
                       <div className="bg-blue-900/20 rounded-xl p-4 border border-blue-500/20">
-                        <h4 className="text-sm font-medium text-blue-300 mb-2">
-                          Speech Activity
+                        <h4 className="text-sm font-medium text-blue-300 mb-3">
+                          Speech Timing (30%)
                         </h4>
-                        <div className="space-y-1">
+                        <div className="space-y-2">
                           <div>
                             <p className="text-2xl font-bold text-blue-200">
-                              {(Number(speechMetric.speech_activity_ratio) * 100).toFixed(1)}%
+                              {Number(speechMetric.words_per_minute || 0).toFixed(0)} wpm
                             </p>
-                            <p className="text-xs text-blue-400">Activity Ratio</p>
+                            <p className="text-xs text-blue-400">Speaking Rate</p>
                           </div>
-                          {delta?.speech_activity_delta_pct !== null && delta?.speech_activity_delta_pct !== undefined && (
+                          {delta?.speech_wpm_delta_pct !== null && delta?.speech_wpm_delta_pct !== undefined && (
                             <p className="text-sm text-blue-300">
-                              {Number(delta.speech_activity_delta_pct) > 0 ? '+' : ''}
-                              {Number(delta.speech_activity_delta_pct).toFixed(1)}% from baseline
+                              {Number(delta.speech_wpm_delta_pct) > 0 ? '+' : ''}
+                              {Number(delta.speech_wpm_delta_pct).toFixed(1)}% from baseline
                             </p>
                           )}
-                          <p className="text-xs text-blue-400 pt-1">
-                            {speechMetric.pause_count} pauses
+                          <div className="text-xs text-blue-400 space-y-1">
+                            <p>Pauses: {speechMetric.pause_count} ({Number(speechMetric.avg_pause_length_ms || 0).toFixed(0)}ms avg)</p>
+                            <p>Activity: {(Number(speechMetric.speech_activity_ratio) * 100).toFixed(1)}%</p>
+                            <p>Words: {speechMetric.word_count}</p>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Memory Recall */}
+                    {memoryMetric && (
+                      <div className="bg-teal-900/20 rounded-xl p-4 border border-teal-500/20">
+                        <h4 className="text-sm font-medium text-teal-300 mb-3">
+                          Memory Recall (20%)
+                        </h4>
+                        <div className="space-y-2">
+                          <div>
+                            <p className="text-2xl font-bold text-teal-200">
+                              {Number(memoryMetric.total_words) > 0
+                                ? ((Number(memoryMetric.words_recalled) / Number(memoryMetric.total_words)) * 100).toFixed(0)
+                                : '0'}%
+                            </p>
+                            <p className="text-xs text-teal-400">Accuracy</p>
+                          </div>
+                          {delta?.memory_recall_delta_pct !== null && delta?.memory_recall_delta_pct !== undefined && (
+                            <p className="text-sm text-teal-300">
+                              {Number(delta.memory_recall_delta_pct) > 0 ? '+' : ''}
+                              {Number(delta.memory_recall_delta_pct).toFixed(1)}% from baseline
+                            </p>
+                          )}
+                          <p className="text-xs text-teal-400">
+                            {memoryMetric.words_recalled}/{memoryMetric.total_words} words
                           </p>
                         </div>
                       </div>
                     )}
 
-                    {/* Session Quality */}
-                    <div className="bg-gray-800/50 rounded-xl p-4">
-                      <h4 className="text-sm font-medium text-gray-300 mb-2">
-                        Session Quality
+                    {/* Overall Score */}
+                    <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-750/50">
+                      <h4 className="text-sm font-medium text-slate-300 mb-3">
+                        Overall Score
                       </h4>
-                      <div className="space-y-2 text-sm">
-                        {session.focus_loss_count > 0 && (
-                          <p className="text-gray-400">
-                            Focus losses: {session.focus_loss_count}
-                          </p>
+                      <div className="space-y-2">
+                        {delta?.weighted_score !== null && delta?.weighted_score !== undefined ? (
+                          <>
+                            <div>
+                              <p className="text-2xl font-bold text-white">
+                                {Math.round(Number(delta.weighted_score))}
+                              </p>
+                              <p className="text-xs text-slate-400">/ 100</p>
+                            </div>
+                            <p className="text-xs text-slate-400">
+                              Weighted combination of all tests
+                            </p>
+                          </>
+                        ) : (
+                          <p className="text-sm text-slate-400">Baseline session</p>
                         )}
-                        {session.speech_skipped && (
-                          <p className="text-gray-400">
-                            Speech test: Skipped
-                          </p>
-                        )}
-                        {reactionMetric && (
-                          <p className="text-gray-400">
-                            Valid trials: {reactionMetric.valid_trial_count}/{reactionMetric.total_trial_count}
-                          </p>
-                        )}
-                        {session.focus_loss_count === 0 && !session.speech_skipped && (
-                          <p className="text-teal-400">
-                            ✓ Complete session
-                          </p>
-                        )}
+                        <div className="text-xs text-slate-400 space-y-1 pt-2">
+                          {session.focus_loss_count > 0 && (
+                            <p>Focus losses: {session.focus_loss_count}</p>
+                          )}
+                          {session.speech_skipped && (
+                            <p>Speech: Skipped</p>
+                          )}
+                          {session.focus_loss_count === 0 && !session.speech_skipped && (
+                            <p className="text-teal-400">✓ Complete</p>
+                          )}
+                        </div>
                       </div>
                     </div>
                   </div>
