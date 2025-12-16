@@ -11,24 +11,24 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
-        // BrainGauge color palette
+        // BrainGauge color palette (uses CSS variables for theme switching)
         slate: {
-          950: '#0f1419',
-          900: '#151b23',
-          850: '#1a2129',
+          950: 'var(--bg-primary)',
+          900: 'var(--bg-secondary)',
+          850: 'var(--bg-tertiary)',
           800: '#1f272f',
-          750: '#242c35',
+          750: 'var(--border-primary)',
         },
         rose: {
           900: '#4a2b3a',
           800: '#6b3d52',
-          700: '#8b4f6a',
-          600: '#a86382',
+          700: 'var(--accent-primary)',
+          600: 'var(--accent-secondary)',
           500: '#c2789a',
         },
         teal: {
           600: '#3d8b8b',
-          500: '#4fa3a3',
+          500: 'var(--accent-tertiary)',
           400: '#6bb8b8',
         },
         status: {

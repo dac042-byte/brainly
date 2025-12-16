@@ -28,6 +28,10 @@ export function SessionContent({ profile }: SessionContentProps) {
   const [loading, setLoading] = useState(true)
   const [memoryWordSequence, setMemoryWordSequence] = useState<string[]>([])
   const [memoryScore, setMemoryScore] = useState<number>(0)
+  const [reactionMetrics, setReactionMetrics] = useState<{
+    medianRT: number
+    trials: number
+  } | null>(null)
   const [speechMetrics, setSpeechMetrics] = useState<{
     wordCount: number
     wordsPerMinute: number
@@ -109,6 +113,18 @@ export function SessionContent({ profile }: SessionContentProps) {
     if (!sessionId) return
 
     try {
+      // Calculate median reaction time
+      const validTrials = trials.filter(t => !t.invalid)
+      const reactionTimes = validTrials.map(t => t.reactionTime).sort((a, b) => a - b)
+      const median = reactionTimes.length > 0
+        ? reactionTimes[Math.floor(reactionTimes.length / 2)]
+        : 0
+
+      setReactionMetrics({
+        medianRT: Math.round(median),
+        trials: validTrials.length
+      })
+
       await saveReactionTrials(sessionId, trials, focusLossCount)
       setState('speech')
     } catch (error) {
@@ -334,25 +350,57 @@ export function SessionContent({ profile }: SessionContentProps) {
   if (state === 'complete') {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-950 via-slate-900 to-slate-850 px-4 animate-fade-in">
-        <div className="max-w-2xl w-full bg-slate-850/80 backdrop-blur-xl rounded-2xl border border-slate-750/50 p-8 text-center animate-slide-up">
+        <div className="max-w-3xl w-full bg-slate-850/80 backdrop-blur-xl rounded-2xl border border-slate-750/50 p-8 text-center animate-slide-up">
           <div className="text-6xl mb-4 animate-fade-in">✓</div>
           <h2 className="text-3xl font-bold mb-2 text-white">
             Session Complete!
           </h2>
-          <div className="bg-rose-900/20 border border-rose-700/30 rounded-xl p-4 mb-6 mx-auto max-w-md hover:bg-rose-900/25 transition-colors duration-300">
-            <p className="text-rose-400 text-sm mb-2">Memory Score</p>
-            <p className="text-3xl font-bold text-white animate-count-up">
-              {memoryScore} / {memoryWordSequence.length}
-            </p>
-            <p className="text-rose-300/60 text-xs mt-1">
-              {memoryWordSequence.length > 0
-                ? `${Math.round((memoryScore / memoryWordSequence.length) * 100)}% recalled`
-                : '0% recalled'}
-            </p>
-          </div>
-          <p className="text-slate-400 mb-6">
+          <p className="text-slate-400 mb-8">
             Your results have been saved and your streak has been updated.
           </p>
+
+          {/* Metrics Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+            {/* Reaction Time */}
+            {reactionMetrics && (
+              <div className="bg-rose-900/20 border border-rose-700/30 rounded-xl p-5 hover:bg-rose-900/25 transition-colors duration-300">
+                <p className="text-rose-400 text-sm mb-2 font-medium">Reaction Time</p>
+                <p className="text-4xl font-bold text-white animate-count-up">
+                  {reactionMetrics.medianRT}
+                </p>
+                <p className="text-rose-300/60 text-xs mt-1">
+                  milliseconds (median)
+                </p>
+              </div>
+            )}
+
+            {/* Speech Activity */}
+            {speechMetrics && (
+              <div className="bg-blue-900/20 border border-blue-500/30 rounded-xl p-5 hover:bg-blue-900/25 transition-colors duration-300">
+                <p className="text-blue-400 text-sm mb-2 font-medium">Speech Activity</p>
+                <p className="text-4xl font-bold text-white animate-count-up">
+                  {speechMetrics.wordsPerMinute.toFixed(0)}
+                </p>
+                <p className="text-blue-300/60 text-xs mt-1">
+                  words per minute
+                </p>
+              </div>
+            )}
+
+            {/* Memory Recall */}
+            <div className="bg-teal-900/20 border border-teal-500/30 rounded-xl p-5 hover:bg-teal-900/25 transition-colors duration-300">
+              <p className="text-teal-400 text-sm mb-2 font-medium">Memory Recall</p>
+              <p className="text-4xl font-bold text-white animate-count-up">
+                {memoryWordSequence.length > 0
+                  ? Math.round((memoryScore / memoryWordSequence.length) * 100)
+                  : 0}%
+              </p>
+              <p className="text-teal-300/60 text-xs mt-1">
+                {memoryScore} of {memoryWordSequence.length} words
+              </p>
+            </div>
+          </div>
+
           <button
             onClick={handleBackToDashboard}
             className="bg-gradient-to-r from-rose-700 to-rose-600 hover:from-rose-800 hover:to-rose-700 text-white px-8 py-3 rounded-xl font-medium shadow-lg shadow-rose-900/20 hover:shadow-rose-900/30 transition-all duration-200 hover:scale-[1.02]"

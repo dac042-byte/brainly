@@ -47,15 +47,19 @@ export function NewDashboardContent({ data, profile }: DashboardContentProps) {
     router.refresh()
   }
 
-  const reactionTimeData = sessions
-    .filter(s => s.reaction_metrics && s.reaction_metrics.length > 0)
+  const chartData = sessions
     .reverse()
     .slice(-8) // Last 8 sessions
     .map((session, index) => {
-      const metric = session.reaction_metrics![0]
+      const reactionMetric = session.reaction_metrics?.[0]
+      const speechMetric = session.speech_metrics?.[0]
+      const memoryMetric = session.memory_metrics?.[0]
+
       return {
         week: `W${index + 1}`,
-        reactionTime: Number(metric.median_rt_ms),
+        reactionTime: reactionMetric ? Number(reactionMetric.median_rt_ms) : null,
+        speechActivity: speechMetric ? Number(speechMetric.speech_activity_ratio) * 100 : null,
+        memoryScore: memoryMetric ? (Number(memoryMetric.words_recalled) / Number(memoryMetric.total_words)) * 100 : null,
       }
     })
 
@@ -202,23 +206,31 @@ export function NewDashboardContent({ data, profile }: DashboardContentProps) {
             )}
 
             {/* History Chart */}
-            {reactionTimeData.length > 0 && (
+            {chartData.length > 0 && (
               <div className="bg-slate-850/80 backdrop-blur-xl rounded-2xl border border-slate-750/50 p-6 hover:border-slate-750/70 transition-all duration-300 animate-slide-up">
                 <div className="flex items-start justify-between mb-6">
                   <div>
-                    <h2 className="text-xl font-bold text-white mb-1">History</h2>
-                    <p className="text-sm text-slate-400">Last 8 weeks (mock data)</p>
+                    <h2 className="text-xl font-bold text-white mb-1">Performance Trends</h2>
+                    <p className="text-sm text-slate-400">Last 8 sessions</p>
                   </div>
                   <div className="flex gap-4 text-xs">
                     <div className="flex items-center gap-2">
-                      <div className="w-3 h-3 rounded-full bg-pink-500"></div>
-                      <span className="text-slate-400">Reaction Time</span>
+                      <div className="w-3 h-3 rounded-full bg-rose-500"></div>
+                      <span className="text-slate-400">Reaction (ms)</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="w-3 h-3 rounded-full bg-blue-400"></div>
+                      <span className="text-slate-400">Speech (%)</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="w-3 h-3 rounded-full bg-teal-400"></div>
+                      <span className="text-slate-400">Memory (%)</span>
                     </div>
                   </div>
                 </div>
 
-                <ResponsiveContainer width="100%" height={200}>
-                  <LineChart data={reactionTimeData}>
+                <ResponsiveContainer width="100%" height={250}>
+                  <LineChart data={chartData}>
                     <CartesianGrid strokeDasharray="3 3" stroke="#2a3945" opacity={0.25} />
                     <XAxis
                       dataKey="week"
@@ -226,9 +238,19 @@ export function NewDashboardContent({ data, profile }: DashboardContentProps) {
                       tick={{ fill: '#64748b', fontSize: 12 }}
                     />
                     <YAxis
+                      yAxisId="left"
+                      stroke="#4a5a6a"
+                      tick={{ fill: '#64748b', fontSize: 12 }}
+                      domain={[0, 100]}
+                      label={{ value: 'Percentage (%)', angle: -90, position: 'insideLeft', fill: '#64748b', fontSize: 11 }}
+                    />
+                    <YAxis
+                      yAxisId="right"
+                      orientation="right"
                       stroke="#4a5a6a"
                       tick={{ fill: '#64748b', fontSize: 12 }}
                       domain={['dataMin - 20', 'dataMax + 20']}
+                      label={{ value: 'Reaction Time (ms)', angle: 90, position: 'insideRight', fill: '#64748b', fontSize: 11 }}
                     />
                     <Tooltip
                       contentStyle={{
@@ -239,12 +261,37 @@ export function NewDashboardContent({ data, profile }: DashboardContentProps) {
                       }}
                     />
                     <Line
+                      yAxisId="right"
                       type="monotone"
                       dataKey="reactionTime"
+                      name="Reaction Time"
                       stroke="#a86382"
                       strokeWidth={2.5}
                       dot={{ r: 4, fill: '#a86382', strokeWidth: 0 }}
                       activeDot={{ r: 6, fill: '#c2789a' }}
+                      connectNulls
+                    />
+                    <Line
+                      yAxisId="left"
+                      type="monotone"
+                      dataKey="speechActivity"
+                      name="Speech Activity"
+                      stroke="#60a5fa"
+                      strokeWidth={2.5}
+                      dot={{ r: 4, fill: '#60a5fa', strokeWidth: 0 }}
+                      activeDot={{ r: 6, fill: '#93c5fd' }}
+                      connectNulls
+                    />
+                    <Line
+                      yAxisId="left"
+                      type="monotone"
+                      dataKey="memoryScore"
+                      name="Memory Score"
+                      stroke="#5eead4"
+                      strokeWidth={2.5}
+                      dot={{ r: 4, fill: '#5eead4', strokeWidth: 0 }}
+                      activeDot={{ r: 6, fill: '#99f6e4' }}
+                      connectNulls
                     />
                   </LineChart>
                 </ResponsiveContainer>
