@@ -24,10 +24,6 @@ export function Sidebar() {
             <p className="text-xs text-slate-400">Performance tracker</p>
           </div>
         </div>
-
-        <div className="mt-4 px-3 py-2 bg-pink-500/20 rounded-lg border border-rose-700/30">
-          <p className="text-xs text-rose-400 font-medium">✓ Baseline established</p>
-        </div>
       </div>
 
       {/* Navigation */}
