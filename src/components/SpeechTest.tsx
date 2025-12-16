@@ -13,11 +13,35 @@ interface SpeechTestProps {
   onSkip?: () => void
 }
 
-const PROMPT_TEXT = "The sun was setting behind the mountains, painting the sky in shades of orange and pink. Birds flew overhead, heading home for the evening. A gentle breeze rustled through the trees, carrying the scent of wildflowers."
+const PASSAGE_BANK = [
+  "The sun was setting behind the mountains, painting the sky in shades of orange and pink. Birds flew overhead, heading home for the evening. A gentle breeze rustled through the trees, carrying the scent of wildflowers.",
+
+  "Morning coffee steamed in the ceramic mug, filling the kitchen with a rich aroma. Outside the window, rain tapped gently against the glass. The world seemed peaceful and quiet, wrapped in a blanket of gray clouds.",
+
+  "The library stood silent except for the soft rustle of turning pages. Rows of wooden shelves stretched toward the ceiling, filled with countless stories. Afternoon sunlight filtered through tall windows, creating patterns on the worn wooden floor.",
+
+  "Waves crashed against the rocky shore, sending white foam dancing across the sand. Seagulls called out overhead, circling in the clear blue sky. The salty ocean breeze carried the promise of summer adventures and distant journeys.",
+
+  "Fresh snow covered the quiet street, muffling all sounds beneath its white blanket. Footprints marked a winding path through the untouched surface. Icicles hung from the roof edges, sparkling like crystals in the cold winter light.",
+
+  "The garden bloomed with vibrant colors as spring arrived in full force. Bees hummed busily among the flowers, gathering nectar from each bloom. Butterflies danced from petal to petal, their delicate wings catching the warm afternoon sun.",
+
+  "City lights began to flicker on as dusk settled over the bustling streets. Cars moved in steady streams, their headlights creating rivers of light. People hurried along sidewalks, heading home after long days at work.",
+
+  "The old bookstore smelled of aged paper and leather bindings. Dust motes floated in shafts of sunlight that pierced the dimness. Each shelf held treasures waiting to be discovered by wandering hands and curious minds.",
+
+  "Thunder rumbled in the distance as dark clouds gathered on the horizon. The wind picked up, bending the trees and scattering leaves across the yard. A few drops began to fall, promising a summer storm would soon arrive.",
+
+  "The bakery window displayed fresh pastries in neat, tempting rows. Golden croissants sat beside chocolate eclairs and fruit tarts. The sweet smell drifted onto the street, drawing passersby closer to admire the delicious creations."
+]
+
+// Select a random passage for each test session
+const getRandomPassage = () => PASSAGE_BANK[Math.floor(Math.random() * PASSAGE_BANK.length)]
 
 export function SpeechTest({ onComplete, onSkip }: SpeechTestProps) {
   const [state, setState] = useState<'intro' | 'recording' | 'processing'>('intro')
   const [recordingTime, setRecordingTime] = useState(0)
+  const [promptText] = useState(getRandomPassage()) // Select passage once per component mount
   const mediaRecorderRef = useRef<MediaRecorder | null>(null)
   const chunksRef = useRef<Blob[]>([])
   const timerRef = useRef<NodeJS.Timeout | null>(null)
@@ -97,7 +121,7 @@ export function SpeechTest({ onComplete, onSkip }: SpeechTestProps) {
 
           <div className="bg-rose-900/20 border border-rose-700/30 rounded-xl p-6 mb-6">
             <p className="text-sm text-rose-400 mb-3">Read this passage aloud:</p>
-            <p className="text-white leading-relaxed">{PROMPT_TEXT}</p>
+            <p className="text-white leading-relaxed">{promptText}</p>
           </div>
 
           <div className="space-y-3 text-sm text-slate-400 mb-6">
@@ -145,7 +169,7 @@ export function SpeechTest({ onComplete, onSkip }: SpeechTestProps) {
           </div>
 
           <div className="bg-rose-900/20 border border-rose-700/30 rounded-xl p-4 mb-6">
-            <p className="text-sm text-rose-300">{PROMPT_TEXT}</p>
+            <p className="text-sm text-rose-300">{promptText}</p>
           </div>
 
           <button
