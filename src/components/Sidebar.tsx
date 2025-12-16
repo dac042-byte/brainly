@@ -12,11 +12,11 @@ export function Sidebar() {
   ]
 
   return (
-    <div className="w-80 min-h-screen bg-gray-900/95 backdrop-blur-xl border-r border-slate-750/50 flex flex-col">
+    <div className="w-80 min-h-screen bg-slate-900 backdrop-blur-xl border-r border-slate-750/50 flex flex-col">
       {/* Logo */}
       <div className="p-6">
         <div className="flex items-center gap-3 mb-2">
-          <div className="w-12 h-12 bg-gradient-to-br from-pink-500 to-rose-500 rounded-xl flex items-center justify-center">
+          <div className="w-12 h-12 bg-gradient-to-br from-rose-700 to-rose-600 rounded-xl flex items-center justify-center">
             <span className="text-2xl">🧠</span>
           </div>
           <div>
@@ -34,8 +34,8 @@ export function Sidebar() {
             href={item.path}
             className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all ${
               pathname === item.path
-                ? 'bg-pink-600 text-white shadow-lg shadow-pink-500/50'
-                : 'text-slate-400 hover:bg-gray-800/50 hover:text-white'
+                ? 'bg-rose-700 text-white shadow-lg shadow-rose-900/50'
+                : 'text-slate-400 hover:bg-slate-800/50 hover:text-white'
             }`}
           >
             <span className="text-lg">{item.icon}</span>

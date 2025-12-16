@@ -159,15 +159,15 @@ export function NewDashboardContent({ data, profile }: DashboardContentProps) {
                   </div>
 
                   {latestReactionMetric && (
-                    <div className="bg-rose-900/20 rounded-xl p-4 border border-pink-500/20">
+                    <div className="bg-rose-900/20 rounded-xl p-4 border border-rose-700/30">
                       <div className="flex items-baseline gap-2 mb-1">
                         <span className="text-4xl font-bold text-rose-400">
                           {Number(latestReactionMetric.median_rt_ms).toFixed(0)}
                         </span>
-                        <span className="text-sm text-pink-400">ms</span>
+                        <span className="text-sm text-rose-400">ms</span>
                       </div>
                       <div className="flex items-center gap-2">
-                        <span className="text-xs text-pink-400">Reaction</span>
+                        <span className="text-xs text-rose-400">Reaction</span>
                         <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${reactionStatus.color}`}>
                           {reactionStatus.label}
                         </span>
