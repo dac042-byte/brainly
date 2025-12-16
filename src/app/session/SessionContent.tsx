@@ -142,12 +142,17 @@ export function SessionContent({ profile }: SessionContentProps) {
     averagePauseDuration: number
     totalDuration: number
   }) => {
-    if (!sessionId) return
+    console.log('[Speech] handleSpeechComplete called with:', metrics)
+    if (!sessionId) {
+      console.error('[Speech] No sessionId!')
+      return
+    }
 
     try {
       const supabase = createClient()
 
       // Step 1: Save basic recording info to speech_data table
+      console.log('[Speech] Saving to speech_data...')
       const { error: dataError } = await supabase.from('speech_data').insert({
         session_id: sessionId,
         prompt_id: 'default_v1',
@@ -158,9 +163,10 @@ export function SessionContent({ profile }: SessionContentProps) {
       })
 
       if (dataError) {
-        console.error('Failed to save speech_data:', dataError)
+        console.error('[Speech] Failed to save speech_data:', dataError)
         throw dataError
       }
+      console.log('[Speech] speech_data saved successfully')
 
       // Step 2: Calculate and save speech activity metrics
       const pauseTimeMs = Math.round(metrics.pauseCount * metrics.averagePauseDuration)
@@ -169,6 +175,7 @@ export function SessionContent({ profile }: SessionContentProps) {
         ? voicedTimeMs / metrics.totalDuration
         : 0
 
+      console.log('[Speech] Saving to speech_metrics...')
       const { error: metricsError } = await supabase.from('speech_metrics').insert({
         session_id: sessionId,
         word_count: metrics.wordCount,
@@ -181,14 +188,17 @@ export function SessionContent({ profile }: SessionContentProps) {
       })
 
       if (metricsError) {
-        console.error('Failed to save speech_metrics:', metricsError)
+        console.error('[Speech] Failed to save speech_metrics:', metricsError)
         throw metricsError
       }
+      console.log('[Speech] speech_metrics saved successfully')
 
       setSpeechMetrics(metrics)
+      console.log('[Speech] Setting state to memory-recall')
       setState('memory-recall')
+      console.log('[Speech] State set to memory-recall')
     } catch (error) {
-      console.error('Failed to save speech data:', error)
+      console.error('[Speech] Failed to save speech data:', error)
       alert('Failed to save speech data. Please try again.')
       setState('speech')
     }
