@@ -146,14 +146,23 @@ export function SessionContent({ profile }: SessionContentProps) {
     try {
       const supabase = createClient()
 
-      // Save speech metrics
-      await supabase.from('speech_tests').insert({
+      // Calculate speech activity metrics
+      const pauseTimeMs = Math.round(metrics.pauseCount * metrics.averagePauseDuration)
+      const voicedTimeMs = Math.max(0, metrics.totalDuration - pauseTimeMs)
+      const speechActivityRatio = metrics.totalDuration > 0
+        ? voicedTimeMs / metrics.totalDuration
+        : 0
+
+      // Save to speech_metrics table (not speech_tests!)
+      await supabase.from('speech_metrics').insert({
         session_id: sessionId,
         word_count: metrics.wordCount,
         words_per_minute: metrics.wordsPerMinute,
         pause_count: metrics.pauseCount,
-        average_pause_duration: metrics.averagePauseDuration,
-        total_duration: metrics.totalDuration
+        avg_pause_length_ms: Math.round(metrics.averagePauseDuration),
+        pause_time_ms: pauseTimeMs,
+        voiced_time_ms: voicedTimeMs,
+        speech_activity_ratio: speechActivityRatio,
       })
 
       setSpeechMetrics(metrics)
