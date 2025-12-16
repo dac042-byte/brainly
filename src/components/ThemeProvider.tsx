@@ -17,7 +17,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     setMounted(true)
-    const stored = localStorage.getItem('braingauge-color-scheme') as ColorScheme | null
+    const stored = localStorage.getItem('cerebro-color-scheme') as ColorScheme | null
     if (stored) {
       setColorSchemeState(stored)
       document.documentElement.setAttribute('data-color-scheme', stored)
@@ -28,7 +28,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   const setColorScheme = (scheme: ColorScheme) => {
     setColorSchemeState(scheme)
-    localStorage.setItem('braingauge-color-scheme', scheme)
+    localStorage.setItem('cerebro-color-scheme', scheme)
     document.documentElement.setAttribute('data-color-scheme', scheme)
   }
 

@@ -3,7 +3,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 
 export const metadata: Metadata = {
-  title: "Braingauge v1",
+  title: "Cerebro",
   description: "Privacy-first cognitive self-tracking",
 };
 

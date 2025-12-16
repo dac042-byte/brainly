@@ -265,7 +265,7 @@ export function SettingsContent({ profile, user }: SettingsContentProps) {
               About
             </h2>
             <div className="space-y-2 text-sm text-slate-400">
-              <p><strong className="text-white">Braingauge v1</strong></p>
+              <p><strong className="text-white">Cerebro</strong></p>
               <p>Privacy-first cognitive self-tracking</p>
               <p className="text-xs pt-2 text-slate-500">For personal tracking only. Not a medical device.</p>
             </div>

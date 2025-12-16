@@ -11,7 +11,7 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
-        // BrainGauge color palette (uses CSS variables for theme switching)
+        // Cerebro color palette (uses CSS variables for theme switching)
         slate: {
           950: 'var(--bg-primary)',
           900: 'var(--bg-secondary)',

@@ -20,7 +20,7 @@ export function Sidebar() {
             <span className="text-2xl">🧠</span>
           </div>
           <div>
-            <h1 className="text-xl font-bold text-white">BrainGauge</h1>
+            <h1 className="text-xl font-bold text-white">Cerebro</h1>
             <p className="text-xs text-slate-400">Performance tracker</p>
           </div>
         </div>
@@ -49,7 +49,7 @@ export function Sidebar() {
         <div className="border-t border-slate-750 pt-4">
           <p className="text-xs text-gray-500 leading-relaxed">
             <strong className="text-slate-400">Not a medical device.</strong><br />
-            BrainGauge is for performance monitoring and trend awareness only.
+            Cerebro is for performance monitoring and trend awareness only.
           </p>
         </div>
       </div>

@@ -1,4 +1,4 @@
--- Braingauge v1 Database Schema
+-- Cerebro Database Schema
 -- Privacy-first cognitive self-tracking with personal baseline only
 
 -- Enable UUID extension
