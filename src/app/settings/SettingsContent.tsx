@@ -6,6 +6,7 @@ import { createClient } from '@/lib/supabase/client'
 import type { UserProfile } from '@/lib/types'
 import type { User } from '@supabase/supabase-js'
 import { DashboardLayout } from '@/components/DashboardLayout'
+import { useTheme } from '@/components/ThemeProvider'
 
 interface SettingsContentProps {
   profile: UserProfile
@@ -14,6 +15,7 @@ interface SettingsContentProps {
 
 export function SettingsContent({ profile, user }: SettingsContentProps) {
   const router = useRouter()
+  const { colorScheme, setColorScheme } = useTheme()
   const [audioStorageEnabled, setAudioStorageEnabled] = useState(profile.audio_storage_enabled)
   const [saving, setSaving] = useState(false)
   const [message, setMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null)
@@ -107,6 +109,106 @@ export function SettingsContent({ profile, user }: SettingsContentProps) {
                 </button>
               </div>
             </div>
+          </div>
+
+          {/* Themes Section */}
+          <div className="bg-slate-850/80 backdrop-blur-xl rounded-2xl border border-slate-750/50 p-6">
+            <h2 className="text-xl font-bold text-white mb-4">
+              Color Scheme
+            </h2>
+            <p className="text-sm text-slate-400 mb-6">
+              Choose your preferred color scheme for the interface
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {/* Calm Analytical */}
+              <button
+                onClick={() => setColorScheme('calm-analytical')}
+                className={`relative p-4 rounded-xl border-2 transition-all duration-200 hover:scale-[1.02] ${
+                  colorScheme === 'calm-analytical'
+                    ? 'border-rose-600 bg-rose-900/20'
+                    : 'border-slate-750 hover:border-slate-700'
+                }`}
+              >
+                <div className="flex items-center justify-between mb-3">
+                  <h3 className="font-semibold text-white">Calm Analytical</h3>
+                  {colorScheme === 'calm-analytical' && (
+                    <div className="w-5 h-5 rounded-full bg-rose-600 flex items-center justify-center">
+                      <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                      </svg>
+                    </div>
+                  )}
+                </div>
+                <p className="text-xs text-slate-400 mb-3">Slate blue with muted rose accents</p>
+                <div className="flex gap-2">
+                  <div className="w-8 h-8 rounded-md bg-[#0f1419] border border-slate-700"></div>
+                  <div className="w-8 h-8 rounded-md bg-[#1a2129] border border-slate-700"></div>
+                  <div className="w-8 h-8 rounded-md bg-[#8b4f6a] border border-slate-700"></div>
+                  <div className="w-8 h-8 rounded-md bg-[#4fa3a3] border border-slate-700"></div>
+                </div>
+              </button>
+
+              {/* Deep Forest */}
+              <button
+                onClick={() => setColorScheme('deep-forest')}
+                className={`relative p-4 rounded-xl border-2 transition-all duration-200 hover:scale-[1.02] ${
+                  colorScheme === 'deep-forest'
+                    ? 'border-[#5d8a5d] bg-[#5d8a5d]/20'
+                    : 'border-slate-750 hover:border-slate-700'
+                }`}
+              >
+                <div className="flex items-center justify-between mb-3">
+                  <h3 className="font-semibold text-white">Deep Forest</h3>
+                  {colorScheme === 'deep-forest' && (
+                    <div className="w-5 h-5 rounded-full bg-[#5d8a5d] flex items-center justify-center">
+                      <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                      </svg>
+                    </div>
+                  )}
+                </div>
+                <p className="text-xs text-slate-400 mb-3">Dark green with earth tones</p>
+                <div className="flex gap-2">
+                  <div className="w-8 h-8 rounded-md bg-[#0d1410] border border-slate-700"></div>
+                  <div className="w-8 h-8 rounded-md bg-[#1a2420] border border-slate-700"></div>
+                  <div className="w-8 h-8 rounded-md bg-[#4a6b4a] border border-slate-700"></div>
+                  <div className="w-8 h-8 rounded-md bg-[#7aa67a] border border-slate-700"></div>
+                </div>
+              </button>
+
+              {/* Night Sky */}
+              <button
+                onClick={() => setColorScheme('night-sky')}
+                className={`relative p-4 rounded-xl border-2 transition-all duration-200 hover:scale-[1.02] ${
+                  colorScheme === 'night-sky'
+                    ? 'border-[#7563b3] bg-[#7563b3]/20'
+                    : 'border-slate-750 hover:border-slate-700'
+                }`}
+              >
+                <div className="flex items-center justify-between mb-3">
+                  <h3 className="font-semibold text-white">Night Sky</h3>
+                  {colorScheme === 'night-sky' && (
+                    <div className="w-5 h-5 rounded-full bg-[#7563b3] flex items-center justify-center">
+                      <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                      </svg>
+                    </div>
+                  )}
+                </div>
+                <p className="text-xs text-slate-400 mb-3">Deep blue with soft violet</p>
+                <div className="flex gap-2">
+                  <div className="w-8 h-8 rounded-md bg-[#0a0d1a] border border-slate-700"></div>
+                  <div className="w-8 h-8 rounded-md bg-[#151a2e] border border-slate-700"></div>
+                  <div className="w-8 h-8 rounded-md bg-[#5a4f8b] border border-slate-700"></div>
+                  <div className="w-8 h-8 rounded-md bg-[#6b8bb8] border border-slate-700"></div>
+                </div>
+              </button>
+            </div>
+
+            <p className="text-xs text-slate-500 mt-4">
+              Theme changes apply immediately and are saved automatically
+            </p>
           </div>
 
           {/* Privacy Section */}

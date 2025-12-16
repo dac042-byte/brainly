@@ -2,49 +2,38 @@
 
 import { createContext, useContext, useEffect, useState } from 'react'
 
-type Theme = 'light' | 'dark'
+type ColorScheme = 'calm-analytical' | 'deep-forest' | 'night-sky'
 
 interface ThemeContextType {
-  theme: Theme
-  toggleTheme: () => void
+  colorScheme: ColorScheme
+  setColorScheme: (scheme: ColorScheme) => void
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>('light')
+  const [colorScheme, setColorSchemeState] = useState<ColorScheme>('calm-analytical')
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
     setMounted(true)
-    const stored = localStorage.getItem('theme') as Theme | null
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-
+    const stored = localStorage.getItem('braingauge-color-scheme') as ColorScheme | null
     if (stored) {
-      setTheme(stored)
-      document.documentElement.classList.toggle('dark', stored === 'dark')
-    } else if (prefersDark) {
-      setTheme('dark')
-      document.documentElement.classList.add('dark')
+      setColorSchemeState(stored)
+      document.documentElement.setAttribute('data-color-scheme', stored)
     } else {
-      document.documentElement.classList.remove('dark')
+      document.documentElement.setAttribute('data-color-scheme', 'calm-analytical')
     }
   }, [])
 
-  useEffect(() => {
-    if (mounted) {
-      document.documentElement.classList.toggle('dark', theme === 'dark')
-    }
-  }, [theme, mounted])
-
-  const toggleTheme = () => {
-    const newTheme = theme === 'light' ? 'dark' : 'light'
-    setTheme(newTheme)
-    localStorage.setItem('theme', newTheme)
+  const setColorScheme = (scheme: ColorScheme) => {
+    setColorSchemeState(scheme)
+    localStorage.setItem('braingauge-color-scheme', scheme)
+    document.documentElement.setAttribute('data-color-scheme', scheme)
   }
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+    <ThemeContext.Provider value={{ colorScheme, setColorScheme }}>
       {children}
     </ThemeContext.Provider>
   )
@@ -54,8 +43,8 @@ export function useTheme() {
   const context = useContext(ThemeContext)
   if (context === undefined) {
     return {
-      theme: 'light' as Theme,
-      toggleTheme: () => {},
+      colorScheme: 'calm-analytical' as ColorScheme,
+      setColorScheme: () => {},
     }
   }
   return context
