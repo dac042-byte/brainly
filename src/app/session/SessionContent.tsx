@@ -146,15 +146,29 @@ export function SessionContent({ profile }: SessionContentProps) {
     try {
       const supabase = createClient()
 
-      // Calculate speech activity metrics
+      // Step 1: Save basic recording info to speech_data table
+      const { error: dataError } = await supabase.from('speech_data').insert({
+        session_id: sessionId,
+        prompt_id: 'default_v1',
+        completion_status: 'completed',
+        duration_ms: metrics.totalDuration,
+        redo_used: false,
+        recorded_at: new Date().toISOString(),
+      })
+
+      if (dataError) {
+        console.error('Failed to save speech_data:', dataError)
+        throw dataError
+      }
+
+      // Step 2: Calculate and save speech activity metrics
       const pauseTimeMs = Math.round(metrics.pauseCount * metrics.averagePauseDuration)
       const voicedTimeMs = Math.max(0, metrics.totalDuration - pauseTimeMs)
       const speechActivityRatio = metrics.totalDuration > 0
         ? voicedTimeMs / metrics.totalDuration
         : 0
 
-      // Save to speech_metrics table (not speech_tests!)
-      await supabase.from('speech_metrics').insert({
+      const { error: metricsError } = await supabase.from('speech_metrics').insert({
         session_id: sessionId,
         word_count: metrics.wordCount,
         words_per_minute: metrics.wordsPerMinute,
@@ -165,10 +179,15 @@ export function SessionContent({ profile }: SessionContentProps) {
         speech_activity_ratio: speechActivityRatio,
       })
 
+      if (metricsError) {
+        console.error('Failed to save speech_metrics:', metricsError)
+        throw metricsError
+      }
+
       setSpeechMetrics(metrics)
       setState('memory-recall')
     } catch (error) {
-      console.error('Failed to save speech metrics:', error)
+      console.error('Failed to save speech data:', error)
       alert('Failed to save speech data. Please try again.')
       setState('speech')
     }
