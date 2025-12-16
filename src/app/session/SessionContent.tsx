@@ -55,11 +55,11 @@ export function SessionContent({ profile }: SessionContentProps) {
   // Detect session abandonment (user leaving mid-test)
   useEffect(() => {
     let abandonedSession = false
+    const inProgressStates: SessionState[] = ['memory-encoding', 'reaction', 'speech', 'memory-recall']
 
     const handleVisibilityChange = () => {
       if (document.hidden) {
         // User left the page - check if session is in progress
-        const inProgressStates: SessionState[] = ['memory-encoding', 'reaction', 'speech', 'memory-recall']
         if (sessionId && inProgressStates.includes(state)) {
           // Session abandoned - delete it
           abandonedSession = true
@@ -68,12 +68,14 @@ export function SessionContent({ profile }: SessionContentProps) {
             console.log('Session abandoned and deleted')
           })
         }
-      } else if (abandonedSession) {
-        // User came back - reset to intro
+      } else if (abandonedSession && !inProgressStates.includes(state)) {
+        // User came back after abandonment - reset to intro
+        // Only reset if not currently in a test (avoid mid-test interruptions)
         setSessionId(null)
         setState('intro')
         setMemoryWordSequence([])
         setMemoryScore(0)
+        setReactionMetrics(null)
         setSpeechMetrics(null)
         abandonedSession = false
         alert('Your previous session was cancelled because you left the page. Please start a new session.')
@@ -81,7 +83,6 @@ export function SessionContent({ profile }: SessionContentProps) {
     }
 
     const handleBeforeUnload = (e: BeforeUnloadEvent) => {
-      const inProgressStates: SessionState[] = ['memory-encoding', 'reaction', 'speech', 'memory-recall']
       if (sessionId && inProgressStates.includes(state)) {
         e.preventDefault()
         e.returnValue = 'Your session progress will be lost. Are you sure you want to leave?'
