@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 import type { UserProfile } from '@/lib/types'
 import { ReactionTimeTest } from '@/components/ReactionTimeTest'
@@ -86,18 +86,18 @@ export function SessionContent({ profile }: SessionContentProps) {
     }
   }, [sessionId, state])
 
-  const handleStartSession = async () => {
+  const handleStartSession = useCallback(async () => {
     const session = await createSession()
     setSessionId(session.id)
     setState('memory-encoding')
-  }
+  }, [])
 
-  const handleMemoryEncodingComplete = (wordSequence: string[]) => {
+  const handleMemoryEncodingComplete = useCallback((wordSequence: string[]) => {
     setMemoryWordSequence(wordSequence)
     setState('reaction')
-  }
+  }, [])
 
-  const handleReactionComplete = async (trials: any[], focusLossCount: number) => {
+  const handleReactionComplete = useCallback(async (trials: any[], focusLossCount: number) => {
     if (!sessionId) return
 
     try {
@@ -120,9 +120,9 @@ export function SessionContent({ profile }: SessionContentProps) {
       alert('Failed to save reaction time data. Please try again.')
       setState('reaction')
     }
-  }
+  }, [sessionId])
 
-  const handleSpeechComplete = async (metrics: {
+  const handleSpeechComplete = useCallback(async (metrics: {
     wordCount: number
     wordsPerMinute: number
     pauseCount: number
@@ -189,9 +189,9 @@ export function SessionContent({ profile }: SessionContentProps) {
       alert('Failed to save speech data. Please try again.')
       setState('speech')
     }
-  }
+  }, [sessionId])
 
-  const handleMemoryRecallComplete = async (score: number, totalWords: number, userRecall: string) => {
+  const handleMemoryRecallComplete = useCallback(async (score: number, totalWords: number, userRecall: string) => {
     if (!sessionId) return
 
     setState('processing')
@@ -226,12 +226,12 @@ export function SessionContent({ profile }: SessionContentProps) {
       alert('Failed to save memory test data. Please try again.')
       setState('memory-recall')
     }
-  }
+  }, [sessionId, memoryWordSequence])
 
-  const handleBackToDashboard = () => {
+  const handleBackToDashboard = useCallback(() => {
     router.push('/dashboard')
     router.refresh()
-  }
+  }, [router])
 
   if (loading) {
     return (
