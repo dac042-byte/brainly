@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import type { UserProfile } from '@/lib/types'
 import { ReactionTimeTest } from '@/components/ReactionTimeTest'
@@ -23,10 +23,16 @@ type SessionState = 'warning' | 'intro' | 'memory-encoding' | 'reaction' | 'spee
 export function SessionContent({ profile }: SessionContentProps) {
   const router = useRouter()
   const [state, setStateInternal] = useState<SessionState>('intro')
+  const stateRef = useRef<SessionState>('intro')
+
   const setState = (newState: SessionState) => {
-    console.log(`[STATE CHANGE] ${state} → ${newState}`)
+    const trace = new Error().stack?.split('\n')[2]?.trim() || 'unknown'
+    console.log(`[STATE CHANGE] ${stateRef.current} → ${newState}`)
+    console.log(`  Called from: ${trace}`)
+    stateRef.current = newState
     setStateInternal(newState)
   }
+
   const [sessionId, setSessionId] = useState<string | null>(null)
   const [recentSessionCount, setRecentSessionCount] = useState(0)
   const [loading, setLoading] = useState(true)
