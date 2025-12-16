@@ -168,9 +168,9 @@ export function NewDashboardContent({ data, profile }: DashboardContentProps) {
                         </span>
                         <span className="text-sm text-rose-400">ms</span>
                       </div>
-                      <div className="flex items-center gap-2">
+                      <div className="flex flex-col gap-1">
                         <span className="text-xs text-rose-400">Reaction (50%)</span>
-                        <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${reactionStatus.color}`}>
+                        <span className={`px-2 py-0.5 rounded-full text-xs font-medium w-fit ${reactionStatus.color}`}>
                           {reactionStatus.label}
                         </span>
                       </div>
@@ -185,9 +185,9 @@ export function NewDashboardContent({ data, profile }: DashboardContentProps) {
                         </span>
                         <span className="text-sm text-blue-400">wpm</span>
                       </div>
-                      <div className="flex items-center gap-2">
+                      <div className="flex flex-col gap-1">
                         <span className="text-xs text-blue-400">Speech (30%)</span>
-                        <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${speechStatus.color}`}>
+                        <span className={`px-2 py-0.5 rounded-full text-xs font-medium w-fit ${speechStatus.color}`}>
                           {speechStatus.label}
                         </span>
                       </div>
