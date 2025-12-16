@@ -22,7 +22,11 @@ type SessionState = 'warning' | 'intro' | 'memory-encoding' | 'reaction' | 'spee
 
 export function SessionContent({ profile }: SessionContentProps) {
   const router = useRouter()
-  const [state, setState] = useState<SessionState>('intro')
+  const [state, setStateInternal] = useState<SessionState>('intro')
+  const setState = (newState: SessionState) => {
+    console.log(`[STATE CHANGE] ${state} → ${newState}`)
+    setStateInternal(newState)
+  }
   const [sessionId, setSessionId] = useState<string | null>(null)
   const [recentSessionCount, setRecentSessionCount] = useState(0)
   const [loading, setLoading] = useState(true)
@@ -39,6 +43,10 @@ export function SessionContent({ profile }: SessionContentProps) {
     averagePauseDuration: number
     totalDuration: number
   } | null>(null)
+
+  useEffect(() => {
+    console.log(`[RENDER] Current state: ${state}`)
+  }, [state])
 
   useEffect(() => {
     async function checkSessions() {
