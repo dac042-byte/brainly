@@ -219,7 +219,8 @@ async function computeBaseline(userId: string) {
     .select(`
       id,
       reaction_metrics(median_rt_ms, std_dev_ms),
-      speech_metrics(speech_activity_ratio)
+      speech_metrics(speech_activity_ratio, avg_pause_length_ms, words_per_minute),
+      memory_metrics(words_recalled, total_words)
     `)
     .eq('user_id', userId)
     .eq('is_baseline_eligible', true)
@@ -251,6 +252,26 @@ async function computeBaseline(userId: string) {
     ? speechMetrics.reduce((sum: number, m: any) => sum + Number(m.speech_activity_ratio), 0) / 1
     : null
 
+  const baselineAvgPause = speechMetrics.length >= 1
+    ? speechMetrics.reduce((sum: number, m: any) => sum + Number(m.avg_pause_length_ms || 0), 0) / 1
+    : null
+
+  const baselineWpm = speechMetrics.length >= 1
+    ? speechMetrics.reduce((sum: number, m: any) => sum + Number(m.words_per_minute || 0), 0) / 1
+    : null
+
+  const memoryMetrics = sessions
+    .map((s: any) => s.memory_metrics?.[0])
+    .filter(Boolean)
+
+  const baselineMemoryRecallPct = memoryMetrics.length >= 1
+    ? memoryMetrics.reduce((sum: number, m: any) => {
+        const total = Number(m.total_words)
+        const recalled = Number(m.words_recalled)
+        return sum + (total > 0 ? (recalled / total) * 100 : 0)
+      }, 0) / 1
+    : null
+
   const { error } = await supabase
     .from('baseline_tracking')
     .insert({
@@ -259,6 +280,9 @@ async function computeBaseline(userId: string) {
       baseline_median_rt_ms: baselineMedianRt,
       baseline_std_dev_ms: baselineStdDev,
       baseline_speech_activity: baselineSpeechActivity,
+      baseline_avg_pause_ms: baselineAvgPause,
+      baseline_wpm: baselineWpm,
+      baseline_memory_recall_pct: baselineMemoryRecallPct,
       is_current: true,
     })
 
@@ -284,7 +308,8 @@ async function computeSessionDeltas(sessionId: string, userId: string) {
     .select(`
       id,
       reaction_metrics(median_rt_ms, std_dev_ms),
-      speech_metrics(speech_activity_ratio)
+      speech_metrics(speech_activity_ratio, avg_pause_length_ms, words_per_minute),
+      memory_metrics(words_recalled, total_words)
     `)
     .eq('id', sessionId)
     .single()
@@ -295,7 +320,9 @@ async function computeSessionDeltas(sessionId: string, userId: string) {
 
   const reactionMetric = (session as any).reaction_metrics?.[0]
   const speechMetric = (session as any).speech_metrics?.[0]
+  const memoryMetric = (session as any).memory_metrics?.[0]
 
+  // Reaction time deltas
   let reactionMedianDelta = null
   let reactionMedianDeltaPct = null
   let reactionVariabilityDelta = null
@@ -306,12 +333,80 @@ async function computeSessionDeltas(sessionId: string, userId: string) {
     reactionVariabilityDelta = Number(reactionMetric.std_dev_ms) - Number(baseline.baseline_std_dev_ms)
   }
 
+  // Speech deltas
   let speechActivityDelta = null
   let speechActivityDeltaPct = null
+  let speechWpmDeltaPct = null
+  let speechPauseDeltaPct = null
 
   if (speechMetric && baseline.baseline_speech_activity) {
     speechActivityDelta = Number(speechMetric.speech_activity_ratio) - Number(baseline.baseline_speech_activity)
     speechActivityDeltaPct = (speechActivityDelta / Number(baseline.baseline_speech_activity)) * 100
+  }
+
+  if (speechMetric && baseline.baseline_wpm) {
+    const wpmDelta = Number(speechMetric.words_per_minute || 0) - Number(baseline.baseline_wpm)
+    speechWpmDeltaPct = (wpmDelta / Number(baseline.baseline_wpm)) * 100
+  }
+
+  if (speechMetric && baseline.baseline_avg_pause_ms) {
+    const pauseDelta = Number(speechMetric.avg_pause_length_ms || 0) - Number(baseline.baseline_avg_pause_ms)
+    speechPauseDeltaPct = (pauseDelta / Number(baseline.baseline_avg_pause_ms)) * 100
+  }
+
+  // Memory delta
+  let memoryRecallDeltaPct = null
+
+  if (memoryMetric && baseline.baseline_memory_recall_pct) {
+    const currentRecallPct = Number(memoryMetric.total_words) > 0
+      ? (Number(memoryMetric.words_recalled) / Number(memoryMetric.total_words)) * 100
+      : 0
+    memoryRecallDeltaPct = ((currentRecallPct - Number(baseline.baseline_memory_recall_pct)) / Number(baseline.baseline_memory_recall_pct)) * 100
+  }
+
+  // Calculate weighted performance score (0-100)
+  let weightedScore = null
+
+  if (reactionMetric && baseline.baseline_median_rt_ms) {
+    // Reaction score (50% weight): penalize slower RT and higher variability
+    const currentRT = Number(reactionMetric.median_rt_ms)
+    const baselineRT = Number(baseline.baseline_median_rt_ms)
+    const rtScore = currentRT <= baselineRT ? 1 : Math.max(0, baselineRT / currentRT)
+
+    const currentStdDev = Number(reactionMetric.std_dev_ms)
+    const baselineStdDev = Number(baseline.baseline_std_dev_ms)
+    const variabilityScore = currentStdDev <= baselineStdDev ? 1 : Math.max(0, baselineStdDev / currentStdDev)
+
+    const reactionScore = (rtScore + variabilityScore) / 2
+
+    // Speech score (30% weight): WPM higher is better, pause duration lower is better
+    let speechScore = 0.5 // Default to middle if no baseline
+
+    if (speechMetric && baseline.baseline_wpm && baseline.baseline_avg_pause_ms) {
+      const currentWpm = Number(speechMetric.words_per_minute || 0)
+      const baselineWpm = Number(baseline.baseline_wpm)
+      const wpmScore = currentWpm >= baselineWpm ? 1 : (baselineWpm > 0 ? Math.max(0, currentWpm / baselineWpm) : 0.5)
+
+      const currentPause = Number(speechMetric.avg_pause_length_ms || 0)
+      const baselinePause = Number(baseline.baseline_avg_pause_ms)
+      const pauseScore = currentPause <= baselinePause ? 1 : (currentPause > 0 ? Math.max(0, baselinePause / currentPause) : 0.5)
+
+      speechScore = (wpmScore + pauseScore) / 2
+    }
+
+    // Memory score (20% weight): recall accuracy
+    let memoryScore = 0.5 // Default to middle if no baseline
+
+    if (memoryMetric && baseline.baseline_memory_recall_pct) {
+      const currentRecallPct = Number(memoryMetric.total_words) > 0
+        ? (Number(memoryMetric.words_recalled) / Number(memoryMetric.total_words)) * 100
+        : 0
+      const baselineRecallPct = Number(baseline.baseline_memory_recall_pct)
+      memoryScore = currentRecallPct >= baselineRecallPct ? 1 : (baselineRecallPct > 0 ? Math.max(0, currentRecallPct / baselineRecallPct) : 0.5)
+    }
+
+    // Weighted combination
+    weightedScore = (0.5 * reactionScore + 0.3 * speechScore + 0.2 * memoryScore) * 100
   }
 
   const { error } = await supabase
@@ -324,6 +419,10 @@ async function computeSessionDeltas(sessionId: string, userId: string) {
       reaction_variability_delta_ms: reactionVariabilityDelta,
       speech_activity_delta: speechActivityDelta,
       speech_activity_delta_pct: speechActivityDeltaPct,
+      speech_wpm_delta_pct: speechWpmDeltaPct,
+      speech_pause_delta_pct: speechPauseDeltaPct,
+      memory_recall_delta_pct: memoryRecallDeltaPct,
+      weighted_score: weightedScore,
     })
 
   if (error) console.error('Failed to compute deltas:', error)

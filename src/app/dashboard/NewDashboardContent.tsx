@@ -65,11 +65,13 @@ export function NewDashboardContent({ data, profile }: DashboardContentProps) {
 
   const latestReactionMetric = latestSession?.reaction_metrics?.[0]
   const latestSpeechMetric = latestSession?.speech_metrics?.[0]
+  const latestMemoryMetric = latestSession?.memory_metrics?.[0]
   const latestDelta = latestSession?.session_deltas?.[0]
 
-  // Calculate performance score (0-100)
-  const performanceScore = baseline && latestReactionMetric
-    ? Math.max(0, Math.min(100, 100 - (Number(latestDelta?.reaction_median_delta_pct) || 0) * 2))
+  // Use weighted score from session_deltas (0-100)
+  // Score combines: 50% reaction time + 30% speech timing + 20% memory
+  const performanceScore = latestDelta?.weighted_score
+    ? Number(latestDelta.weighted_score)
     : 50
 
   const getStatusBadge = (deltaPct: number | null | undefined) => {
@@ -146,16 +148,16 @@ export function NewDashboardContent({ data, profile }: DashboardContentProps) {
               <div className="bg-slate-850/80 backdrop-blur-xl rounded-2xl border border-slate-750/50 p-6 hover:border-slate-750/70 transition-all duration-300 animate-slide-up">
                 <h2 className="text-xl font-bold text-white mb-4">Performance Score</h2>
                 <p className="text-sm text-slate-400 mb-6">
-                  Weighted average of reaction time and speech metrics. Higher = better performance.
+                  Combined score from reaction time (50%), speech timing (30%), and memory recall (20%). Score of 100 = baseline performance.
                 </p>
 
-                <div className="grid grid-cols-3 gap-4">
+                <div className="grid grid-cols-4 gap-4">
                   <div className="bg-slate-800/50 rounded-xl p-4 hover:bg-slate-800/70 transition-colors duration-200">
                     <div className="flex items-baseline gap-2 mb-1">
                       <span className="text-4xl font-bold text-white">{Math.round(performanceScore)}</span>
                       <span className="text-sm text-slate-400">/ 100</span>
                     </div>
-                    <p className="text-xs text-gray-500">Overall</p>
+                    <p className="text-xs text-gray-500">Overall Score</p>
                   </div>
 
                   {latestReactionMetric && (
@@ -167,7 +169,7 @@ export function NewDashboardContent({ data, profile }: DashboardContentProps) {
                         <span className="text-sm text-rose-400">ms</span>
                       </div>
                       <div className="flex items-center gap-2">
-                        <span className="text-xs text-rose-400">Reaction</span>
+                        <span className="text-xs text-rose-400">Reaction (50%)</span>
                         <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${reactionStatus.color}`}>
                           {reactionStatus.label}
                         </span>
@@ -179,15 +181,31 @@ export function NewDashboardContent({ data, profile }: DashboardContentProps) {
                     <div className="bg-blue-900/20 rounded-xl p-4 border border-blue-500/20">
                       <div className="flex items-baseline gap-2 mb-1">
                         <span className="text-4xl font-bold text-blue-300">
-                          {(Number(latestSpeechMetric.speech_activity_ratio) * 100).toFixed(0)}
+                          {Number(latestSpeechMetric.words_per_minute || 0).toFixed(0)}
                         </span>
-                        <span className="text-sm text-blue-400">%</span>
+                        <span className="text-sm text-blue-400">wpm</span>
                       </div>
                       <div className="flex items-center gap-2">
-                        <span className="text-xs text-blue-400">Speech</span>
+                        <span className="text-xs text-blue-400">Speech (30%)</span>
                         <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${speechStatus.color}`}>
                           {speechStatus.label}
                         </span>
+                      </div>
+                    </div>
+                  )}
+
+                  {latestMemoryMetric && (
+                    <div className="bg-teal-900/20 rounded-xl p-4 border border-teal-500/20">
+                      <div className="flex items-baseline gap-2 mb-1">
+                        <span className="text-4xl font-bold text-teal-300">
+                          {Number(latestMemoryMetric.total_words) > 0
+                            ? ((Number(latestMemoryMetric.words_recalled) / Number(latestMemoryMetric.total_words)) * 100).toFixed(0)
+                            : '0'}
+                        </span>
+                        <span className="text-sm text-teal-400">%</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-xs text-teal-400">Memory (20%)</span>
                       </div>
                     </div>
                   )}

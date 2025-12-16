@@ -102,8 +102,8 @@ export function SessionContent({ profile }: SessionContentProps) {
 
     try {
       // Calculate median reaction time
-      const validTrials = trials.filter(t => !t.invalid)
-      const reactionTimes = validTrials.map(t => t.reactionTime).sort((a, b) => a - b)
+      const validTrials = trials.filter(t => !t.is_practice && t.reaction_time_ms !== null)
+      const reactionTimes = validTrials.map(t => t.reaction_time_ms).sort((a, b) => a - b)
       const median = reactionTimes.length > 0
         ? reactionTimes[Math.floor(reactionTimes.length / 2)]
         : 0
