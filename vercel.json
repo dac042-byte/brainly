@@ -1,0 +1,12 @@
+{
+  "buildCommand": "npm run build",
+  "devCommand": "npm run dev",
+  "installCommand": "npm install",
+  "framework": "nextjs",
+  "regions": ["iad1"],
+  "env": {
+    "NEXT_PUBLIC_SUPABASE_URL": "@cerebro-supabase-url",
+    "NEXT_PUBLIC_SUPABASE_ANON_KEY": "@cerebro-supabase-anon-key",
+    "ASSEMBLYAI_API_KEY": "@cerebro-assemblyai-key"
+  }
+}
