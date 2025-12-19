@@ -43,7 +43,6 @@ export function HistoryContent({ sessions, baseline }: HistoryContentProps) {
             {sessions.map((session, index) => {
               const reactionMetric = session.reaction_metrics?.[0]
               const speechMetric = session.speech_metrics?.[0]
-              const memoryMetric = session.memory_metrics?.[0]
               const delta = session.session_deltas?.[0]
               const isBaseline = baseline?.baseline_session_ids.includes(session.id)
 
@@ -108,45 +107,11 @@ export function HistoryContent({ sessions, baseline }: HistoryContentProps) {
                             </p>
                             <p className="text-xs text-blue-400">Speaking Rate</p>
                           </div>
-                          {delta?.speech_wpm_delta_pct !== null && delta?.speech_wpm_delta_pct !== undefined && (
-                            <p className="text-sm text-blue-300">
-                              {Number(delta.speech_wpm_delta_pct) > 0 ? '+' : ''}
-                              {Number(delta.speech_wpm_delta_pct).toFixed(1)}% from baseline
-                            </p>
-                          )}
                           <div className="text-xs text-blue-400 space-y-1">
                             <p>Pauses: {speechMetric.pause_count} ({Number(speechMetric.avg_pause_length_ms || 0).toFixed(0)}ms avg)</p>
                             <p>Activity: {(Number(speechMetric.speech_activity_ratio) * 100).toFixed(1)}%</p>
                             <p>Words: {speechMetric.word_count}</p>
                           </div>
-                        </div>
-                      </div>
-                    )}
-
-                    {/* Memory Recall */}
-                    {memoryMetric && (
-                      <div className="bg-teal-900/20 rounded-xl p-4 border border-teal-500/20">
-                        <h4 className="text-sm font-medium text-teal-300 mb-3">
-                          Memory Recall (20%)
-                        </h4>
-                        <div className="space-y-2">
-                          <div>
-                            <p className="text-2xl font-bold text-teal-200">
-                              {Number(memoryMetric.total_words) > 0
-                                ? ((Number(memoryMetric.words_recalled) / Number(memoryMetric.total_words)) * 100).toFixed(0)
-                                : '0'}%
-                            </p>
-                            <p className="text-xs text-teal-400">Accuracy</p>
-                          </div>
-                          {delta?.memory_recall_delta_pct !== null && delta?.memory_recall_delta_pct !== undefined && (
-                            <p className="text-sm text-teal-300">
-                              {Number(delta.memory_recall_delta_pct) > 0 ? '+' : ''}
-                              {Number(delta.memory_recall_delta_pct).toFixed(1)}% from baseline
-                            </p>
-                          )}
-                          <p className="text-xs text-teal-400">
-                            {memoryMetric.words_recalled}/{memoryMetric.total_words} words
-                          </p>
                         </div>
                       </div>
                     )}

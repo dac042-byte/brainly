@@ -94,6 +94,7 @@ export interface SessionDelta {
   reaction_variability_delta_ms: number | null
   speech_activity_delta: number | null
   speech_activity_delta_pct: number | null
+  weighted_score: number | null
   computed_at: string
 }
 
