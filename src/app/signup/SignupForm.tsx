@@ -13,11 +13,33 @@ export function SignupForm() {
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState<{ type: 'error' | 'success', text: string } | null>(null)
 
+  const validatePassword = (password: string) => {
+    if (password.length < 8) {
+      return 'Password must be at least 8 characters'
+    }
+    if (!/[A-Z]/.test(password)) {
+      return 'Password must contain at least one uppercase letter'
+    }
+    if (!/[a-z]/.test(password)) {
+      return 'Password must contain at least one lowercase letter'
+    }
+    if (!/[0-9]/.test(password)) {
+      return 'Password must contain at least one number'
+    }
+    return null
+  }
+
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault()
 
     if (!consentAccepted) {
       setMessage({ type: 'error', text: 'Please accept the consent to continue' })
+      return
+    }
+
+    const passwordError = validatePassword(password)
+    if (passwordError) {
+      setMessage({ type: 'error', text: passwordError })
       return
     }
 
@@ -29,6 +51,9 @@ export function SignupForm() {
     const { data: authData, error: authError } = await supabase.auth.signUp({
       email,
       password,
+      options: {
+        emailRedirectTo: `${window.location.origin}/auth/confirm`,
+      },
     })
 
     if (authError) {
@@ -58,8 +83,8 @@ export function SignupForm() {
         return
       }
 
-      router.push('/dashboard')
-      router.refresh()
+      // Redirect to verify email page
+      router.push('/auth/verify-email')
     }
   }
 

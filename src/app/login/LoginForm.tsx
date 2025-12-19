@@ -18,13 +18,29 @@ export function LoginForm() {
     setMessage(null)
 
     const supabase = createClient()
-    const { error } = await supabase.auth.signInWithPassword({
+    const { data, error } = await supabase.auth.signInWithPassword({
       email,
       password,
     })
 
     if (error) {
-      setMessage({ type: 'error', text: error.message })
+      // Check if it's an email not confirmed error
+      if (error.message.includes('Email not confirmed')) {
+        setMessage({
+          type: 'error',
+          text: 'Please verify your email before logging in. Check your inbox for the verification link.'
+        })
+      } else {
+        setMessage({ type: 'error', text: error.message })
+      }
+      setLoading(false)
+    } else if (data.user && !data.user.email_confirmed_at) {
+      // Extra check for unconfirmed email
+      await supabase.auth.signOut()
+      setMessage({
+        type: 'error',
+        text: 'Please verify your email before logging in. Check your inbox for the verification link.'
+      })
       setLoading(false)
     } else {
       router.push('/dashboard')
@@ -141,13 +157,23 @@ export function LoginForm() {
           </button>
         </div>
 
-        <div className="text-center">
-          <a
-            href="/signup"
-            className="font-medium text-rose-500 hover:text-rose-400 transition-colors duration-200"
-          >
-            Don't have an account? Sign up
-          </a>
+        <div className="text-center space-y-2">
+          <div>
+            <a
+              href="/forgot-password"
+              className="text-sm font-medium text-slate-400 hover:text-slate-300 transition-colors duration-200"
+            >
+              Forgot password?
+            </a>
+          </div>
+          <div>
+            <a
+              href="/signup"
+              className="font-medium text-rose-500 hover:text-rose-400 transition-colors duration-200"
+            >
+              Don't have an account? Sign up
+            </a>
+          </div>
         </div>
       </form>
     </div>
