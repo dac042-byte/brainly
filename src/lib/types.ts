@@ -74,6 +74,16 @@ export interface SpeechMetrics {
   computed_at: string
 }
 
+export interface MemoryTest {
+  id: string
+  session_id: string
+  word_sequence: string[]
+  user_recall: string | null
+  score: number
+  total_words: number
+  created_at: string
+}
+
 export interface BaselineTracking {
   id: string
   user_id: string
@@ -101,6 +111,7 @@ export interface SessionDelta {
 export interface SessionWithMetrics extends Session {
   reaction_metrics?: ReactionMetrics[]
   speech_metrics?: SpeechMetrics[]
+  memory_tests?: MemoryTest[]
   session_deltas?: SessionDelta[]
 }
 

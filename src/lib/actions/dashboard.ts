@@ -17,6 +17,7 @@ export async function getDashboardData(): Promise<DashboardData> {
       *,
       reaction_metrics(*),
       speech_metrics(*),
+      memory_tests(*),
       session_deltas(*)
     `)
     .eq('user_id', user.id)

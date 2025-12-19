@@ -43,6 +43,7 @@ export function HistoryContent({ sessions, baseline }: HistoryContentProps) {
             {sessions.map((session, index) => {
               const reactionMetric = session.reaction_metrics?.[0]
               const speechMetric = session.speech_metrics?.[0]
+              const memoryTest = session.memory_tests?.[0]
               const delta = session.session_deltas?.[0]
               const isBaseline = baseline?.baseline_session_ids.includes(session.id)
 
@@ -112,6 +113,28 @@ export function HistoryContent({ sessions, baseline }: HistoryContentProps) {
                             <p>Activity: {(Number(speechMetric.speech_activity_ratio) * 100).toFixed(1)}%</p>
                             <p>Words: {speechMetric.word_count}</p>
                           </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Memory Recall */}
+                    {memoryTest && (
+                      <div className="bg-teal-900/20 rounded-xl p-4 border border-teal-500/20">
+                        <h4 className="text-sm font-medium text-teal-300 mb-3">
+                          Memory Recall (20%)
+                        </h4>
+                        <div className="space-y-2">
+                          <div>
+                            <p className="text-2xl font-bold text-teal-200">
+                              {memoryTest.total_words > 0
+                                ? ((memoryTest.score / memoryTest.total_words) * 100).toFixed(0)
+                                : '0'}%
+                            </p>
+                            <p className="text-xs text-teal-400">Accuracy</p>
+                          </div>
+                          <p className="text-xs text-teal-400">
+                            {memoryTest.score}/{memoryTest.total_words} words
+                          </p>
                         </div>
                       </div>
                     )}

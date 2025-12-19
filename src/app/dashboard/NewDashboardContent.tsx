@@ -53,16 +53,19 @@ export function NewDashboardContent({ data, profile }: DashboardContentProps) {
     .map((session, index) => {
       const reactionMetric = session.reaction_metrics?.[0]
       const speechMetric = session.speech_metrics?.[0]
+      const memoryTest = session.memory_tests?.[0]
 
       return {
         week: `W${index + 1}`,
         reactionTime: reactionMetric ? Number(reactionMetric.median_rt_ms) : null,
         speechActivity: speechMetric ? Number(speechMetric.speech_activity_ratio) * 100 : null,
+        memoryScore: memoryTest ? (memoryTest.score / memoryTest.total_words) * 100 : null,
       }
     })
 
   const latestReactionMetric = latestSession?.reaction_metrics?.[0]
   const latestSpeechMetric = latestSession?.speech_metrics?.[0]
+  const latestMemoryTest = latestSession?.memory_tests?.[0]
   const latestDelta = latestSession?.session_deltas?.[0]
 
   // Use weighted score from session_deltas (0-100)
@@ -190,6 +193,22 @@ export function NewDashboardContent({ data, profile }: DashboardContentProps) {
                       </div>
                     </div>
                   )}
+
+                  {latestMemoryTest && (
+                    <div className="bg-teal-900/20 rounded-xl p-4 border border-teal-500/20">
+                      <div className="flex items-baseline gap-2 mb-1">
+                        <span className="text-4xl font-bold text-teal-300">
+                          {latestMemoryTest.total_words > 0
+                            ? ((latestMemoryTest.score / latestMemoryTest.total_words) * 100).toFixed(0)
+                            : '0'}
+                        </span>
+                        <span className="text-sm text-teal-400">%</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-xs text-teal-400">Memory (20%)</span>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             )}
@@ -220,6 +239,10 @@ export function NewDashboardContent({ data, profile }: DashboardContentProps) {
                     <div className="flex items-center gap-2">
                       <div className="w-3 h-3 rounded-full bg-blue-400"></div>
                       <span className="text-slate-400">Speech (%)</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="w-3 h-3 rounded-full bg-teal-400"></div>
+                      <span className="text-slate-400">Memory (%)</span>
                     </div>
                   </div>
                 </div>
@@ -275,6 +298,17 @@ export function NewDashboardContent({ data, profile }: DashboardContentProps) {
                       strokeWidth={2.5}
                       dot={{ r: 4, fill: '#60a5fa', strokeWidth: 0 }}
                       activeDot={{ r: 6, fill: '#93c5fd' }}
+                      connectNulls
+                    />
+                    <Line
+                      yAxisId="left"
+                      type="monotone"
+                      dataKey="memoryScore"
+                      name="Memory Score"
+                      stroke="#5eead4"
+                      strokeWidth={2.5}
+                      dot={{ r: 4, fill: '#5eead4', strokeWidth: 0 }}
+                      activeDot={{ r: 6, fill: '#99f6e4' }}
                       connectNulls
                     />
                   </LineChart>
