@@ -1,0 +1,11 @@
+PLACEHOLDER: Replace this file with your logo.png
+
+The Sidebar component expects a logo at: /public/logo.png
+
+Instructions:
+1. Save your logo as logo.png in the /public folder
+2. Recommended size: 48x48px minimum (will scale to fit)
+3. Formats supported: PNG, SVG, JPG, WEBP
+4. The logo will appear in a 48x48px rounded square
+
+Once you add your logo, delete this placeholder file.

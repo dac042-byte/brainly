@@ -1,12 +1,12 @@
 # Cerebro Deployment Guide
 
-## ✅ Build Status: READY TO DEPLOY
+## Build Status: READY TO DEPLOY
 
 Your app now builds successfully! I've fixed all TypeScript errors.
 
 ---
 
-## 🚀 Deploy to Vercel Preview (5 minutes)
+## Deploy to Vercel Preview (5 minutes)
 
 ### Step 1: Install Vercel CLI (if not already installed)
 
@@ -46,7 +46,7 @@ vercel
 
 ### Step 4: Set Environment Variables in Vercel
 
-⚠️ **CRITICAL:** Your `.env.local` file is not deployed. You must add these in Vercel dashboard:
+**CRITICAL:** Your `.env.local` file is not deployed. You must add these in Vercel dashboard:
 
 1. Open your Vercel project dashboard
 2. Go to **Settings** → **Environment Variables**
@@ -65,23 +65,23 @@ OPENAI_API_KEY=your-actual-openai-key
 
 ---
 
-## 🧪 Test Your Preview Deployment
+## Test Your Preview Deployment
 
 Once deployed, visit your preview URL and test:
 
 ### Critical Flow Test (10 minutes):
 
-1. ✅ **Sign Up** - Create a test account
-2. ✅ **Login** - Verify auth works
-3. ✅ **Dashboard** - Check it loads without errors
-4. ✅ **Start Session** - Click "Start Check-In"
-5. ✅ **Reaction Test** - Complete the reaction time test
-6. ✅ **Speech Test** - Test microphone permissions
+1. **Sign Up** - Create a test account
+2. **Login** - Verify auth works
+3. **Dashboard** - Check it loads without errors
+4. **Start Session** - Click "Start Check-In"
+5. **Reaction Test** - Complete the reaction time test
+6. **Speech Test** - Test microphone permissions
    - If it fails, check browser console for errors
    - Verify OPENAI_API_KEY is set in Vercel
-7. ✅ **Memory Test** - Skip this (removed in current version)
-8. ✅ **View History** - Check your session appears
-9. ✅ **Dashboard Charts** - Verify data shows
+7. **Memory Test** - Skip this (removed in current version)
+8. **View History** - Check your session appears
+9. **Dashboard Charts** - Verify data shows
 
 ### Common Issues:
 
@@ -99,13 +99,13 @@ Once deployed, visit your preview URL and test:
 
 ---
 
-## 📝 What I Fixed to Make This Deployable
+## What I Fixed to Make This Deployable
 
 ### TypeScript Errors Fixed:
-1. ✅ Removed `memory_metrics` references (not in database)
-2. ✅ Added `weighted_score` field to SessionDelta type
-3. ✅ Updated ThemeToggle to use color schemes
-4. ✅ Removed Speech WPM delta (not in database)
+1. Removed `memory_metrics` references (not in database)
+2. Added `weighted_score` field to SessionDelta type
+3. Updated ThemeToggle to use color schemes
+4. Removed Speech WPM delta (not in database)
 
 ### Files Changed:
 - `src/app/dashboard/NewDashboardContent.tsx` - Removed memory charts
@@ -120,7 +120,7 @@ Once deployed, visit your preview URL and test:
 
 ---
 
-## 🎯 Next Steps After Successful Preview
+## Next Steps After Successful Preview
 
 Once your preview deployment works:
 
@@ -143,7 +143,7 @@ Follow the detailed improvement roadmap I provided earlier to:
 
 ---
 
-## 🔧 Vercel Configuration
+## Vercel Configuration
 
 Your app uses these Vercel settings (auto-detected):
 
@@ -155,7 +155,7 @@ Your app uses these Vercel settings (auto-detected):
 
 ---
 
-## 📊 Build Output
+## Build Output
 
 ```
 Route (app)                              Size     First Load JS
@@ -169,11 +169,11 @@ Route (app)                              Size     First Load JS
 ```
 
 **Total:** ~255 kB for dashboard (largest page)
-**Status:** ✅ All pages building successfully
+**Status:** All pages building successfully
 
 ---
 
-## 🚨 Important Notes
+## Important Notes
 
 1. **Environment Variables:** Never commit `.env.local` to git - always set in Vercel dashboard
 2. **Supabase RLS:** Your Row Level Security policies are already configured - users can only see their own data
@@ -182,7 +182,7 @@ Route (app)                              Size     First Load JS
 
 ---
 
-## 🆘 If Deployment Fails
+## If Deployment Fails
 
 ### Build Errors:
 ```bash
@@ -204,7 +204,7 @@ npm run build
 
 ---
 
-## 📞 Support
+## Support
 
 If you hit issues:
 1. Check Vercel deployment logs
@@ -214,13 +214,13 @@ If you hit issues:
 
 ---
 
-## ✨ You're Ready!
+## You're Ready!
 
 Your app:
-- ✅ Builds successfully
-- ✅ Has no TypeScript errors
-- ✅ Git committed and pushed
-- ✅ Ready for Vercel deployment
+- Builds successfully
+- Has no TypeScript errors
+- Git committed and pushed
+- Ready for Vercel deployment
 
 **Run this command now:**
 ```bash

@@ -6,9 +6,9 @@ export function Sidebar() {
   const pathname = usePathname()
 
   const navItems = [
-    { name: 'Dashboard', path: '/dashboard', icon: '📊' },
-    { name: 'History', path: '/history', icon: '📈' },
-    { name: 'Settings', path: '/settings', icon: '⚙️' },
+    { name: 'Dashboard', path: '/dashboard' },
+    { name: 'History', path: '/history' },
+    { name: 'Settings', path: '/settings' },
   ]
 
   return (
@@ -16,8 +16,12 @@ export function Sidebar() {
       {/* Logo */}
       <div className="p-6">
         <div className="flex items-center gap-3 mb-2">
-          <div className="w-12 h-12 bg-gradient-to-br from-rose-700 to-rose-600 rounded-xl flex items-center justify-center">
-            <span className="text-2xl">🧠</span>
+          <div className="w-12 h-12 bg-gradient-to-br from-rose-700 to-rose-600 rounded-xl flex items-center justify-center overflow-hidden">
+            <img
+              src="/logo.png"
+              alt="Cerebro Logo"
+              className="w-full h-full object-cover"
+            />
           </div>
           <div>
             <h1 className="text-xl font-bold text-white">Cerebro</h1>
@@ -38,7 +42,6 @@ export function Sidebar() {
                 : 'text-slate-400 hover:bg-slate-800/50 hover:text-white'
             }`}
           >
-            <span className="text-lg">{item.icon}</span>
             <span className="font-medium">{item.name}</span>
           </a>
         ))}
