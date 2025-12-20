@@ -61,7 +61,22 @@ export async function getUserProfile() {
     .eq('id', user.id)
     .single()
 
-  if (error) throw error
+  if (error && error.code !== 'PGRST116') {
+    throw error
+  }
+
+  // If profile doesn't exist yet, return a default profile
+  if (!profile) {
+    return {
+      id: user.id,
+      consent_version: 'v1.0',
+      consent_timestamp: new Date().toISOString(),
+      timezone: 'UTC',
+      locale: 'en-US',
+      audio_storage_enabled: false,
+      created_at: new Date().toISOString(),
+    }
+  }
 
   return profile
 }
