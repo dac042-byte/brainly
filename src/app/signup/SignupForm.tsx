@@ -51,9 +51,6 @@ export function SignupForm() {
     const { data: authData, error: authError } = await supabase.auth.signUp({
       email,
       password,
-      options: {
-        emailRedirectTo: `${window.location.origin}/auth/confirm`,
-      },
     })
 
     if (authError) {
@@ -83,8 +80,9 @@ export function SignupForm() {
         return
       }
 
-      // Redirect to verify email page
-      router.push('/auth/verify-email')
+      // Redirect to dashboard
+      router.push('/dashboard')
+      router.refresh()
     }
   }
 

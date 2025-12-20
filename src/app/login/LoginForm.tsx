@@ -24,23 +24,7 @@ export function LoginForm() {
     })
 
     if (error) {
-      // Check if it's an email not confirmed error
-      if (error.message.includes('Email not confirmed')) {
-        setMessage({
-          type: 'error',
-          text: 'Please verify your email before logging in. Check your inbox for the verification link.'
-        })
-      } else {
-        setMessage({ type: 'error', text: error.message })
-      }
-      setLoading(false)
-    } else if (data.user && !data.user.email_confirmed_at) {
-      // Extra check for unconfirmed email
-      await supabase.auth.signOut()
-      setMessage({
-        type: 'error',
-        text: 'Please verify your email before logging in. Check your inbox for the verification link.'
-      })
+      setMessage({ type: 'error', text: error.message })
       setLoading(false)
     } else {
       router.push('/dashboard')
