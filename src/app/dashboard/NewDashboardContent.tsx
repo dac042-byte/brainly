@@ -115,8 +115,28 @@ export function NewDashboardContent({ data, profile }: DashboardContentProps) {
           </div>
         </div>
 
+        {/* Empty State - No Sessions */}
+        {sessions.length === 0 && (
+          <div className="bg-slate-850/80 backdrop-blur-xl rounded-2xl border border-slate-750/50 p-12 text-center animate-slide-up">
+            <div className="max-w-md mx-auto">
+              <div className="text-6xl mb-4">🧠</div>
+              <h3 className="text-2xl font-bold text-white mb-4">No Sessions Yet</h3>
+              <p className="text-slate-400 mb-6 leading-relaxed">
+                Start your first cognitive assessment to track your performance over time.
+                Each session measures reaction time, speech patterns, and memory recall.
+              </p>
+              <button
+                onClick={() => router.push('/session')}
+                className="px-8 py-4 bg-gradient-to-r from-rose-700 to-rose-600 text-white rounded-xl hover:from-rose-800 hover:to-rose-700 transition-all shadow-lg shadow-rose-900/30 font-medium"
+              >
+                Start First Session
+              </button>
+            </div>
+          </div>
+        )}
+
         {/* Weekly Streak */}
-        {streak && (
+        {sessions.length > 0 && streak && (
           <div className="bg-gradient-to-r from-rose-900/40 to-rose-900/30 backdrop-blur-xl rounded-2xl border border-rose-700/30 p-6 mb-6 hover:border-rose-700/40 transition-all duration-300 animate-slide-up">
             <div className="flex items-center justify-between">
               <div>
@@ -140,6 +160,7 @@ export function NewDashboardContent({ data, profile }: DashboardContentProps) {
           </div>
         )}
 
+        {sessions.length > 0 && (
         <div className="grid grid-cols-3 gap-6">
           {/* Main Content - 2 columns */}
           <div className="col-span-2 space-y-6">
@@ -421,6 +442,7 @@ export function NewDashboardContent({ data, profile }: DashboardContentProps) {
             )}
           </div>
         </div>
+        )}
       </div>
     </DashboardLayout>
   )

@@ -50,11 +50,19 @@ export function Sidebar() {
 
       {/* Bottom section */}
       <div className="p-6">
-        <div className="border-t border-slate-750 pt-4">
+        <div className="border-t border-slate-750 pt-4 space-y-3">
           <p className="text-xs text-gray-500 leading-relaxed">
             <strong className="text-slate-400">Not a medical device.</strong><br />
             Cerebro is for performance monitoring and trend awareness only.
           </p>
+          <div className="flex gap-4 text-xs">
+            <a href="/privacy" className="text-slate-500 hover:text-slate-400 transition-colors">
+              Privacy
+            </a>
+            <a href="/terms" className="text-slate-500 hover:text-slate-400 transition-colors">
+              Terms
+            </a>
+          </div>
         </div>
       </div>
     </div>

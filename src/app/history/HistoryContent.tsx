@@ -27,16 +27,21 @@ export function HistoryContent({ sessions, baseline }: HistoryContentProps) {
         </div>
 
         {sessions.length === 0 ? (
-          <div className="bg-gray-900/60 backdrop-blur-xl rounded-2xl border border-gray-800/50 p-12 text-center">
-            <p className="text-gray-400 mb-4">
-              No sessions yet. Complete your first session to see your history.
-            </p>
-            <button
-              onClick={() => router.push('/session')}
-              className="inline-block bg-gradient-to-r from-rose-700 to-rose-600 hover:from-rose-800 hover:to-rose-700 text-white px-8 py-3 rounded-xl font-medium shadow-lg shadow-rose-900/30 transition-all"
-            >
-              Start First Session
-            </button>
+          <div className="bg-slate-850/80 backdrop-blur-xl rounded-2xl border border-slate-750/50 p-12 text-center">
+            <div className="max-w-md mx-auto">
+              <div className="text-6xl mb-4">📊</div>
+              <h3 className="text-2xl font-bold text-white mb-4">No Session History</h3>
+              <p className="text-slate-400 mb-6 leading-relaxed">
+                Complete your first session to start tracking your cognitive performance over time.
+                All your past sessions will appear here.
+              </p>
+              <button
+                onClick={() => router.push('/session')}
+                className="px-8 py-4 bg-gradient-to-r from-rose-700 to-rose-600 text-white rounded-xl hover:from-rose-800 hover:to-rose-700 transition-all shadow-lg shadow-rose-900/30 font-medium"
+              >
+                Start First Session
+              </button>
+            </div>
           </div>
         ) : (
           <div className="space-y-4">

@@ -26,9 +26,6 @@ export function SessionContent({ profile }: SessionContentProps) {
   const stateRef = useRef<SessionState>('intro')
 
   const setState = (newState: SessionState) => {
-    const trace = new Error().stack?.split('\n')[2]?.trim() || 'unknown'
-    console.log(`[STATE CHANGE] ${stateRef.current} → ${newState}`)
-    console.log(`  Called from: ${trace}`)
     stateRef.current = newState
     setStateInternal(newState)
   }
@@ -50,9 +47,6 @@ export function SessionContent({ profile }: SessionContentProps) {
     totalDuration: number
   } | null>(null)
 
-  useEffect(() => {
-    console.log(`[RENDER] Current state: ${state}`)
-  }, [state])
 
   useEffect(() => {
     async function checkSessions() {
@@ -129,7 +123,6 @@ export function SessionContent({ profile }: SessionContentProps) {
     averagePauseDuration: number
     totalDuration: number
   }) => {
-    console.log('[Speech] handleSpeechComplete called with:', metrics)
     if (!sessionId) {
       console.error('[Speech] No sessionId!')
       return
@@ -139,7 +132,6 @@ export function SessionContent({ profile }: SessionContentProps) {
       const supabase = createClient()
 
       // Step 1: Save basic recording info to speech_data table
-      console.log('[Speech] Saving to speech_data...')
       const { error: dataError } = await supabase.from('speech_data').insert({
         session_id: sessionId,
         prompt_id: 'default_v1',
@@ -153,7 +145,6 @@ export function SessionContent({ profile }: SessionContentProps) {
         console.error('[Speech] Failed to save speech_data:', dataError)
         throw dataError
       }
-      console.log('[Speech] speech_data saved successfully')
 
       // Step 2: Calculate and save speech activity metrics
       const pauseTimeMs = Math.round(metrics.pauseCount * metrics.averagePauseDuration)
@@ -162,7 +153,6 @@ export function SessionContent({ profile }: SessionContentProps) {
         ? voicedTimeMs / metrics.totalDuration
         : 0
 
-      console.log('[Speech] Saving to speech_metrics...')
       const { error: metricsError } = await supabase.from('speech_metrics').insert({
         session_id: sessionId,
         word_count: metrics.wordCount,
@@ -178,7 +168,6 @@ export function SessionContent({ profile }: SessionContentProps) {
         console.error('[Speech] Failed to save speech_metrics:', metricsError)
         throw metricsError
       }
-      console.log('[Speech] speech_metrics saved successfully')
 
       setSpeechMetrics(metrics)
 
@@ -193,9 +182,7 @@ export function SessionContent({ profile }: SessionContentProps) {
 
       // Complete session
       await completeSession(sessionId)
-      console.log('[Speech] Setting state to complete')
       setState('complete')
-      console.log('[Speech] State set to complete')
     } catch (error) {
       console.error('[Speech] Failed to save speech data:', error)
       alert('Failed to save speech data. Please try again.')
