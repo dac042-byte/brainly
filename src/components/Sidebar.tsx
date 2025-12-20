@@ -7,6 +7,7 @@ export function Sidebar() {
 
   const navItems = [
     { name: 'Dashboard', path: '/dashboard' },
+    { name: 'Mission', path: '/mission' },
     { name: 'History', path: '/history' },
     { name: 'Settings', path: '/settings' },
   ]
