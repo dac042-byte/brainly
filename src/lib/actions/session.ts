@@ -2,6 +2,8 @@
 
 import { createClient } from '@/lib/supabase/server'
 import { revalidatePath } from 'next/cache'
+import { validateReactionTime, validateSpeechMetrics } from '@/lib/validation'
+import { checkRateLimit, RATE_LIMITS } from '@/lib/ratelimit'
 
 interface ReactionTrialInput {
   trial_index: number
@@ -23,6 +25,16 @@ export async function createSession() {
     throw new Error('Unauthorized')
   }
 
+  // Rate limit session creation (10 per hour)
+  const rateLimitCheck = await checkRateLimit(
+    `session_create:${user.id}`,
+    RATE_LIMITS.SESSION_CREATE
+  )
+
+  if (!rateLimitCheck.allowed) {
+    throw new Error('Too many sessions created. Please wait before starting another.')
+  }
+
   const { data, error } = await supabase
     .from('sessions')
     .insert({
@@ -42,6 +54,18 @@ export async function saveReactionTrials(sessionId: string, trials: ReactionTria
 
   if (!user) {
     throw new Error('Unauthorized')
+  }
+
+  // Validate reaction times
+  for (const trial of trials) {
+    if (trial.reaction_time_ms !== null && !validateReactionTime(trial.reaction_time_ms)) {
+      throw new Error('Invalid reaction time detected')
+    }
+  }
+
+  // Validate focus loss count (should be reasonable)
+  if (focusLossCount < 0 || focusLossCount > 50) {
+    throw new Error('Invalid focus loss count')
   }
 
   const { error: trialsError } = await supabase
@@ -167,6 +191,20 @@ export async function saveSpeechMetrics(
 
   if (!user) {
     throw new Error('Unauthorized')
+  }
+
+  // Validate speech metrics before saving
+  const totalDuration = metrics.voiced_time_ms + metrics.pause_time_ms
+  const validationData = {
+    wordCount: metrics.word_count || 0,
+    wordsPerMinute: metrics.words_per_minute || 0,
+    pauseCount: metrics.pause_count,
+    averagePauseDuration: metrics.avg_pause_length_ms,
+    totalDuration: totalDuration
+  }
+
+  if (!validateSpeechMetrics(validationData)) {
+    throw new Error('Invalid speech metrics detected')
   }
 
   const { error } = await supabase
