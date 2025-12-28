@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
+import { StructuredData } from "@/components/StructuredData";
 
 export const metadata: Metadata = {
   title: {
@@ -60,6 +61,9 @@ export const metadata: Metadata = {
     apple: '/apple-touch-icon.png',
   },
   metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "https://cogna.app"),
+  alternates: {
+    canonical: '/',
+  },
 };
 
 export default function RootLayout({
@@ -70,6 +74,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className="bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-indigo-950 min-h-screen transition-colors duration-300">
+        <StructuredData />
         <ThemeProvider>
           <ErrorBoundary>
             <main className="pb-8">

@@ -1,24 +1,62 @@
 import Link from 'next/link'
 import { Metadata } from 'next'
+import Script from 'next/script'
 
 export const metadata: Metadata = {
   title: 'Best Brain Tracking Tools for Cognitive Health Monitoring in 2025',
   description: 'Complete guide to brain tracking tools. Learn how cognitive tracking software helps monitor brain health, detect changes, and track mental performance over time.',
   keywords: ['brain tracking tools', 'cognitive tracking software', 'brain health monitoring tools', 'cognitive assessment tools'],
+  alternates: {
+    canonical: '/blog/brain-tracking-tools',
+  },
+  openGraph: {
+    type: 'article',
+    publishedTime: '2025-01-01T00:00:00.000Z',
+    authors: ['Cogna'],
+  },
 }
 
 export default function BlogPost() {
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Best Brain Tracking Tools for Cognitive Health Monitoring in 2025",
+    "description": "Complete guide to brain tracking tools. Learn how cognitive tracking software helps monitor brain health, detect changes, and track mental performance over time.",
+    "author": {
+      "@type": "Organization",
+      "name": "Cogna"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Cogna",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://cogna.app/icon.png"
+      }
+    },
+    "datePublished": "2025-01-01",
+    "dateModified": "2025-01-01"
+  }
+
   return (
-    <article className="container mx-auto px-4 py-12 max-w-4xl">
-      <Link href="/" className="text-rose-600 hover:underline mb-8 inline-block">← Back to Home</Link>
+    <>
+      <Script
+        id="article-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(articleSchema)
+        }}
+      />
+      <article className="container mx-auto px-4 py-12 max-w-4xl">
+        <Link href="/" className="text-rose-600 hover:underline mb-8 inline-block">← Back to Home</Link>
 
-      <h1 className="text-4xl font-bold mb-4">
-        Best Brain Tracking Tools for Cognitive Health Monitoring in 2025
-      </h1>
+        <h1 className="text-4xl font-bold mb-4">
+          Best Brain Tracking Tools for Cognitive Health Monitoring in 2025
+        </h1>
 
-      <p className="text-gray-600 dark:text-gray-400 mb-8">
-        Published: January 2025 • 8 min read
-      </p>
+        <p className="text-gray-600 dark:text-gray-400 mb-8">
+          Published: January 2025 • 8 min read
+        </p>
 
       <div className="prose prose-lg dark:prose-invert max-w-none">
         <h2>What Are Brain Tracking Tools?</h2>
@@ -150,5 +188,6 @@ export default function BlogPost() {
         </div>
       </div>
     </article>
+    </>
   )
 }
