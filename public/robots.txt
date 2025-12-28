@@ -1,0 +1,13 @@
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Disallow private pages
+Disallow: /dashboard
+Disallow: /session
+Disallow: /settings
+Disallow: /history
+Disallow: /api/
+
+# Sitemap location
+Sitemap: https://braingauge.com/sitemap.xml
