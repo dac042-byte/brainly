@@ -51,7 +51,7 @@ export default function ForgotPassword() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email"
-              className="w-full px-4 py-3 bg-slate-900/50 border border-slate-750 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-rose-600 focus:border-transparent transition-all"
+              className="w-full px-4 py-3 bg-slate-900/50 border border-slate-750 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-rose-600 focus:border-transparent transition-all [-webkit-text-fill-color:white] [&:-webkit-autofill]:[-webkit-text-fill-color:white] [&:-webkit-autofill]:shadow-[inset_0_0_0px_1000px_rgb(15_23_42_/_0.5)]"
               required
             />
           </div>
