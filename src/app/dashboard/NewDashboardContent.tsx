@@ -68,12 +68,6 @@ export function NewDashboardContent({ data, profile }: DashboardContentProps) {
   const latestMemoryTest = latestSession?.memory_tests?.[0]
   const latestDelta = latestSession?.session_deltas?.[0]
 
-  // Use weighted score from session_deltas (0-100)
-  // Score combines: 50% reaction time + 30% speech timing + 20% memory
-  const performanceScore = latestDelta?.weighted_score
-    ? Number(latestDelta.weighted_score)
-    : 50
-
   const getStatusBadge = (deltaPct: number | null | undefined) => {
     if (deltaPct === null || deltaPct === undefined) return { label: 'baseline', color: 'bg-teal-500/20 text-teal-400' }
     if (Math.abs(deltaPct) < 5) return { label: 'stable', color: 'bg-status-stable/20 text-status-stable' }
@@ -167,20 +161,9 @@ export function NewDashboardContent({ data, profile }: DashboardContentProps) {
             {/* Performance Score */}
             {baseline && (
               <div className="bg-slate-850/80 backdrop-blur-xl rounded-2xl border border-slate-750/50 p-4 sm:p-6 hover:border-slate-750/70 transition-all duration-300 animate-slide-up">
-                <h2 className="text-lg sm:text-xl font-bold text-white mb-3 sm:mb-4">Performance Score</h2>
-                <p className="text-xs sm:text-sm text-slate-400 mb-4 sm:mb-6">
-                  Combined score from reaction time (50%), speech timing (30%), and memory recall (20%). Score of 100 = baseline performance.
-                </p>
+                <h2 className="text-lg sm:text-xl font-bold text-white mb-3 sm:mb-4">Performance Metrics</h2>
 
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-                  <div className="bg-slate-800/50 rounded-xl p-3 sm:p-4 hover:bg-slate-800/70 transition-colors duration-200">
-                    <div className="flex items-baseline gap-1 sm:gap-2 mb-1">
-                      <span className="text-3xl sm:text-4xl font-bold text-white">{Math.round(performanceScore)}</span>
-                      <span className="text-xs sm:text-sm text-slate-400">/ 100</span>
-                    </div>
-                    <p className="text-xs text-gray-500">Overall Score</p>
-                  </div>
-
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
                   {latestReactionMetric && (
                     <div className="bg-rose-900/20 rounded-xl p-3 sm:p-4 border border-rose-700/30">
                       <div className="flex items-baseline gap-1 sm:gap-2 mb-1">
@@ -190,7 +173,7 @@ export function NewDashboardContent({ data, profile }: DashboardContentProps) {
                         <span className="text-xs sm:text-sm text-rose-400">ms</span>
                       </div>
                       <div className="flex flex-col gap-1">
-                        <span className="text-xs text-rose-400">Reaction (50%)</span>
+                        <span className="text-xs text-rose-400">Reaction Time</span>
                         <span className={`px-2 py-0.5 rounded-full text-xs font-medium w-fit ${reactionStatus.color}`}>
                           {reactionStatus.label}
                         </span>
@@ -207,7 +190,7 @@ export function NewDashboardContent({ data, profile }: DashboardContentProps) {
                         <span className="text-xs sm:text-sm text-blue-400">wpm</span>
                       </div>
                       <div className="flex flex-col gap-1">
-                        <span className="text-xs text-blue-400">Speech (30%)</span>
+                        <span className="text-xs text-blue-400">Speech</span>
                         <span className={`px-2 py-0.5 rounded-full text-xs font-medium w-fit ${speechStatus.color}`}>
                           {speechStatus.label}
                         </span>
@@ -226,7 +209,7 @@ export function NewDashboardContent({ data, profile }: DashboardContentProps) {
                         <span className="text-xs sm:text-sm text-teal-400">%</span>
                       </div>
                       <div className="flex items-center gap-2">
-                        <span className="text-xs text-teal-400">Memory (20%)</span>
+                        <span className="text-xs text-teal-400">Memory Recall</span>
                       </div>
                     </div>
                   )}
