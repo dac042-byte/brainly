@@ -20,7 +20,7 @@ export default function Terms() {
               Not a Medical Device
             </h2>
             <p className="text-red-200 font-medium leading-relaxed">
-              Cerebro is NOT a medical device and is NOT intended to diagnose, treat,
+              Cogna is NOT a medical device and is NOT intended to diagnose, treat,
               cure, or prevent any disease or medical condition. This tool is for personal
               cognitive performance tracking and awareness only. It should never be used
               as a substitute for professional medical advice, diagnosis, or treatment.
@@ -30,7 +30,7 @@ export default function Terms() {
           <div>
             <h2 className="text-2xl font-bold text-white mt-8 mb-4">Acceptance of Terms</h2>
             <p>
-              By accessing and using Cerebro, you accept and agree to be bound by these Terms
+              By accessing and using Cogna, you accept and agree to be bound by these Terms
               of Service. If you do not agree to these terms, please do not use this service.
             </p>
           </div>
@@ -38,7 +38,7 @@ export default function Terms() {
           <div>
             <h2 className="text-2xl font-bold text-white mt-8 mb-4">Intended Use</h2>
             <p>
-              Cerebro is designed for personal cognitive performance self-tracking. It measures
+              Cogna is designed for personal cognitive performance self-tracking. It measures
               reaction time, speech patterns, and memory recall to help you monitor trends in
               your own performance over time. Results should be compared only to your personal
               baseline, not to other individuals.
@@ -51,7 +51,7 @@ export default function Terms() {
               Always seek the advice of qualified healthcare professionals with any questions
               you may have regarding a medical condition or cognitive health concerns. Never
               disregard professional medical advice or delay seeking it because of something
-              you have observed using Cerebro.
+              you have observed using Cogna.
             </p>
           </div>
 
@@ -59,7 +59,7 @@ export default function Terms() {
             <h2 className="text-2xl font-bold text-white mt-8 mb-4">Liability Limitation</h2>
             <p>
               Use of this service is at your own risk. We are not liable for any decisions
-              made based on data from this tool. Cerebro is provided "as is" without warranties
+              made based on data from this tool. Cogna is provided "as is" without warranties
               of any kind, either express or implied. We do not guarantee the accuracy,
               reliability, or completeness of any data or analysis.
             </p>
@@ -68,7 +68,7 @@ export default function Terms() {
           <div>
             <h2 className="text-2xl font-bold text-white mt-8 mb-4">Acceptable Use</h2>
             <p>
-              You agree to use Cerebro only for personal, non-commercial purposes. You may not:
+              You agree to use Cogna only for personal, non-commercial purposes. You may not:
             </p>
             <ul className="list-disc pl-6 mt-2 space-y-1">
               <li>Use the service for any unlawful purpose</li>

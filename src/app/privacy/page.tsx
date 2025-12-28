@@ -18,7 +18,7 @@ export default function Privacy() {
           <div>
             <h2 className="text-2xl font-bold text-white mt-8 mb-4">Data We Collect</h2>
             <p>
-              Cerebro collects email addresses and cognitive test results including reaction time measurements,
+              Cogna collects email addresses and cognitive test results including reaction time measurements,
               speech metrics, and memory test scores. All data is stored securely and is only
               accessible by you through your password-protected account.
             </p>
@@ -63,7 +63,7 @@ export default function Privacy() {
           <div>
             <h2 className="text-2xl font-bold text-white mt-8 mb-4">Third-Party Services</h2>
             <p>
-              Cerebro uses Supabase for authentication and data storage, and Vercel for hosting.
+              Cogna uses Supabase for authentication and data storage, and Vercel for hosting.
               These services are SOC 2 compliant and follow industry-standard security practices.
               We do not use any third-party analytics, tracking, or advertising services.
             </p>

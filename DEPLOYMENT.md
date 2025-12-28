@@ -1,6 +1,6 @@
-# BrainGauge Deployment Guide
+# Cogna Deployment Guide
 
-Complete step-by-step guide for deploying BrainGauge to production and publishing mobile apps.
+Complete step-by-step guide for deploying Cogna to production and publishing mobile apps.
 
 ## Table of Contents
 1. [Email Notifications Setup](#email-notifications-setup)
@@ -19,7 +19,7 @@ Complete step-by-step guide for deploying BrainGauge to production and publishin
 3. Sign up with GitHub or email
 4. After signup, click "API Keys" in the left sidebar
 5. Click "Create API Key"
-6. Name it "BrainGauge Production"
+6. Name it "Cogna Production"
 7. Copy the API key (starts with `re_`)
 8. **Important**: Save it somewhere safe - you can only see it once!
 
@@ -29,7 +29,7 @@ Complete step-by-step guide for deploying BrainGauge to production and publishin
 
 1. In Resend dashboard, click "Domains"
 2. Click "Add Domain"
-3. Enter your domain (e.g., `braingauge.com`)
+3. Enter your domain (e.g., `cogna.com`)
 4. Resend will show DNS records to add
 5. Go to your domain registrar (Namecheap, GoDaddy, etc.)
 6. Add the DNS records Resend shows you:
@@ -102,7 +102,7 @@ Answer prompts:
 - "Set up and deploy?" → **Yes**
 - "Which scope?" → Your account
 - "Link to existing project?" → **No**
-- "Project name?" → **braingauge** (or whatever you want)
+- "Project name?" → **cogna** (or whatever you want)
 - "In which directory?" → `./` (press Enter)
 - "Override settings?" → **No**
 
@@ -118,7 +118,7 @@ Answer prompts:
    - `RESEND_API_KEY`
    - `CRON_SECRET`
    - `ADMIN_EMAIL`
-   - `NEXT_PUBLIC_APP_URL` (use your Vercel URL: `https://braingauge.vercel.app`)
+   - `NEXT_PUBLIC_APP_URL` (use your Vercel URL: `https://cogna.vercel.app`)
 
 ### Step 5: Redeploy with Environment Variables
 
@@ -144,12 +144,12 @@ Use [cron-job.org](https://cron-job.org) (free):
 2. Create two jobs:
 
 **Job 1: Weekly Reminders**
-- URL: `https://braingauge.vercel.app/api/cron/send-reminders`
+- URL: `https://cogna.vercel.app/api/cron/send-reminders`
 - Schedule: Every Monday at 9:00 AM
 - HTTP Header: `Authorization: Bearer YOUR_CRON_SECRET`
 
 **Job 2: Daily Limit Checks**
-- URL: `https://braingauge.vercel.app/api/cron/check-limits`
+- URL: `https://cogna.vercel.app/api/cron/check-limits`
 - Schedule: Every day at 12:00 AM
 - HTTP Header: `Authorization: Bearer YOUR_CRON_SECRET`
 
@@ -158,10 +158,10 @@ Use [cron-job.org](https://cron-job.org) (free):
 Test the cron endpoints manually (replace with your values):
 
 ```bash
-curl -X GET https://braingauge.vercel.app/api/cron/send-reminders \
+curl -X GET https://cogna.vercel.app/api/cron/send-reminders \
   -H "Authorization: Bearer YOUR_CRON_SECRET"
 
-curl -X GET https://braingauge.vercel.app/api/cron/check-limits \
+curl -X GET https://cogna.vercel.app/api/cron/check-limits \
   -H "Authorization: Bearer YOUR_CRON_SECRET"
 ```
 
@@ -194,8 +194,8 @@ npx cap init
 ```
 
 When prompted:
-- App name: **BrainGauge**
-- App package ID: **com.yourdomain.braingauge** (use your actual domain backwards)
+- App name: **Cogna**
+- App package ID: **com.yourdomain.cogna** (use your actual domain backwards)
 - Web asset directory: **out**
 
 **Note**: This will overwrite the existing capacitor.config.ts. Edit it after to match your domain and app settings.
@@ -221,8 +221,8 @@ Xcode will open with your project.
 
 1. **Select your project** in left sidebar (top item)
 2. **General tab**:
-   - Display Name: **BrainGauge**
-   - Bundle Identifier: **com.braingauge.app** (must be unique)
+   - Display Name: **Cogna**
+   - Bundle Identifier: **com.cogna.app** (must be unique)
    - Version: **1.0.0**
    - Build: **1**
    - Deployment Target: **iOS 13.0** or higher
@@ -236,7 +236,7 @@ Xcode will open with your project.
    - Click "Info" tab
    - Right-click in the list → "Add Row"
    - Key: **Privacy - Microphone Usage Description**
-   - Value: **BrainGauge needs microphone access to analyze your speech patterns for cognitive assessment**
+   - Value: **Cogna needs microphone access to analyze your speech patterns for cognitive assessment**
 
 ### Step 5: Test on Simulator
 
@@ -261,10 +261,10 @@ Xcode will open with your project.
 3. Click "My Apps" → "+" → "New App"
 4. Fill in details:
    - Platform: **iOS**
-   - Name: **BrainGauge**
+   - Name: **Cogna**
    - Primary Language: **English (U.S.)**
-   - Bundle ID: Select **com.braingauge.app**
-   - SKU: **braingauge-ios** (any unique ID)
+   - Bundle ID: Select **com.cogna.app**
+   - SKU: **cogna-ios** (any unique ID)
    - User Access: **Full Access**
 5. Click "Create"
 
@@ -317,7 +317,7 @@ In App Store Connect:
    - Promotional Text: Short tagline
    - Description:
    ```
-   BrainGauge helps you track your cognitive health over time through quick, science-based assessments.
+   Cogna helps you track your cognitive health over time through quick, science-based assessments.
 
    Take just 2 minutes per week to:
    • Test reaction time
@@ -418,10 +418,10 @@ Android Studio will open.
 
 1. **Update App Name**:
    - Open `android/app/src/main/res/values/strings.xml`
-   - Change app name to "BrainGauge"
+   - Change app name to "Cogna"
 
 2. **Update Package Name**:
-   - Already set in `capacitor.config.ts` as `com.braingauge.app`
+   - Already set in `capacitor.config.ts` as `com.cogna.app`
 
 3. **Add Permissions**:
    - Open `android/app/src/main/AndroidManifest.xml`
@@ -464,7 +464,7 @@ Android Studio will open.
 
 1. Click "Create app"
 2. Fill details:
-   - App name: **BrainGauge**
+   - App name: **Cogna**
    - Default language: **English (United States)**
    - App or game: **App**
    - Free or paid: **Free**
@@ -480,7 +480,7 @@ Android Studio will open.
    ```
    - Full description:
    ```
-   BrainGauge helps you monitor your cognitive health over time through quick, science-based assessments.
+   Cogna helps you monitor your cognitive health over time through quick, science-based assessments.
 
    FEATURES:
    • Reaction Time Test - Measure response speed and consistency
@@ -490,7 +490,7 @@ Android Studio will open.
    • Private & Secure - Your data stays encrypted
 
    HOW IT WORKS:
-   Take a 2-minute test once per week. BrainGauge establishes your personal baseline and tracks changes over time, helping you detect potential cognitive changes early.
+   Take a 2-minute test once per week. Cogna establishes your personal baseline and tracks changes over time, helping you detect potential cognitive changes early.
 
    Perfect for anyone interested in:
    - Monitoring brain health as they age
@@ -551,9 +551,9 @@ Android Studio will open.
 2. Select **Android App Bundle** → Next
 3. Create keystore:
    - Click "Create new..."
-   - Key store path: Choose location (e.g., `~/braingauge-key.jks`)
+   - Key store path: Choose location (e.g., `~/cogna-key.jks`)
    - Password: Choose strong password (**SAVE THIS!**)
-   - Alias: **braingauge**
+   - Alias: **cogna**
    - Alias password: Same or different (**SAVE THIS!**)
    - Validity: **25 years**
    - Certificate info: Your name/company
@@ -572,7 +572,7 @@ Android Studio will open.
 4. Release name: **1.0.0**
 5. Release notes:
    ```
-   Initial release of BrainGauge
+   Initial release of Cogna
    - Reaction time testing
    - Speech pattern analysis
    - Memory recall assessment

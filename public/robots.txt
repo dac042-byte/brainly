@@ -10,4 +10,4 @@ Disallow: /history
 Disallow: /api/
 
 # Sitemap location
-Sitemap: https://braingauge.com/sitemap.xml
+Sitemap: https://cogna.app/sitemap.xml

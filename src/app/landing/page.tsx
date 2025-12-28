@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Brain Tracking Tools - Monitor Your Cognitive Health | BrainGauge',
+  title: 'Brain Tracking Tools - Monitor Your Cognitive Health | Cogna',
   description: 'Free brain tracking tools to monitor cognitive health. Test reaction time, speech patterns, and memory recall. Track brain performance over time with science-based assessments.',
   keywords: ['brain tracking tools', 'cognitive tracking', 'brain health monitoring', 'cognitive health tools', 'memory tracking', 'brain assessment tools', 'cognitive testing software'],
 }
@@ -173,7 +173,7 @@ export default function LandingPage() {
           <Link href="/terms" className="hover:text-rose-600">Terms</Link>
           <Link href="/mission" className="hover:text-rose-600">Mission</Link>
         </div>
-        <p>© 2025 BrainGauge. All rights reserved.</p>
+        <p>© 2025 Cogna. All rights reserved.</p>
       </footer>
     </div>
   )

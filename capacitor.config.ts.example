@@ -1,8 +1,8 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.braingauge.app', // Change this to your domain
-  appName: 'BrainGauge',
+  appId: 'com.cogna.app', // Change this to your domain
+  appName: 'Cogna',
   webDir: 'out',
   server: {
     // Point to your Vercel deployment for API calls

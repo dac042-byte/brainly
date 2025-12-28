@@ -5,8 +5,8 @@ import { ErrorBoundary } from "@/components/ErrorBoundary";
 
 export const metadata: Metadata = {
   title: {
-    default: "BrainGauge - Track Your Cognitive Health",
-    template: "%s | BrainGauge"
+    default: "Cogna - Track Your Cognitive Health",
+    template: "%s | Cogna"
   },
   description: "Free brain tracking tools to monitor cognitive health. Track reaction time, speech patterns, and memory recall with science-based assessments. Private and secure cognitive health monitoring.",
   keywords: [
@@ -25,9 +25,9 @@ export const metadata: Metadata = {
     "memory test",
     "cognitive assessment"
   ],
-  authors: [{ name: "BrainGauge" }],
-  creator: "BrainGauge",
-  publisher: "BrainGauge",
+  authors: [{ name: "Cogna" }],
+  creator: "Cogna",
+  publisher: "Cogna",
   robots: {
     index: true,
     follow: true,
@@ -39,17 +39,17 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: process.env.NEXT_PUBLIC_APP_URL || "https://braingauge.com",
-    title: "BrainGauge - Track Your Cognitive Health",
+    url: process.env.NEXT_PUBLIC_APP_URL || "https://cogna.app",
+    title: "Cogna - Track Your Cognitive Health",
     description: "Monitor your cognitive health with quick, science-based assessments. Track reaction time, speech patterns, and memory recall.",
-    siteName: "BrainGauge",
+    siteName: "Cogna",
   },
   twitter: {
     card: "summary_large_image",
-    title: "BrainGauge - Track Your Cognitive Health",
+    title: "Cogna - Track Your Cognitive Health",
     description: "Monitor your cognitive health with quick, science-based assessments.",
   },
-  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "https://braingauge.com"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "https://cogna.app"),
 };
 
 export default function RootLayout({

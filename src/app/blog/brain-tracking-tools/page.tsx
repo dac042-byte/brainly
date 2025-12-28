@@ -132,14 +132,14 @@ export default function BlogPost() {
 
         <h2>Start Tracking Your Cognitive Health</h2>
         <p>
-          BrainGauge offers free, science-based brain tracking tools to monitor your cognitive health.
+          Cogna offers free, science-based brain tracking tools to monitor your cognitive health.
           Test reaction time, speech patterns, and memory recall in just 2 minutes per week.
         </p>
 
         <div className="bg-gradient-to-r from-rose-600 to-pink-600 text-white p-8 rounded-lg mt-8">
           <h3 className="text-2xl font-bold mb-4">Ready to Start Brain Tracking?</h3>
           <p className="mb-6">
-            Join thousands using BrainGauge for cognitive health monitoring. Free forever.
+            Join thousands using Cogna for cognitive health monitoring. Free forever.
           </p>
           <Link
             href="/signup"

@@ -1,10 +1,10 @@
-# Cerebro MVP
+# Cogna MVP
 
 Privacy-first cognitive self-tracking web application for measuring reaction time and speech patterns against a personal baseline.
 
 ## Overview
 
-Cerebro is a web app that helps users track their cognitive performance over time through:
+Cogna is a web app that helps users track their cognitive performance over time through:
 - **Reaction Time Tests**: Measures response latency to visual stimuli
 - **Speech Recording**: Captures speech timing patterns (duration, pauses, activity ratio)
 - **Personal Baseline Tracking**: All comparisons are made against the user's own baseline (first session)

@@ -61,13 +61,13 @@ export async function GET(request: NextRequest) {
     // Send alert if there are warnings
     if (warnings.length > 0 && resend) {
       await resend.emails.send({
-        from: 'BrainGauge Alerts <alerts@resend.dev>', // Change to alerts@yourdomain.com after domain setup
+        from: 'Cogna Alerts <alerts@resend.dev>', // Change to alerts@cogna.app after domain setup
         to: [ADMIN_EMAIL!],
-        subject: '🚨 BrainGauge: Service Limit Warnings',
+        subject: '🚨 Cogna: Service Limit Warnings',
         html: `
           <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
             <h2 style="color: #dc2626;">Service Limit Warnings</h2>
-            <p>Your BrainGauge app is approaching service limits:</p>
+            <p>Your Cogna app is approaching service limits:</p>
             <ul style="background: #fef2f2; padding: 20px; border-left: 4px solid #dc2626;">
               ${warnings.map(w => `<li>${w}</li>`).join('')}
             </ul>

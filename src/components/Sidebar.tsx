@@ -60,12 +60,12 @@ export function Sidebar() {
           <div className="w-12 h-12 bg-gradient-to-br from-rose-700 to-rose-600 rounded-xl flex items-center justify-center overflow-hidden">
             <img
               src="/logo.png"
-              alt="Cerebro Logo"
+              alt="Cogna Logo"
               className="w-full h-full object-cover"
             />
           </div>
           <div>
-            <h1 className="text-xl font-bold text-white">Cerebro</h1>
+            <h1 className="text-xl font-bold text-white">Cogna</h1>
             <p className="text-xs text-slate-400">Performance tracker</p>
           </div>
         </div>
@@ -94,7 +94,7 @@ export function Sidebar() {
         <div className="border-t border-slate-750 pt-4 space-y-3">
           <p className="text-xs text-gray-500 leading-relaxed">
             <strong className="text-slate-400">Not a medical device.</strong><br />
-            Cerebro is for performance monitoring and trend awareness only.
+            Cogna is for performance monitoring and trend awareness only.
           </p>
           <div className="flex gap-4 text-xs">
             <a href="/privacy" className="text-slate-500 hover:text-slate-400 transition-colors">

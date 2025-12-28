@@ -62,7 +62,7 @@ export async function GET(request: NextRequest) {
     for (const reminder of remindersToSend) {
       try {
         const { data, error } = await resend.emails.send({
-          from: 'BrainGauge <notifications@resend.dev>', // Change to notifications@yourdomain.com after domain setup
+          from: 'Cogna <notifications@resend.dev>', // Change to notifications@cogna.app after domain setup
           to: [reminder.email!],
           subject: 'Time for your weekly brain check-in 🧠',
           html: `
