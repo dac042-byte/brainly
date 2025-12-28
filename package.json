@@ -5,8 +5,11 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:mobile": "next build --config next.config.mobile.js",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "mobile:ios": "npm run build:mobile && npx cap sync ios && npx cap open ios",
+    "mobile:android": "npm run build:mobile && npx cap sync android && npx cap open android"
   },
   "dependencies": {
     "@supabase/ssr": "^0.1.0",

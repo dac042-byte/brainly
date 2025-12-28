@@ -1,0 +1,24 @@
+import { CapacitorConfig } from '@capacitor/cli';
+
+const config: CapacitorConfig = {
+  appId: 'com.braingauge.app', // Change this to your domain
+  appName: 'BrainGauge',
+  webDir: 'out',
+  server: {
+    // Point to your Vercel deployment for API calls
+    url: process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000',
+    cleartext: true
+  },
+  ios: {
+    contentInset: 'always',
+  },
+  plugins: {
+    SplashScreen: {
+      launchShowDuration: 2000,
+      backgroundColor: '#0f172a',
+      showSpinner: false,
+    },
+  },
+};
+
+export default config;

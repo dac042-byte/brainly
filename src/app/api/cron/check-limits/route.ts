@@ -60,7 +60,7 @@ export async function GET(request: NextRequest) {
     // Send alert if there are warnings
     if (warnings.length > 0) {
       await resend.emails.send({
-        from: 'BrainGauge Alerts <alerts@yourdomain.com>',
+        from: 'BrainGauge Alerts <alerts@resend.dev>', // Change to alerts@yourdomain.com after domain setup
         to: [ADMIN_EMAIL!],
         subject: '🚨 BrainGauge: Service Limit Warnings',
         html: `
