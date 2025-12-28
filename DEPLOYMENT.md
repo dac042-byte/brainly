@@ -182,6 +182,11 @@ Navigate to project folder:
 cd /home/user/brainly
 ```
 
+Rename the example config file:
+```bash
+mv capacitor.config.ts.example capacitor.config.ts
+```
+
 Install Capacitor:
 ```bash
 npm install @capacitor/core @capacitor/cli
@@ -192,6 +197,8 @@ When prompted:
 - App name: **BrainGauge**
 - App package ID: **com.yourdomain.braingauge** (use your actual domain backwards)
 - Web asset directory: **out**
+
+**Note**: This will overwrite the existing capacitor.config.ts. Edit it after to match your domain and app settings.
 
 ### Step 2: Add iOS Platform
 
@@ -383,6 +390,12 @@ In App Store Connect:
 Navigate to project folder:
 ```bash
 cd /home/user/brainly
+```
+
+**If you haven't done iOS setup yet**, first install Capacitor:
+```bash
+mv capacitor.config.ts.example capacitor.config.ts
+npm install @capacitor/core @capacitor/cli
 ```
 
 Install and add Android:

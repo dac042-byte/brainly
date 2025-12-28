@@ -2,7 +2,8 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import { Resend } from 'resend'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
+// Initialize Resend only if API key is available (for build-time compatibility)
+const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null
 
 export async function GET(request: NextRequest) {
   // Verify cron secret to prevent unauthorized access
@@ -51,6 +52,13 @@ export async function GET(request: NextRequest) {
 
     // Send emails
     const emailResults = []
+    if (!resend) {
+      return NextResponse.json({
+        error: 'Resend not configured',
+        remindersFound: remindersToSend.length
+      }, { status: 500 })
+    }
+
     for (const reminder of remindersToSend) {
       try {
         const { data, error } = await resend.emails.send({

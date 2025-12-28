@@ -2,7 +2,8 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import { Resend } from 'resend'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
+// Initialize Resend only if API key is available (for build-time compatibility)
+const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null
 
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL // Your email
 
@@ -58,7 +59,7 @@ export async function GET(request: NextRequest) {
     }
 
     // Send alert if there are warnings
-    if (warnings.length > 0) {
+    if (warnings.length > 0 && resend) {
       await resend.emails.send({
         from: 'BrainGauge Alerts <alerts@resend.dev>', // Change to alerts@yourdomain.com after domain setup
         to: [ADMIN_EMAIL!],
