@@ -19,18 +19,12 @@ export default function LandingPage() {
           Monitor your cognitive health with science-based brain tracking tools.
           Test reaction time, speech patterns, and memory recall in just 2 minutes per week.
         </p>
-        <div className="flex gap-4 justify-center">
+        <div className="flex justify-center">
           <Link
             href="/signup"
             className="bg-gradient-to-r from-rose-600 to-pink-600 text-white px-8 py-3 rounded-lg font-semibold hover:opacity-90 transition"
           >
             Start Free
-          </Link>
-          <Link
-            href="/mission"
-            className="border-2 border-rose-600 text-rose-600 dark:text-rose-400 px-8 py-3 rounded-lg font-semibold hover:bg-rose-50 dark:hover:bg-rose-950 transition"
-          >
-            Learn More
           </Link>
         </div>
       </section>
