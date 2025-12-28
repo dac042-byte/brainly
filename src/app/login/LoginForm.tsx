@@ -95,7 +95,7 @@ export function LoginForm() {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="appearance-none rounded-none relative block w-full px-3 py-2 border border-slate-750 placeholder-slate-500 text-white rounded-t-md focus:outline-none focus:ring-1 focus:ring-rose-600 focus:border-rose-600 focus:z-10 sm:text-sm bg-slate-850/80 transition-all duration-200 [-webkit-text-fill-color:white] [&:-webkit-autofill]:[-webkit-text-fill-color:white] [&:-webkit-autofill]:bg-slate-850/80"
+              className="appearance-none rounded-none relative block w-full px-3 py-2 border border-slate-300 placeholder-slate-400 text-slate-900 rounded-t-md focus:outline-none focus:ring-1 focus:ring-rose-600 focus:border-rose-600 focus:z-10 sm:text-sm bg-white transition-all duration-200 [-webkit-text-fill-color:#0f172a] [&:-webkit-autofill]:[-webkit-text-fill-color:#0f172a] [&:-webkit-autofill]:bg-white [&:-webkit-autofill]:shadow-[inset_0_0_0px_1000px_white]"
               placeholder="Email address"
             />
           </div>
@@ -112,7 +112,7 @@ export function LoginForm() {
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-slate-750 placeholder-slate-500 text-white rounded-b-md focus:outline-none focus:ring-1 focus:ring-rose-600 focus:border-rose-600 focus:z-10 sm:text-sm bg-slate-850/80 transition-all duration-200 [-webkit-text-fill-color:white] [&:-webkit-autofill]:[-webkit-text-fill-color:white] [&:-webkit-autofill]:bg-slate-850/80"
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-slate-300 placeholder-slate-400 text-slate-900 rounded-b-md focus:outline-none focus:ring-1 focus:ring-rose-600 focus:border-rose-600 focus:z-10 sm:text-sm bg-white transition-all duration-200 [-webkit-text-fill-color:#0f172a] [&:-webkit-autofill]:[-webkit-text-fill-color:#0f172a] [&:-webkit-autofill]:bg-white [&:-webkit-autofill]:shadow-[inset_0_0_0px_1000px_white]"
                 placeholder="Password"
               />
             </div>
