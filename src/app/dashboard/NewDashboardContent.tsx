@@ -86,28 +86,28 @@ export function NewDashboardContent({ data, profile }: DashboardContentProps) {
 
   return (
     <DashboardLayout>
-      <div className="p-8 animate-fade-in">
+      <div className="p-4 sm:p-6 lg:p-8 animate-fade-in">
         {/* Header */}
-        <div className="mb-8 animate-slide-up">
-          <div className="flex items-start justify-between mb-2">
+        <div className="mb-6 lg:mb-8 animate-slide-up">
+          <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-2">
             <div>
-              <h1 className="text-3xl font-bold text-white mb-2">Dashboard</h1>
-              <p className="text-slate-400">
+              <h1 className="text-2xl sm:text-3xl font-bold text-white mb-2">Dashboard</h1>
+              <p className="text-sm sm:text-base text-slate-400">
                 {baseline
                   ? 'Performance metrics compared to your baseline.'
                   : 'Complete 1 session to establish your baseline.'}
               </p>
             </div>
-            <div className="flex gap-3">
+            <div className="flex gap-2 sm:gap-3 w-full sm:w-auto">
               <button
                 onClick={() => router.push('/session')}
-                className="px-6 py-3 bg-gradient-to-r from-rose-700 to-rose-600 hover:from-rose-800 hover:to-rose-700 text-white font-medium rounded-xl shadow-lg shadow-rose-900/20 hover:shadow-rose-900/30 transition-all duration-200 hover:scale-[1.02]"
+                className="flex-1 sm:flex-none px-4 sm:px-6 py-2.5 sm:py-3 bg-gradient-to-r from-rose-700 to-rose-600 hover:from-rose-800 hover:to-rose-700 text-white text-sm sm:text-base font-medium rounded-xl shadow-lg shadow-rose-900/20 hover:shadow-rose-900/30 transition-all duration-200 hover:scale-[1.02] whitespace-nowrap"
               >
-                Start This Week
+                Start Session
               </button>
               <button
                 onClick={handleSignOut}
-                className="px-4 py-3 bg-slate-800/50 hover:bg-slate-800 text-slate-300 rounded-xl transition-all duration-200"
+                className="px-3 sm:px-4 py-2.5 sm:py-3 bg-slate-800/50 hover:bg-slate-800 text-slate-300 text-sm sm:text-base rounded-xl transition-all duration-200 whitespace-nowrap"
               >
                 Sign Out
               </button>
@@ -137,22 +137,22 @@ export function NewDashboardContent({ data, profile }: DashboardContentProps) {
 
         {/* Weekly Streak */}
         {sessions.length > 0 && streak && (
-          <div className="bg-gradient-to-r from-rose-900/40 to-rose-900/30 backdrop-blur-xl rounded-2xl border border-rose-700/30 p-6 mb-6 hover:border-rose-700/40 transition-all duration-300 animate-slide-up">
-            <div className="flex items-center justify-between">
+          <div className="bg-gradient-to-r from-rose-900/40 to-rose-900/30 backdrop-blur-xl rounded-2xl border border-rose-700/30 p-4 sm:p-6 mb-4 sm:mb-6 hover:border-rose-700/40 transition-all duration-300 animate-slide-up">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
               <div>
-                <h3 className="text-lg font-bold text-white mb-1">Weekly Streak</h3>
-                <p className="text-rose-300/80 text-sm">
+                <h3 className="text-base sm:text-lg font-bold text-white mb-1">Weekly Streak</h3>
+                <p className="text-rose-300/80 text-xs sm:text-sm">
                   Test once per week to maintain your streak
                 </p>
               </div>
-              <div className="flex items-center gap-6">
+              <div className="flex items-center gap-4 sm:gap-6">
                 <div className="text-center">
-                  <div className="text-4xl font-bold text-rose-400 animate-count-up">{streak.current_streak}</div>
+                  <div className="text-3xl sm:text-4xl font-bold text-rose-400 animate-count-up">{streak.current_streak}</div>
                   <div className="text-xs text-rose-300/60 mt-1">Current</div>
                 </div>
-                <div className="w-px h-12 bg-rose-700/30"></div>
+                <div className="w-px h-10 sm:h-12 bg-rose-700/30"></div>
                 <div className="text-center">
-                  <div className="text-4xl font-bold text-rose-400 animate-count-up">{streak.longest_streak}</div>
+                  <div className="text-3xl sm:text-4xl font-bold text-rose-400 animate-count-up">{streak.longest_streak}</div>
                   <div className="text-xs text-rose-300/60 mt-1">Best</div>
                 </div>
               </div>
@@ -161,33 +161,33 @@ export function NewDashboardContent({ data, profile }: DashboardContentProps) {
         )}
 
         {sessions.length > 0 && (
-        <div className="grid grid-cols-3 gap-6">
-          {/* Main Content - 2 columns */}
-          <div className="col-span-2 space-y-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
+          {/* Main Content - 2 columns on desktop, full width on mobile */}
+          <div className="lg:col-span-2 space-y-4 sm:space-y-6">
             {/* Performance Score */}
             {baseline && (
-              <div className="bg-slate-850/80 backdrop-blur-xl rounded-2xl border border-slate-750/50 p-6 hover:border-slate-750/70 transition-all duration-300 animate-slide-up">
-                <h2 className="text-xl font-bold text-white mb-4">Performance Score</h2>
-                <p className="text-sm text-slate-400 mb-6">
+              <div className="bg-slate-850/80 backdrop-blur-xl rounded-2xl border border-slate-750/50 p-4 sm:p-6 hover:border-slate-750/70 transition-all duration-300 animate-slide-up">
+                <h2 className="text-lg sm:text-xl font-bold text-white mb-3 sm:mb-4">Performance Score</h2>
+                <p className="text-xs sm:text-sm text-slate-400 mb-4 sm:mb-6">
                   Combined score from reaction time (50%), speech timing (30%), and memory recall (20%). Score of 100 = baseline performance.
                 </p>
 
-                <div className="grid grid-cols-4 gap-4">
-                  <div className="bg-slate-800/50 rounded-xl p-4 hover:bg-slate-800/70 transition-colors duration-200">
-                    <div className="flex items-baseline gap-2 mb-1">
-                      <span className="text-4xl font-bold text-white">{Math.round(performanceScore)}</span>
-                      <span className="text-sm text-slate-400">/ 100</span>
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+                  <div className="bg-slate-800/50 rounded-xl p-3 sm:p-4 hover:bg-slate-800/70 transition-colors duration-200">
+                    <div className="flex items-baseline gap-1 sm:gap-2 mb-1">
+                      <span className="text-3xl sm:text-4xl font-bold text-white">{Math.round(performanceScore)}</span>
+                      <span className="text-xs sm:text-sm text-slate-400">/ 100</span>
                     </div>
                     <p className="text-xs text-gray-500">Overall Score</p>
                   </div>
 
                   {latestReactionMetric && (
-                    <div className="bg-rose-900/20 rounded-xl p-4 border border-rose-700/30">
-                      <div className="flex items-baseline gap-2 mb-1">
-                        <span className="text-4xl font-bold text-rose-400">
+                    <div className="bg-rose-900/20 rounded-xl p-3 sm:p-4 border border-rose-700/30">
+                      <div className="flex items-baseline gap-1 sm:gap-2 mb-1">
+                        <span className="text-3xl sm:text-4xl font-bold text-rose-400">
                           {Number(latestReactionMetric.median_rt_ms).toFixed(0)}
                         </span>
-                        <span className="text-sm text-rose-400">ms</span>
+                        <span className="text-xs sm:text-sm text-rose-400">ms</span>
                       </div>
                       <div className="flex flex-col gap-1">
                         <span className="text-xs text-rose-400">Reaction (50%)</span>
@@ -199,12 +199,12 @@ export function NewDashboardContent({ data, profile }: DashboardContentProps) {
                   )}
 
                   {latestSpeechMetric && (
-                    <div className="bg-blue-900/20 rounded-xl p-4 border border-blue-500/20">
-                      <div className="flex items-baseline gap-2 mb-1">
-                        <span className="text-4xl font-bold text-blue-300">
+                    <div className="bg-blue-900/20 rounded-xl p-3 sm:p-4 border border-blue-500/20">
+                      <div className="flex items-baseline gap-1 sm:gap-2 mb-1">
+                        <span className="text-3xl sm:text-4xl font-bold text-blue-300">
                           {Number(latestSpeechMetric.words_per_minute || 0).toFixed(0)}
                         </span>
-                        <span className="text-sm text-blue-400">wpm</span>
+                        <span className="text-xs sm:text-sm text-blue-400">wpm</span>
                       </div>
                       <div className="flex flex-col gap-1">
                         <span className="text-xs text-blue-400">Speech (30%)</span>
@@ -216,14 +216,14 @@ export function NewDashboardContent({ data, profile }: DashboardContentProps) {
                   )}
 
                   {latestMemoryTest && (
-                    <div className="bg-teal-900/20 rounded-xl p-4 border border-teal-500/20">
-                      <div className="flex items-baseline gap-2 mb-1">
-                        <span className="text-4xl font-bold text-teal-300">
+                    <div className="bg-teal-900/20 rounded-xl p-3 sm:p-4 border border-teal-500/20">
+                      <div className="flex items-baseline gap-1 sm:gap-2 mb-1">
+                        <span className="text-3xl sm:text-4xl font-bold text-teal-300">
                           {latestMemoryTest.total_words > 0
                             ? ((latestMemoryTest.score / latestMemoryTest.total_words) * 100).toFixed(0)
                             : '0'}
                         </span>
-                        <span className="text-sm text-teal-400">%</span>
+                        <span className="text-xs sm:text-sm text-teal-400">%</span>
                       </div>
                       <div className="flex items-center gap-2">
                         <span className="text-xs text-teal-400">Memory (20%)</span>
@@ -246,29 +246,92 @@ export function NewDashboardContent({ data, profile }: DashboardContentProps) {
 
             {/* History Chart */}
             {chartData.length > 0 && (
-              <div className="bg-slate-850/80 backdrop-blur-xl rounded-2xl border border-slate-750/50 p-6 hover:border-slate-750/70 transition-all duration-300 animate-slide-up">
-                <div className="flex items-start justify-between mb-6">
+              <div className="bg-slate-850/80 backdrop-blur-xl rounded-2xl border border-slate-750/50 p-4 sm:p-6 hover:border-slate-750/70 transition-all duration-300 animate-slide-up">
+                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 sm:gap-0 mb-4 sm:mb-6">
                   <div>
-                    <h2 className="text-xl font-bold text-white mb-1">Performance Trends</h2>
-                    <p className="text-sm text-slate-400">Last 8 sessions</p>
+                    <h2 className="text-lg sm:text-xl font-bold text-white mb-1">Performance Trends</h2>
+                    <p className="text-xs sm:text-sm text-slate-400">Last 8 sessions</p>
                   </div>
-                  <div className="flex gap-4 text-xs">
+                  <div className="flex flex-wrap gap-3 sm:gap-4 text-xs">
                     <div className="flex items-center gap-2">
                       <div className="w-3 h-3 rounded-full bg-rose-500"></div>
-                      <span className="text-slate-400">Reaction (ms)</span>
+                      <span className="text-slate-400">Reaction</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <div className="w-3 h-3 rounded-full bg-blue-400"></div>
-                      <span className="text-slate-400">Speech (%)</span>
+                      <span className="text-slate-400">Speech</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <div className="w-3 h-3 rounded-full bg-teal-400"></div>
-                      <span className="text-slate-400">Memory (%)</span>
+                      <span className="text-slate-400">Memory</span>
                     </div>
                   </div>
                 </div>
 
-                <ResponsiveContainer width="100%" height={250}>
+                <ResponsiveContainer width="100%" height={200} className="sm:hidden">
+                  <LineChart data={chartData}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="#2a3945" opacity={0.25} />
+                    <XAxis
+                      dataKey="week"
+                      stroke="#4a5a6a"
+                      tick={{ fill: '#64748b', fontSize: 10 }}
+                    />
+                    <YAxis
+                      yAxisId="left"
+                      stroke="#4a5a6a"
+                      tick={{ fill: '#64748b', fontSize: 10 }}
+                      domain={[0, 100]}
+                    />
+                    <YAxis
+                      yAxisId="right"
+                      orientation="right"
+                      stroke="#4a5a6a"
+                      tick={{ fill: '#64748b', fontSize: 10 }}
+                      domain={['dataMin - 20', 'dataMax + 20']}
+                    />
+                    <Tooltip
+                      contentStyle={{
+                        backgroundColor: '#1a2129',
+                        border: '1px solid #2a3945',
+                        borderRadius: '12px',
+                        color: '#e2e8f0',
+                        fontSize: '12px'
+                      }}
+                    />
+                    <Line
+                      yAxisId="right"
+                      type="monotone"
+                      dataKey="reactionTime"
+                      name="Reaction Time"
+                      stroke="#a86382"
+                      strokeWidth={2}
+                      dot={{ r: 3 }}
+                      connectNulls
+                    />
+                    <Line
+                      yAxisId="left"
+                      type="monotone"
+                      dataKey="speechActivity"
+                      name="Speech"
+                      stroke="#60a5fa"
+                      strokeWidth={2}
+                      dot={{ r: 3 }}
+                      connectNulls
+                    />
+                    <Line
+                      yAxisId="left"
+                      type="monotone"
+                      dataKey="memoryScore"
+                      name="Memory"
+                      stroke="#5eead4"
+                      strokeWidth={2}
+                      dot={{ r: 3 }}
+                      connectNulls
+                    />
+                  </LineChart>
+                </ResponsiveContainer>
+
+                <ResponsiveContainer width="100%" height={250} className="hidden sm:block">
                   <LineChart data={chartData}>
                     <CartesianGrid strokeDasharray="3 3" stroke="#2a3945" opacity={0.25} />
                     <XAxis

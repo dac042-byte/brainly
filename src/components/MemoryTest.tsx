@@ -117,17 +117,17 @@ export function MemoryTest({ mode, wordSequence, onEncodingComplete, onRecallCom
   // ENCODING MODE: Show words for 20 seconds
   if (mode === 'encoding') {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-850 flex items-center justify-center p-4">
-        <div className="max-w-3xl w-full bg-slate-850/80 backdrop-blur-xl rounded-2xl border border-slate-750/50 p-12 text-center">
-          <h2 className="text-2xl font-bold text-white mb-6">Memory Encoding Phase</h2>
+      <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-850 flex items-center justify-center p-4 py-8">
+        <div className="max-w-3xl w-full bg-slate-850/80 backdrop-blur-xl rounded-2xl border border-slate-750/50 p-6 sm:p-8 lg:p-12 text-center">
+          <h2 className="text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-6">Memory Encoding Phase</h2>
 
-          <div className="bg-rose-900/20 border border-rose-700/30 rounded-xl p-8 mb-6">
-            <p className="text-sm text-rose-400 mb-6">Memorize these words:</p>
-            <div className="flex flex-wrap justify-center gap-4">
+          <div className="bg-rose-900/20 border border-rose-700/30 rounded-xl p-4 sm:p-6 lg:p-8 mb-4 sm:mb-6">
+            <p className="text-xs sm:text-sm text-rose-400 mb-4 sm:mb-6">Memorize these words:</p>
+            <div className="flex flex-wrap justify-center gap-2 sm:gap-3 lg:gap-4">
               {words.map((word, index) => (
                 <span
                   key={index}
-                  className="text-4xl font-bold text-white bg-rose-700/30 px-8 py-4 rounded-xl border border-rose-600/50"
+                  className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white bg-rose-700/30 px-4 sm:px-6 lg:px-8 py-2 sm:py-3 lg:py-4 rounded-xl border border-rose-600/50"
                 >
                   {word}
                 </span>
@@ -135,14 +135,14 @@ export function MemoryTest({ mode, wordSequence, onEncodingComplete, onRecallCom
             </div>
           </div>
 
-          <div className="flex items-center justify-center gap-4">
-            <div className="text-6xl font-mono font-bold text-rose-400">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4">
+            <div className="text-5xl sm:text-6xl font-mono font-bold text-rose-400">
               {timeRemaining}
             </div>
-            <div className="text-slate-400">seconds remaining</div>
+            <div className="text-sm sm:text-base text-slate-400">seconds remaining</div>
           </div>
 
-          <p className="text-slate-400 text-sm mt-6">
+          <p className="text-xs sm:text-sm text-slate-400 mt-4 sm:mt-6">
             You'll recall these words after completing other tasks
           </p>
         </div>
@@ -153,15 +153,15 @@ export function MemoryTest({ mode, wordSequence, onEncodingComplete, onRecallCom
   // RECALL MODE: Collect delayed recall
   if (mode === 'recall') {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-850 flex items-center justify-center p-4">
-        <div className="max-w-3xl w-full bg-slate-850/80 backdrop-blur-xl rounded-2xl border border-slate-750/50 p-8">
-          <h2 className="text-3xl font-bold text-white mb-4">Memory Recall Phase</h2>
+      <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-850 flex items-center justify-center p-4 py-8">
+        <div className="max-w-3xl w-full bg-slate-850/80 backdrop-blur-xl rounded-2xl border border-slate-750/50 p-6 sm:p-8">
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">Memory Recall Phase</h2>
 
-          <div className="bg-rose-900/20 border border-rose-700/30 rounded-xl p-6 mb-6">
-            <p className="text-rose-300 mb-2">
+          <div className="bg-rose-900/20 border border-rose-700/30 rounded-xl p-4 sm:p-6 mb-4 sm:mb-6">
+            <p className="text-sm sm:text-base text-rose-300 mb-2">
               <strong>Instructions:</strong>
             </p>
-            <ul className="text-sm text-rose-300/80 space-y-1">
+            <ul className="text-xs sm:text-sm text-rose-300/80 space-y-1">
               <li>• Recall the words you saw at the beginning of this session</li>
               <li>• Type them in any order, separated by spaces or commas</li>
               <li>• Don't worry about perfect spelling</li>
@@ -173,15 +173,15 @@ export function MemoryTest({ mode, wordSequence, onEncodingComplete, onRecallCom
             value={userRecall}
             onChange={(e) => setUserRecall(e.target.value)}
             placeholder="Type the words you remember here..."
-            className="w-full h-40 px-4 py-3 border border-slate-750 rounded-xl bg-slate-800/50 text-white text-lg focus:outline-none focus:ring-2 focus:ring-rose-600 resize-none"
+            className="w-full h-32 sm:h-40 px-3 sm:px-4 py-2 sm:py-3 border border-slate-750 rounded-xl bg-slate-800/50 text-white text-base sm:text-lg focus:outline-none focus:ring-2 focus:ring-rose-600 resize-none"
             autoFocus
           />
 
-          <div className="flex gap-4 mt-6">
+          <div className="flex gap-3 sm:gap-4 mt-4 sm:mt-6">
             <button
               onClick={handleRecallSubmit}
               disabled={!userRecall.trim()}
-              className="flex-1 bg-gradient-to-r from-rose-700 to-rose-600 hover:from-rose-800 hover:to-rose-700 disabled:opacity-50 disabled:cursor-not-allowed text-white px-6 py-3 rounded-xl font-medium shadow-lg shadow-rose-900/20 transition-all"
+              className="flex-1 bg-gradient-to-r from-rose-700 to-rose-600 hover:from-rose-800 hover:to-rose-700 disabled:opacity-50 disabled:cursor-not-allowed text-white px-6 py-3 rounded-xl font-medium text-sm sm:text-base shadow-lg shadow-rose-900/20 transition-all"
             >
               Submit Recall
             </button>

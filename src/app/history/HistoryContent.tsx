@@ -15,13 +15,13 @@ export function HistoryContent({ sessions, baseline }: HistoryContentProps) {
 
   return (
     <DashboardLayout>
-      <div className="p-8">
+      <div className="p-4 sm:p-6 lg:p-8">
       <div className="max-w-6xl mx-auto">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-white mb-2">
+        <div className="mb-6 lg:mb-8">
+          <h1 className="text-2xl sm:text-3xl font-bold text-white mb-2">
             Session History
           </h1>
-          <p className="text-gray-400">
+          <p className="text-sm sm:text-base text-gray-400">
             View all your past test results
           </p>
         </div>
@@ -55,40 +55,40 @@ export function HistoryContent({ sessions, baseline }: HistoryContentProps) {
               return (
                 <div
                   key={session.id}
-                  className="bg-gray-900/60 backdrop-blur-xl rounded-2xl border border-gray-800/50 p-6 hover:border-gray-700/50 transition-all"
+                  className="bg-gray-900/60 backdrop-blur-xl rounded-2xl border border-gray-800/50 p-4 sm:p-6 hover:border-gray-700/50 transition-all"
                 >
-                  <div className="flex items-start justify-between mb-4">
+                  <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 sm:gap-0 mb-4">
                     <div>
-                      <h3 className="text-lg font-bold text-white">
+                      <h3 className="text-base sm:text-lg font-bold text-white">
                         Session #{sessions.length - index}
                       </h3>
-                      <p className="text-sm text-gray-400">
+                      <p className="text-xs sm:text-sm text-gray-400">
                         {format(new Date(session.created_at), 'MMMM d, yyyy \'at\' h:mm a')}
                       </p>
                     </div>
                     {isBaseline && (
-                      <span className="px-3 py-1 bg-blue-500/20 text-blue-300 text-xs font-medium rounded-full border border-blue-500/30">
+                      <span className="px-3 py-1 bg-blue-500/20 text-blue-300 text-xs font-medium rounded-full border border-blue-500/30 w-fit">
                         Baseline Session
                       </span>
                     )}
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
                     {/* Reaction Time */}
                     {reactionMetric && (
-                      <div className="bg-rose-900/20 rounded-xl p-4 border border-rose-700/30">
-                        <h4 className="text-sm font-medium text-rose-400 mb-3">
+                      <div className="bg-rose-900/20 rounded-xl p-3 sm:p-4 border border-rose-700/30">
+                        <h4 className="text-xs sm:text-sm font-medium text-rose-400 mb-2 sm:mb-3">
                           Reaction Time (50%)
                         </h4>
-                        <div className="space-y-2">
+                        <div className="space-y-1.5 sm:space-y-2">
                           <div>
-                            <p className="text-2xl font-bold text-rose-200">
+                            <p className="text-xl sm:text-2xl font-bold text-rose-200">
                               {Number(reactionMetric.median_rt_ms).toFixed(0)}ms
                             </p>
                             <p className="text-xs text-rose-400">Median</p>
                           </div>
                           {delta?.reaction_median_delta_pct !== null && delta?.reaction_median_delta_pct !== undefined && (
-                            <p className="text-sm text-rose-300">
+                            <p className="text-xs sm:text-sm text-rose-300">
                               {Number(delta.reaction_median_delta_pct) > 0 ? '+' : ''}
                               {Number(delta.reaction_median_delta_pct).toFixed(1)}% from baseline
                             </p>
@@ -102,13 +102,13 @@ export function HistoryContent({ sessions, baseline }: HistoryContentProps) {
 
                     {/* Speech Metrics */}
                     {speechMetric && !session.speech_skipped && (
-                      <div className="bg-blue-900/20 rounded-xl p-4 border border-blue-500/20">
-                        <h4 className="text-sm font-medium text-blue-300 mb-3">
+                      <div className="bg-blue-900/20 rounded-xl p-3 sm:p-4 border border-blue-500/20">
+                        <h4 className="text-xs sm:text-sm font-medium text-blue-300 mb-2 sm:mb-3">
                           Speech Timing (30%)
                         </h4>
-                        <div className="space-y-2">
+                        <div className="space-y-1.5 sm:space-y-2">
                           <div>
-                            <p className="text-2xl font-bold text-blue-200">
+                            <p className="text-xl sm:text-2xl font-bold text-blue-200">
                               {Number(speechMetric.words_per_minute || 0).toFixed(0)} wpm
                             </p>
                             <p className="text-xs text-blue-400">Speaking Rate</p>
@@ -124,13 +124,13 @@ export function HistoryContent({ sessions, baseline }: HistoryContentProps) {
 
                     {/* Memory Recall */}
                     {memoryTest && (
-                      <div className="bg-teal-900/20 rounded-xl p-4 border border-teal-500/20">
-                        <h4 className="text-sm font-medium text-teal-300 mb-3">
+                      <div className="bg-teal-900/20 rounded-xl p-3 sm:p-4 border border-teal-500/20">
+                        <h4 className="text-xs sm:text-sm font-medium text-teal-300 mb-2 sm:mb-3">
                           Memory Recall (20%)
                         </h4>
-                        <div className="space-y-2">
+                        <div className="space-y-1.5 sm:space-y-2">
                           <div>
-                            <p className="text-2xl font-bold text-teal-200">
+                            <p className="text-xl sm:text-2xl font-bold text-teal-200">
                               {memoryTest.total_words > 0
                                 ? ((memoryTest.score / memoryTest.total_words) * 100).toFixed(0)
                                 : '0'}%
@@ -145,15 +145,15 @@ export function HistoryContent({ sessions, baseline }: HistoryContentProps) {
                     )}
 
                     {/* Overall Score */}
-                    <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-750/50">
-                      <h4 className="text-sm font-medium text-slate-300 mb-3">
+                    <div className="bg-slate-800/50 rounded-xl p-3 sm:p-4 border border-slate-750/50">
+                      <h4 className="text-xs sm:text-sm font-medium text-slate-300 mb-2 sm:mb-3">
                         Overall Score
                       </h4>
-                      <div className="space-y-2">
+                      <div className="space-y-1.5 sm:space-y-2">
                         {delta?.weighted_score !== null && delta?.weighted_score !== undefined ? (
                           <>
                             <div>
-                              <p className="text-2xl font-bold text-white">
+                              <p className="text-xl sm:text-2xl font-bold text-white">
                                 {Math.round(Number(delta.weighted_score))}
                               </p>
                               <p className="text-xs text-slate-400">/ 100</p>
@@ -163,7 +163,7 @@ export function HistoryContent({ sessions, baseline }: HistoryContentProps) {
                             </p>
                           </>
                         ) : (
-                          <p className="text-sm text-slate-400">Baseline session</p>
+                          <p className="text-xs sm:text-sm text-slate-400">Baseline session</p>
                         )}
                         <div className="text-xs text-slate-400 space-y-1 pt-2">
                           {session.focus_loss_count > 0 && (

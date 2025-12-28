@@ -231,27 +231,27 @@ export function SessionContent({ profile }: SessionContentProps) {
 
   if (state === 'warning') {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-950 via-slate-900 to-slate-850 px-4">
-        <div className="max-w-2xl w-full bg-slate-850/80 backdrop-blur-xl rounded-2xl border border-slate-750/50 p-8">
-          <h2 className="text-3xl font-bold mb-4 text-white">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-950 via-slate-900 to-slate-850 px-4 py-8">
+        <div className="max-w-2xl w-full bg-slate-850/80 backdrop-blur-xl rounded-2xl border border-slate-750/50 p-6 sm:p-8">
+          <h2 className="text-2xl sm:text-3xl font-bold mb-4 text-white">
             Multiple Sessions Detected
           </h2>
           <div className="bg-amber-900/20 border border-amber-500/30 rounded-xl p-4 mb-6">
-            <p className="text-amber-200">
+            <p className="text-sm sm:text-base text-amber-200">
               You've completed {recentSessionCount} session{recentSessionCount > 1 ? 's' : ''} in the last 12 hours.
               For best results, we recommend testing once per day under similar conditions.
             </p>
           </div>
-          <div className="flex space-x-4">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
             <button
               onClick={handleStartSession}
-              className="flex-1 bg-gradient-to-r from-rose-700 to-rose-600 hover:from-rose-800 hover:to-rose-700 text-white px-6 py-3 rounded-xl font-medium shadow-lg shadow-rose-900/20 transition-all duration-200"
+              className="flex-1 bg-gradient-to-r from-rose-700 to-rose-600 hover:from-rose-800 hover:to-rose-700 text-white px-6 py-3 rounded-xl font-medium text-sm sm:text-base shadow-lg shadow-rose-900/20 transition-all duration-200"
             >
               Continue Anyway
             </button>
             <button
               onClick={handleBackToDashboard}
-              className="px-6 py-3 rounded-xl border border-slate-750 hover:bg-slate-800/50 font-medium text-slate-300 transition-all duration-200"
+              className="px-6 py-3 rounded-xl border border-slate-750 hover:bg-slate-800/50 font-medium text-sm sm:text-base text-slate-300 transition-all duration-200"
             >
               Back to Dashboard
             </button>
@@ -263,16 +263,16 @@ export function SessionContent({ profile }: SessionContentProps) {
 
   if (state === 'intro') {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-950 via-slate-900 to-slate-850 px-4">
-        <div className="max-w-2xl w-full bg-slate-850/80 backdrop-blur-xl rounded-2xl border border-slate-750/50 p-8">
-          <h2 className="text-3xl font-bold mb-4 text-white">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-950 via-slate-900 to-slate-850 px-4 py-8">
+        <div className="max-w-2xl w-full bg-slate-850/80 backdrop-blur-xl rounded-2xl border border-slate-750/50 p-6 sm:p-8">
+          <h2 className="text-2xl sm:text-3xl font-bold mb-4 text-white">
             Start New Session
           </h2>
-          <div className="space-y-4 text-slate-300">
-            <p>
+          <div className="space-y-3 sm:space-y-4 text-slate-300">
+            <p className="text-sm sm:text-base">
               This session includes memory encoding, reaction time testing, speech analysis, and delayed memory recall.
             </p>
-            <ol className="list-decimal list-inside space-y-2">
+            <ol className="list-decimal list-inside space-y-2 text-sm sm:text-base">
               <li>Memorize words (10 seconds)</li>
               <li>Complete reaction time test</li>
               <li>Recall the words from memory</li>
@@ -282,7 +282,7 @@ export function SessionContent({ profile }: SessionContentProps) {
               <h3 className="text-sm font-medium text-rose-400 mb-2">
                 Tips for Best Results
               </h3>
-              <ul className="text-sm text-rose-300/80 space-y-1">
+              <ul className="text-xs sm:text-sm text-rose-300/80 space-y-1">
                 <li>• Test at the same time each week to maintain your streak</li>
                 <li>• Find a quiet, comfortable environment</li>
                 <li>• Avoid testing when tired or distracted</li>
@@ -290,16 +290,16 @@ export function SessionContent({ profile }: SessionContentProps) {
               </ul>
             </div>
           </div>
-          <div className="mt-6 flex space-x-4">
+          <div className="mt-6 flex flex-col sm:flex-row gap-3 sm:gap-4">
             <button
               onClick={handleStartSession}
-              className="flex-1 bg-gradient-to-r from-rose-700 to-rose-600 hover:from-rose-800 hover:to-rose-700 text-white px-6 py-3 rounded-xl font-medium shadow-lg shadow-rose-900/20 transition-all duration-200 hover:shadow-rose-900/30"
+              className="flex-1 bg-gradient-to-r from-rose-700 to-rose-600 hover:from-rose-800 hover:to-rose-700 text-white px-6 py-3 rounded-xl font-medium text-sm sm:text-base shadow-lg shadow-rose-900/20 transition-all duration-200 hover:shadow-rose-900/30"
             >
               Begin Session
             </button>
             <button
               onClick={handleBackToDashboard}
-              className="px-6 py-3 rounded-xl border border-slate-750 hover:bg-slate-800/50 hover:border-slate-700 font-medium text-slate-300 transition-all duration-200"
+              className="px-6 py-3 rounded-xl border border-slate-750 hover:bg-slate-800/50 hover:border-slate-700 font-medium text-sm sm:text-base text-slate-300 transition-all duration-200"
             >
               Cancel
             </button>
@@ -347,13 +347,13 @@ export function SessionContent({ profile }: SessionContentProps) {
 
   if (state === 'processing') {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-950 via-slate-900 to-slate-850 px-4 animate-fade-in">
-        <div className="max-w-2xl w-full bg-slate-850/80 backdrop-blur-xl rounded-2xl border border-slate-750/50 p-8 text-center animate-slide-up">
-          <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-rose-600 mx-auto mb-4"></div>
-          <h2 className="text-3xl font-bold mb-2 text-white">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-950 via-slate-900 to-slate-850 px-4 py-8 animate-fade-in">
+        <div className="max-w-2xl w-full bg-slate-850/80 backdrop-blur-xl rounded-2xl border border-slate-750/50 p-6 sm:p-8 text-center animate-slide-up">
+          <div className="animate-spin rounded-full h-12 sm:h-16 w-12 sm:w-16 border-t-2 border-b-2 border-rose-600 mx-auto mb-4"></div>
+          <h2 className="text-2xl sm:text-3xl font-bold mb-2 text-white">
             Processing Session...
           </h2>
-          <p className="text-slate-400">
+          <p className="text-sm sm:text-base text-slate-400">
             Analyzing your results
           </p>
         </div>
@@ -363,23 +363,23 @@ export function SessionContent({ profile }: SessionContentProps) {
 
   if (state === 'complete') {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-950 via-slate-900 to-slate-850 px-4 animate-fade-in">
-        <div className="max-w-3xl w-full bg-slate-850/80 backdrop-blur-xl rounded-2xl border border-slate-750/50 p-8 text-center animate-slide-up">
-          <div className="text-6xl mb-4 animate-fade-in">✓</div>
-          <h2 className="text-3xl font-bold mb-2 text-white">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-950 via-slate-900 to-slate-850 px-4 py-8 animate-fade-in">
+        <div className="max-w-3xl w-full bg-slate-850/80 backdrop-blur-xl rounded-2xl border border-slate-750/50 p-6 sm:p-8 text-center animate-slide-up">
+          <div className="text-5xl sm:text-6xl mb-4 animate-fade-in">✓</div>
+          <h2 className="text-2xl sm:text-3xl font-bold mb-2 text-white">
             Session Complete!
           </h2>
-          <p className="text-slate-400 mb-8">
+          <p className="text-sm sm:text-base text-slate-400 mb-6 sm:mb-8">
             Your results have been saved and your streak has been updated.
           </p>
 
           {/* Metrics Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mb-6 sm:mb-8">
             {/* Reaction Time */}
             {reactionMetrics && (
-              <div className="bg-rose-900/20 border border-rose-700/30 rounded-xl p-5 hover:bg-rose-900/25 transition-colors duration-300">
-                <p className="text-rose-400 text-sm mb-2 font-medium">Reaction Time</p>
-                <p className="text-4xl font-bold text-white animate-count-up">
+              <div className="bg-rose-900/20 border border-rose-700/30 rounded-xl p-4 sm:p-5 hover:bg-rose-900/25 transition-colors duration-300">
+                <p className="text-rose-400 text-xs sm:text-sm mb-2 font-medium">Reaction Time</p>
+                <p className="text-3xl sm:text-4xl font-bold text-white animate-count-up">
                   {reactionMetrics.medianRT}
                 </p>
                 <p className="text-rose-300/60 text-xs mt-1">
@@ -390,9 +390,9 @@ export function SessionContent({ profile }: SessionContentProps) {
 
             {/* Speech Activity */}
             {speechMetrics && (
-              <div className="bg-blue-900/20 border border-blue-500/30 rounded-xl p-5 hover:bg-blue-900/25 transition-colors duration-300">
-                <p className="text-blue-400 text-sm mb-2 font-medium">Speech Activity</p>
-                <p className="text-4xl font-bold text-white animate-count-up">
+              <div className="bg-blue-900/20 border border-blue-500/30 rounded-xl p-4 sm:p-5 hover:bg-blue-900/25 transition-colors duration-300">
+                <p className="text-blue-400 text-xs sm:text-sm mb-2 font-medium">Speech Activity</p>
+                <p className="text-3xl sm:text-4xl font-bold text-white animate-count-up">
                   {speechMetrics.wordsPerMinute.toFixed(0)}
                 </p>
                 <p className="text-blue-300/60 text-xs mt-1">
@@ -402,9 +402,9 @@ export function SessionContent({ profile }: SessionContentProps) {
             )}
 
             {/* Memory Recall */}
-            <div className="bg-teal-900/20 border border-teal-500/30 rounded-xl p-5 hover:bg-teal-900/25 transition-colors duration-300">
-              <p className="text-teal-400 text-sm mb-2 font-medium">Memory Recall</p>
-              <p className="text-4xl font-bold text-white animate-count-up">
+            <div className="bg-teal-900/20 border border-teal-500/30 rounded-xl p-4 sm:p-5 hover:bg-teal-900/25 transition-colors duration-300">
+              <p className="text-teal-400 text-xs sm:text-sm mb-2 font-medium">Memory Recall</p>
+              <p className="text-3xl sm:text-4xl font-bold text-white animate-count-up">
                 {memoryWordSequence.length > 0
                   ? Math.round((memoryScore / memoryWordSequence.length) * 100)
                   : 0}%
@@ -417,7 +417,7 @@ export function SessionContent({ profile }: SessionContentProps) {
 
           <button
             onClick={handleBackToDashboard}
-            className="bg-gradient-to-r from-rose-700 to-rose-600 hover:from-rose-800 hover:to-rose-700 text-white px-8 py-3 rounded-xl font-medium shadow-lg shadow-rose-900/20 hover:shadow-rose-900/30 transition-all duration-200 hover:scale-[1.02]"
+            className="bg-gradient-to-r from-rose-700 to-rose-600 hover:from-rose-800 hover:to-rose-700 text-white px-6 sm:px-8 py-3 rounded-xl font-medium text-sm sm:text-base shadow-lg shadow-rose-900/20 hover:shadow-rose-900/30 transition-all duration-200 hover:scale-[1.02]"
           >
             View Dashboard
           </button>
