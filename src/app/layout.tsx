@@ -49,6 +49,13 @@ export const metadata: Metadata = {
     title: "Cogna - Track Your Cognitive Health",
     description: "Monitor your cognitive health with quick, science-based assessments.",
   },
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: '32x32' },
+      { url: '/icon.png', type: 'image/png', sizes: '512x512' },
+    ],
+    apple: '/apple-touch-icon.png',
+  },
   metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "https://cogna.app"),
 };
 
