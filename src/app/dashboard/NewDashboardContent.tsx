@@ -383,23 +383,8 @@ export function NewDashboardContent({ data, profile }: DashboardContentProps) {
                 <div className="bg-slate-800/50 rounded-xl p-4 hover:bg-slate-800/70 transition-colors duration-200">
                   <h3 className="text-sm font-semibold text-white mb-3">Weekly Check-In</h3>
                   <p className="text-xs text-slate-400 mb-4">
-                    ~4-6 minutes total. Try to do it at the same time of day.
+                    ~1-2 minutes total. Try to do it at the same time of day.
                   </p>
-
-                  <div className="space-y-2 text-xs text-slate-400 mb-4">
-                    <div className="flex items-center gap-2">
-                      <div className="w-2 h-2 rounded-full bg-teal-500"></div>
-                      <span>Quiet room</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <div className="w-2 h-2 rounded-full bg-teal-500"></div>
-                      <span>Good lighting</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <div className="w-2 h-2 rounded-full bg-teal-500"></div>
-                      <span>Camera ready</span>
-                    </div>
-                  </div>
 
                   <button
                     onClick={() => router.push('/session')}
