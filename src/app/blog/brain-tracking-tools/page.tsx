@@ -31,7 +31,7 @@ export default function BlogPost() {
       "name": "Cogna",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://cogna.app/icon.png"
+        "url": "https://cognaapp.com/icon.png"
       }
     },
     "datePublished": "2025-01-01",

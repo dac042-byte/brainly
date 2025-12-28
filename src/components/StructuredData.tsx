@@ -5,8 +5,8 @@ export function StructuredData() {
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "Cogna",
-    "url": "https://cogna.app",
-    "logo": "https://cogna.app/icon.png",
+    "url": "https://cognaapp.com",
+    "logo": "https://cognaapp.com/icon.png",
     "description": "Free brain tracking tools to monitor cognitive health through reaction time, speech pattern, and memory recall assessments.",
     "sameAs": [
       // Add your social media URLs here when available
@@ -38,10 +38,10 @@ export function StructuredData() {
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "Cogna",
-    "url": "https://cogna.app",
+    "url": "https://cognaapp.com",
     "potentialAction": {
       "@type": "SearchAction",
-      "target": "https://cogna.app/search?q={search_term_string}",
+      "target": "https://cognaapp.com/search?q={search_term_string}",
       "query-input": "required name=search_term_string"
     }
   }

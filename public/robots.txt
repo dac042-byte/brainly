@@ -10,4 +10,4 @@ Disallow: /history
 Disallow: /api/
 
 # Sitemap location
-Sitemap: https://cogna.app/sitemap.xml
+Sitemap: https://cognaapp.com/sitemap.xml

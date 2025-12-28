@@ -43,7 +43,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: process.env.NEXT_PUBLIC_APP_URL || "https://cogna.app",
+    url: process.env.NEXT_PUBLIC_APP_URL || "https://cognaapp.com",
     title: "Cogna - Track Your Cognitive Health",
     description: "Monitor your cognitive health with quick, science-based assessments. Track reaction time, speech patterns, and memory recall.",
     siteName: "Cogna",
@@ -60,7 +60,7 @@ export const metadata: Metadata = {
     ],
     apple: '/apple-touch-icon.png',
   },
-  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "https://cogna.app"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "https://cognaapp.com"),
   alternates: {
     canonical: '/',
   },
