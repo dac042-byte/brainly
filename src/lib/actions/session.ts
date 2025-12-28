@@ -403,48 +403,56 @@ async function computeSessionDeltas(sessionId: string, userId: string) {
   }
 
   // Calculate weighted performance score (0-100)
+  // 100 = baseline performance or better
+  // < 100 = worse than baseline (proportional to how much worse)
   let weightedScore = null
 
   if (reactionMetric && baseline.baseline_median_rt_ms) {
-    // Reaction score (50% weight): penalize slower RT and higher variability
+    // Reaction score (50% weight): slower RT = worse performance
     const currentRT = Number(reactionMetric.median_rt_ms)
     const baselineRT = Number(baseline.baseline_median_rt_ms)
+    // If faster or equal to baseline: 1.0, if slower: ratio (e.g., 300/400 = 0.75)
     const rtScore = currentRT <= baselineRT ? 1 : Math.max(0, baselineRT / currentRT)
 
     const currentStdDev = Number(reactionMetric.std_dev_ms)
     const baselineStdDev = Number(baseline.baseline_std_dev_ms)
+    // If less variable or equal to baseline: 1.0, if more variable: ratio
     const variabilityScore = currentStdDev <= baselineStdDev ? 1 : Math.max(0, baselineStdDev / currentStdDev)
 
     const reactionScore = (rtScore + variabilityScore) / 2
 
-    // Speech score (30% weight): WPM higher is better, pause duration lower is better
-    let speechScore = 0.5 // Default to middle if no baseline
+    // Speech score (30% weight): higher WPM is better, shorter pauses are better
+    let speechScore = 1.0 // Default to baseline if no speech data
 
     if (speechMetric && baseline.baseline_wpm && baseline.baseline_avg_pause_ms) {
       const currentWpm = Number(speechMetric.words_per_minute || 0)
       const baselineWpm = Number(baseline.baseline_wpm)
-      const wpmScore = currentWpm >= baselineWpm ? 1 : (baselineWpm > 0 ? Math.max(0, currentWpm / baselineWpm) : 0.5)
+      // If WPM >= baseline: 1.0, if lower: ratio (e.g., 100/120 = 0.83)
+      const wpmScore = currentWpm >= baselineWpm ? 1 : (baselineWpm > 0 ? Math.max(0, currentWpm / baselineWpm) : 1.0)
 
       const currentPause = Number(speechMetric.avg_pause_length_ms || 0)
       const baselinePause = Number(baseline.baseline_avg_pause_ms)
-      const pauseScore = currentPause <= baselinePause ? 1 : (currentPause > 0 ? Math.max(0, baselinePause / currentPause) : 0.5)
+      // If pauses <= baseline: 1.0, if longer: ratio (e.g., 200/300 = 0.67)
+      const pauseScore = currentPause <= baselinePause ? 1 : (currentPause > 0 ? Math.max(0, baselinePause / currentPause) : 1.0)
 
       speechScore = (wpmScore + pauseScore) / 2
     }
 
-    // Memory score (20% weight): recall accuracy
-    let memoryScore = 0.5 // Default to middle if no baseline
+    // Memory score (20% weight): higher recall % is better
+    let memoryScore = 1.0 // Default to baseline if no memory data
 
     if (memoryMetric && baseline.baseline_memory_recall_pct) {
       const currentRecallPct = Number(memoryMetric.total_words) > 0
         ? (Number(memoryMetric.words_recalled) / Number(memoryMetric.total_words)) * 100
         : 0
       const baselineRecallPct = Number(baseline.baseline_memory_recall_pct)
-      memoryScore = currentRecallPct >= baselineRecallPct ? 1 : (baselineRecallPct > 0 ? Math.max(0, currentRecallPct / baselineRecallPct) : 0.5)
+      // If recall >= baseline: 1.0, if lower: ratio (e.g., 60%/80% = 0.75)
+      memoryScore = currentRecallPct >= baselineRecallPct ? 1 : (baselineRecallPct > 0 ? Math.max(0, currentRecallPct / baselineRecallPct) : 1.0)
     }
 
-    // Weighted combination
-    weightedScore = (0.5 * reactionScore + 0.3 * speechScore + 0.2 * memoryScore) * 100
+    // Weighted combination: capped at 100 (baseline or better = 100)
+    const rawScore = (0.5 * reactionScore + 0.3 * speechScore + 0.2 * memoryScore) * 100
+    weightedScore = Math.min(100, rawScore)
   }
 
   const { error } = await supabase
