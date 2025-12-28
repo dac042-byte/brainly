@@ -258,7 +258,7 @@ async function computeBaseline(userId: string) {
       id,
       reaction_metrics(median_rt_ms, std_dev_ms),
       speech_metrics(speech_activity_ratio, avg_pause_length_ms, words_per_minute),
-      memory_metrics(words_recalled, total_words)
+      memory_tests(score, total_words)
     `)
     .eq('user_id', userId)
     .eq('is_baseline_eligible', true)
@@ -298,15 +298,15 @@ async function computeBaseline(userId: string) {
     ? speechMetrics.reduce((sum: number, m: any) => sum + Number(m.words_per_minute || 0), 0) / 1
     : null
 
-  const memoryMetrics = sessions
-    .map((s: any) => s.memory_metrics?.[0])
+  const memoryTests = sessions
+    .map((s: any) => s.memory_tests?.[0])
     .filter(Boolean)
 
-  const baselineMemoryRecallPct = memoryMetrics.length >= 1
-    ? memoryMetrics.reduce((sum: number, m: any) => {
+  const baselineMemoryRecallPct = memoryTests.length >= 1
+    ? memoryTests.reduce((sum: number, m: any) => {
         const total = Number(m.total_words)
-        const recalled = Number(m.words_recalled)
-        return sum + (total > 0 ? (recalled / total) * 100 : 0)
+        const score = Number(m.score)
+        return sum + (total > 0 ? (score / total) * 100 : 0)
       }, 0) / 1
     : null
 
@@ -347,7 +347,7 @@ async function computeSessionDeltas(sessionId: string, userId: string) {
       id,
       reaction_metrics(median_rt_ms, std_dev_ms),
       speech_metrics(speech_activity_ratio, avg_pause_length_ms, words_per_minute),
-      memory_metrics(words_recalled, total_words)
+      memory_tests(score, total_words)
     `)
     .eq('id', sessionId)
     .single()
@@ -358,7 +358,7 @@ async function computeSessionDeltas(sessionId: string, userId: string) {
 
   const reactionMetric = (session as any).reaction_metrics?.[0]
   const speechMetric = (session as any).speech_metrics?.[0]
-  const memoryMetric = (session as any).memory_metrics?.[0]
+  const memoryTest = (session as any).memory_tests?.[0]
 
   // Reaction time deltas
   let reactionMedianDelta = null
@@ -395,9 +395,9 @@ async function computeSessionDeltas(sessionId: string, userId: string) {
   // Memory delta
   let memoryRecallDeltaPct = null
 
-  if (memoryMetric && baseline.baseline_memory_recall_pct) {
-    const currentRecallPct = Number(memoryMetric.total_words) > 0
-      ? (Number(memoryMetric.words_recalled) / Number(memoryMetric.total_words)) * 100
+  if (memoryTest && baseline.baseline_memory_recall_pct) {
+    const currentRecallPct = Number(memoryTest.total_words) > 0
+      ? (Number(memoryTest.score) / Number(memoryTest.total_words)) * 100
       : 0
     memoryRecallDeltaPct = ((currentRecallPct - Number(baseline.baseline_memory_recall_pct)) / Number(baseline.baseline_memory_recall_pct)) * 100
   }
@@ -441,9 +441,9 @@ async function computeSessionDeltas(sessionId: string, userId: string) {
     // Memory score (20% weight): higher recall % is better
     let memoryScore = 1.0 // Default to baseline if no memory data
 
-    if (memoryMetric && baseline.baseline_memory_recall_pct) {
-      const currentRecallPct = Number(memoryMetric.total_words) > 0
-        ? (Number(memoryMetric.words_recalled) / Number(memoryMetric.total_words)) * 100
+    if (memoryTest && baseline.baseline_memory_recall_pct) {
+      const currentRecallPct = Number(memoryTest.total_words) > 0
+        ? (Number(memoryTest.score) / Number(memoryTest.total_words)) * 100
         : 0
       const baselineRecallPct = Number(baseline.baseline_memory_recall_pct)
       // If recall >= baseline: 1.0, if lower: ratio (e.g., 60%/80% = 0.75)

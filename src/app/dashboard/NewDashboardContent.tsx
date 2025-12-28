@@ -48,8 +48,8 @@ export function NewDashboardContent({ data, profile }: DashboardContentProps) {
   }
 
   const chartData = sessions
-    .reverse()
     .slice(-8) // Last 8 sessions
+    .reverse() // Reverse to show oldest on left, newest on right
     .map((session, index) => {
       const reactionMetric = session.reaction_metrics?.[0]
       const speechMetric = session.speech_metrics?.[0]
