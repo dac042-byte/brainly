@@ -36,10 +36,18 @@ export async function POST(request: NextRequest) {
     })
 
     if (!uploadResponse.ok) {
-      throw new Error('Failed to upload audio')
+      const errorText = await uploadResponse.text()
+      console.error('AssemblyAI upload error:', uploadResponse.status, errorText)
+      throw new Error(`Failed to upload audio: ${uploadResponse.status}`)
     }
 
-    const { upload_url } = await uploadResponse.json()
+    const uploadData = await uploadResponse.json()
+    const { upload_url } = uploadData
+
+    if (!upload_url) {
+      console.error('No upload_url in response:', uploadData)
+      throw new Error('No upload URL received from AssemblyAI')
+    }
 
     // Step 2: Request transcription with word-level timestamps
     const transcriptResponse = await fetch('https://api.assemblyai.com/v2/transcript', {
@@ -55,10 +63,18 @@ export async function POST(request: NextRequest) {
     })
 
     if (!transcriptResponse.ok) {
-      throw new Error('Failed to start transcription')
+      const errorText = await transcriptResponse.text()
+      console.error('AssemblyAI transcription error:', transcriptResponse.status, errorText)
+      throw new Error(`Failed to start transcription: ${transcriptResponse.status}`)
     }
 
-    const { id: transcriptId } = await transcriptResponse.json()
+    const transcriptStartData = await transcriptResponse.json()
+    const { id: transcriptId } = transcriptStartData
+
+    if (!transcriptId) {
+      console.error('No transcript ID in response:', transcriptStartData)
+      throw new Error('No transcript ID received from AssemblyAI')
+    }
 
     // Step 3: Poll for transcription completion
     let transcriptData
@@ -80,7 +96,8 @@ export async function POST(request: NextRequest) {
       if (transcriptData.status === 'completed') {
         break
       } else if (transcriptData.status === 'error') {
-        throw new Error('Transcription failed')
+        console.error('AssemblyAI transcription error:', transcriptData.error)
+        throw new Error(`Transcription failed: ${transcriptData.error || 'Unknown error'}`)
       }
 
       // Wait 1 second before polling again
@@ -89,7 +106,8 @@ export async function POST(request: NextRequest) {
     }
 
     if (!transcriptData || transcriptData.status !== 'completed') {
-      throw new Error('Transcription timed out')
+      console.error('Transcription timeout. Last status:', transcriptData?.status)
+      throw new Error('Transcription timed out after 60 seconds')
     }
 
     const words = transcriptData.words || []
@@ -138,8 +156,9 @@ export async function POST(request: NextRequest) {
     })
   } catch (error) {
     console.error('Speech analysis error:', error)
+    const errorMessage = error instanceof Error ? error.message : 'Failed to analyze speech'
     return NextResponse.json(
-      { error: 'Failed to analyze speech' },
+      { error: errorMessage },
       { status: 500 }
     )
   }
