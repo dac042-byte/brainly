@@ -85,8 +85,8 @@ export function NewDashboardContent({ data, profile }: DashboardContentProps) {
         <div className="mb-6 lg:mb-8 animate-slide-up">
           <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-2">
             <div>
-              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-2">Dashboard</h1>
-              <p className="text-sm sm:text-base text-gray-600 dark:text-slate-400">
+              <h1 className="text-2xl sm:text-3xl font-bold text-white mb-2">Dashboard</h1>
+              <p className="text-sm sm:text-base text-slate-400">
                 {baseline
                   ? 'Performance metrics compared to your baseline.'
                   : 'Complete 1 session to establish your baseline.'}
@@ -101,7 +101,7 @@ export function NewDashboardContent({ data, profile }: DashboardContentProps) {
               </button>
               <button
                 onClick={handleSignOut}
-                className="px-3 sm:px-4 py-2.5 sm:py-3 bg-gray-100 dark:bg-slate-800/50 hover:bg-gray-200 dark:hover:bg-slate-800 text-gray-700 dark:text-slate-300 text-sm sm:text-base rounded-xl transition-all duration-200 whitespace-nowrap"
+                className="px-3 sm:px-4 py-2.5 sm:py-3 bg-slate-800/50 hover:bg-slate-800 text-slate-300 text-sm sm:text-base rounded-xl transition-all duration-200 whitespace-nowrap"
               >
                 Sign Out
               </button>
@@ -111,11 +111,11 @@ export function NewDashboardContent({ data, profile }: DashboardContentProps) {
 
         {/* Empty State - No Sessions */}
         {sessions.length === 0 && (
-          <div className="bg-white dark:bg-slate-850/80 backdrop-blur-xl rounded-2xl border border-gray-200 dark:border-slate-750/50 shadow-sm p-12 text-center animate-slide-up">
+          <div className="bg-slate-850/80 backdrop-blur-xl rounded-2xl border border-slate-750/50 p-12 text-center animate-slide-up">
             <div className="max-w-md mx-auto">
               <div className="text-6xl mb-4">🧠</div>
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">No Sessions Yet</h3>
-              <p className="text-gray-600 dark:text-slate-400 mb-6 leading-relaxed">
+              <h3 className="text-2xl font-bold text-white mb-4">No Sessions Yet</h3>
+              <p className="text-slate-400 mb-6 leading-relaxed">
                 Start your first cognitive assessment to track your performance over time.
                 Each session measures reaction time, speech patterns, and memory recall.
               </p>
@@ -134,7 +134,7 @@ export function NewDashboardContent({ data, profile }: DashboardContentProps) {
           <div className="bg-gradient-to-r from-rose-900/40 to-rose-900/30 backdrop-blur-xl rounded-2xl border border-rose-700/30 p-4 sm:p-6 mb-4 sm:mb-6 hover:border-rose-700/40 transition-all duration-300 animate-slide-up">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
               <div>
-                <h3 className="text-base sm:text-lg font-bold text-gray-900 dark:text-white mb-1">Weekly Streak</h3>
+                <h3 className="text-base sm:text-lg font-bold text-white mb-1">Weekly Streak</h3>
                 <p className="text-rose-300/80 text-xs sm:text-sm">
                   Test once per week to maintain your streak
                 </p>
@@ -160,7 +160,7 @@ export function NewDashboardContent({ data, profile }: DashboardContentProps) {
           <div className="lg:col-span-2 space-y-4 sm:space-y-6">
             {/* Performance Score */}
             {baseline && (
-              <div className="bg-white dark:bg-slate-850/80 backdrop-blur-xl rounded-2xl border border-gray-200 dark:border-slate-750/50 shadow-sm p-4 sm:p-6 hover:border-slate-750/70 transition-all duration-300 animate-slide-up">
+              <div className="bg-slate-850/80 backdrop-blur-xl rounded-2xl border border-slate-750/50 p-4 sm:p-6 hover:border-slate-750/70 transition-all duration-300 animate-slide-up">
                 <h2 className="text-lg sm:text-xl font-bold text-white mb-3 sm:mb-4">Performance Metrics</h2>
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
@@ -220,7 +220,7 @@ export function NewDashboardContent({ data, profile }: DashboardContentProps) {
             {/* Progress Banner */}
             {!baseline && sessions.length < 1 && (
               <div className="bg-gradient-to-r from-rose-900/40 to-rose-900/30 backdrop-blur-xl rounded-2xl border border-rose-700/30 p-6 hover:border-rose-700/40 transition-all duration-300 animate-slide-up">
-                <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">Building Your Baseline</h3>
+                <h3 className="text-lg font-bold text-white mb-2">Building Your Baseline</h3>
                 <p className="text-rose-300">
                   Complete {1 - sessions.length} more session{1 - sessions.length > 1 ? 's' : ''} to establish your personal baseline.
                 </p>
@@ -229,24 +229,24 @@ export function NewDashboardContent({ data, profile }: DashboardContentProps) {
 
             {/* History Chart */}
             {chartData.length > 0 && (
-              <div className="bg-white dark:bg-slate-850/80 backdrop-blur-xl rounded-2xl border border-gray-200 dark:border-slate-750/50 shadow-sm p-4 sm:p-6 hover:border-slate-750/70 transition-all duration-300 animate-slide-up">
+              <div className="bg-slate-850/80 backdrop-blur-xl rounded-2xl border border-slate-750/50 p-4 sm:p-6 hover:border-slate-750/70 transition-all duration-300 animate-slide-up">
                 <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 sm:gap-0 mb-4 sm:mb-6">
                   <div>
-                    <h2 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white mb-1">Performance Trends</h2>
-                    <p className="text-xs sm:text-sm text-gray-600 dark:text-slate-400">Last 8 sessions</p>
+                    <h2 className="text-lg sm:text-xl font-bold text-white mb-1">Performance Trends</h2>
+                    <p className="text-xs sm:text-sm text-slate-400">Last 8 sessions</p>
                   </div>
                   <div className="flex flex-wrap gap-3 sm:gap-4 text-xs">
                     <div className="flex items-center gap-2">
                       <div className="w-3 h-3 rounded-full bg-rose-500"></div>
-                      <span className="text-gray-600 dark:text-slate-400">Reaction</span>
+                      <span className="text-slate-400">Reaction</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <div className="w-3 h-3 rounded-full bg-blue-400"></div>
-                      <span className="text-gray-600 dark:text-slate-400">Speech</span>
+                      <span className="text-slate-400">Speech</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <div className="w-3 h-3 rounded-full bg-teal-400"></div>
-                      <span className="text-gray-600 dark:text-slate-400">Memory</span>
+                      <span className="text-slate-400">Memory</span>
                     </div>
                   </div>
                 </div>
@@ -419,16 +419,16 @@ export function NewDashboardContent({ data, profile }: DashboardContentProps) {
           {/* Right Sidebar */}
           <div className="space-y-6">
             {/* This Week's Plan */}
-            <div className="bg-white dark:bg-slate-850/80 backdrop-blur-xl rounded-2xl border border-gray-200 dark:border-slate-750/50 shadow-sm p-6 hover:border-slate-750/70 transition-all duration-300 animate-slide-up">
+            <div className="bg-slate-850/80 backdrop-blur-xl rounded-2xl border border-slate-750/50 p-6 hover:border-slate-750/70 transition-all duration-300 animate-slide-up">
               <h2 className="text-lg font-bold text-white mb-3">This Week's Plan</h2>
-              <p className="text-sm text-gray-600 dark:text-slate-400 mb-6">
+              <p className="text-sm text-slate-400 mb-6">
                 Complete your session to track your cognitive performance.
               </p>
 
               <div className="space-y-4">
                 <div className="bg-slate-800/50 rounded-xl p-4 hover:bg-slate-800/70 transition-colors duration-200">
                   <h3 className="text-sm font-semibold text-white mb-3">Weekly Check-In</h3>
-                  <p className="text-xs text-gray-600 dark:text-slate-400 mb-4">
+                  <p className="text-xs text-slate-400 mb-4">
                     ~1-2 minutes total. Try to do it at the same time of day.
                   </p>
 
@@ -444,17 +444,17 @@ export function NewDashboardContent({ data, profile }: DashboardContentProps) {
 
             {/* Quick Stats */}
             {sessions.length > 0 && (
-              <div className="bg-white dark:bg-slate-850/80 backdrop-blur-xl rounded-2xl border border-gray-200 dark:border-slate-750/50 shadow-sm p-6 hover:border-slate-750/70 transition-all duration-300 animate-slide-up">
-                <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-4">Quick Stats</h2>
+              <div className="bg-slate-850/80 backdrop-blur-xl rounded-2xl border border-slate-750/50 p-6 hover:border-slate-750/70 transition-all duration-300 animate-slide-up">
+                <h2 className="text-lg font-bold text-white mb-4">Quick Stats</h2>
 
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-600 dark:text-slate-400">Total Sessions</span>
+                    <span className="text-sm text-slate-400">Total Sessions</span>
                     <span className="text-white font-semibold">{sessions.length}</span>
                   </div>
                   {baseline && (
                     <div className="flex items-center justify-between">
-                      <span className="text-sm text-gray-600 dark:text-slate-400">Baseline RT</span>
+                      <span className="text-sm text-slate-400">Baseline RT</span>
                       <span className="text-white font-semibold">
                         {Number(baseline.baseline_median_rt_ms).toFixed(0)}ms
                       </span>
@@ -462,7 +462,7 @@ export function NewDashboardContent({ data, profile }: DashboardContentProps) {
                   )}
                   {latestSession && (
                     <div className="flex items-center justify-between">
-                      <span className="text-sm text-gray-600 dark:text-slate-400">Last Session</span>
+                      <span className="text-sm text-slate-400">Last Session</span>
                       <span className="text-white font-semibold">
                         {format(new Date(latestSession.created_at), 'MMM d')}
                       </span>

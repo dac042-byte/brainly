@@ -2,24 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Light Mode Theme */
-:root {
-  --bg-primary: #ffffff;
-  --bg-secondary: #f8fafc;
-  --bg-tertiary: #f1f5f9;
-  --border-primary: #e2e8f0;
-  --accent-primary: #8b4f6a;
-  --accent-secondary: #a86382;
-  --accent-tertiary: #4fa3a3;
-  --text-primary: #0f172a;
-  --text-secondary: #475569;
-  --status-stable: #5a8a6f;
-  --status-watch: #9a7d4f;
-  --status-concern: #9a5a5a;
-}
-
-/* Dark Mode Theme */
-.dark {
+/* Calm Analytical Theme (Default) */
+:root,
+[data-color-scheme="calm-analytical"] {
   --bg-primary: #0f1419;
   --bg-secondary: #1a2129;
   --bg-tertiary: #1f272f;
@@ -32,6 +17,38 @@
   --status-stable: #5a8a6f;
   --status-watch: #9a7d4f;
   --status-concern: #9a5a5a;
+}
+
+/* Deep Forest Theme */
+[data-color-scheme="deep-forest"] {
+  --bg-primary: #0d1410;
+  --bg-secondary: #1a2420;
+  --bg-tertiary: #1f2f27;
+  --border-primary: #2a3f32;
+  --accent-primary: #4a6b4a;
+  --accent-secondary: #5d8a5d;
+  --accent-tertiary: #7aa67a;
+  --text-primary: #e8f5e8;
+  --text-secondary: #a8c8a8;
+  --status-stable: #5a8a6f;
+  --status-watch: #b89860;
+  --status-concern: #a86060;
+}
+
+/* Night Sky Theme */
+[data-color-scheme="night-sky"] {
+  --bg-primary: #0a0d1a;
+  --bg-secondary: #151a2e;
+  --bg-tertiary: #1f2542;
+  --border-primary: #2a3156;
+  --accent-primary: #5a4f8b;
+  --accent-secondary: #7563b3;
+  --accent-tertiary: #6b8bb8;
+  --text-primary: #e8ecf5;
+  --text-secondary: #a8b3d8;
+  --status-stable: #5a7a8a;
+  --status-watch: #9a8a4f;
+  --status-concern: #9a5a6a;
 }
 
 body {
