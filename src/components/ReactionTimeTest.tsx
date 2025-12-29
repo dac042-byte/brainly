@@ -241,7 +241,7 @@ export function ReactionTimeTest({ onComplete, onCancel }: ReactionTimeTestProps
     return (
       <div
         onClick={handleResponse}
-        className="mx-auto w-80 h-80 sm:w-96 sm:h-96 bg-slate-900/80 backdrop-blur-xl rounded-2xl border border-slate-750/50 cursor-pointer flex items-center justify-center transition-all duration-200 active:scale-95"
+        className="mx-auto w-80 h-80 sm:w-96 sm:h-96 bg-slate-900/80 backdrop-blur-xl rounded-2xl border border-slate-750/50 cursor-pointer flex items-center justify-center"
       >
         <p className="text-slate-400 text-base sm:text-lg font-medium">
           Wait for it...
@@ -254,7 +254,7 @@ export function ReactionTimeTest({ onComplete, onCancel }: ReactionTimeTestProps
     return (
       <div
         onClick={handleResponse}
-        className="mx-auto w-80 h-80 sm:w-96 sm:h-96 bg-green-500 rounded-2xl shadow-2xl cursor-pointer flex items-center justify-center transition-all duration-200 active:scale-95"
+        className="mx-auto w-80 h-80 sm:w-96 sm:h-96 bg-green-500 rounded-2xl shadow-2xl cursor-pointer flex items-center justify-center"
       >
         <div className="w-24 h-24 sm:w-32 sm:h-32 bg-green-600 rounded-full shadow-lg"></div>
       </div>
