@@ -107,7 +107,7 @@ export function MemoryTest({ mode, wordSequence, onEncodingComplete, onRecallCom
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-850 flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-rose-600 mx-auto mb-4"></div>
+          <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-rose-400 mx-auto mb-4"></div>
           <p className="text-white text-lg">Preparing memory test...</p>
         </div>
       </div>
@@ -127,7 +127,7 @@ export function MemoryTest({ mode, wordSequence, onEncodingComplete, onRecallCom
               {words.map((word, index) => (
                 <span
                   key={index}
-                  className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white bg-rose-700/30 px-4 sm:px-6 lg:px-8 py-2 sm:py-3 lg:py-4 rounded-xl border border-rose-600/50"
+                  className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white bg-rose-700/30 px-4 sm:px-6 lg:px-8 py-2 sm:py-3 lg:py-4 rounded-xl border border-rose-400/50"
                 >
                   {word}
                 </span>
@@ -173,7 +173,7 @@ export function MemoryTest({ mode, wordSequence, onEncodingComplete, onRecallCom
             value={userRecall}
             onChange={(e) => setUserRecall(e.target.value)}
             placeholder="Type the words you remember here..."
-            className="w-full h-32 sm:h-40 px-3 sm:px-4 py-2 sm:py-3 border border-slate-750 rounded-xl bg-slate-800/50 text-white text-base sm:text-lg focus:outline-none focus:ring-2 focus:ring-rose-600 resize-none"
+            className="w-full h-32 sm:h-40 px-3 sm:px-4 py-2 sm:py-3 border border-slate-750 rounded-xl bg-slate-800/50 text-white text-base sm:text-lg focus:outline-none focus:ring-2 focus:ring-rose-400 resize-none"
             autoFocus
           />
 
@@ -181,13 +181,13 @@ export function MemoryTest({ mode, wordSequence, onEncodingComplete, onRecallCom
             <button
               onClick={handleRecallSubmit}
               disabled={!userRecall.trim()}
-              className="flex-1 bg-gradient-to-r from-rose-700 to-rose-600 hover:from-rose-800 hover:to-rose-700 disabled:opacity-50 disabled:cursor-not-allowed text-white px-6 py-3 rounded-xl font-medium text-sm sm:text-base shadow-lg shadow-rose-900/20 transition-all"
+              className="flex-1 bg-gradient-to-r from-rose-500 to-rose-400 hover:from-rose-700 hover:to-rose-600 disabled:opacity-50 disabled:cursor-not-allowed text-white px-6 py-3 rounded-xl font-medium text-sm sm:text-base shadow-lg shadow-rose-900/20 transition-all"
             >
               Submit Recall
             </button>
           </div>
 
-          <p className="text-gray-500 text-xs mt-4 text-center">
+          <p className="text-gray-300 text-xs mt-4 text-center">
             This tests your delayed free recall - a measure of memory retention
           </p>
         </div>

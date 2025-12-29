@@ -126,14 +126,14 @@ export function SettingsContent({ profile, user }: SettingsContentProps) {
                 onClick={() => setColorScheme('calm-analytical')}
                 className={`relative p-4 rounded-xl border-2 transition-all duration-200 hover:scale-[1.02] ${
                   colorScheme === 'calm-analytical'
-                    ? 'border-rose-600 bg-rose-900/20'
+                    ? 'border-rose-400 bg-rose-900/20'
                     : 'border-slate-750 hover:border-slate-700'
                 }`}
               >
                 <div className="flex items-center justify-between mb-3">
                   <h3 className="font-semibold text-white">Calm Analytical</h3>
                   {colorScheme === 'calm-analytical' && (
-                    <div className="w-5 h-5 rounded-full bg-rose-600 flex items-center justify-center">
+                    <div className="w-5 h-5 rounded-full bg-rose-400 flex items-center justify-center">
                       <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                       </svg>
@@ -233,13 +233,13 @@ export function SettingsContent({ profile, user }: SettingsContentProps) {
                     onChange={(e) => setAudioStorageEnabled(e.target.checked)}
                     className="sr-only peer"
                   />
-                  <div className="w-11 h-6 bg-slate-700 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-rose-600/20 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all duration-200 peer-checked:bg-rose-700"></div>
+                  <div className="w-11 h-6 bg-slate-700 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-rose-400/20 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all duration-200 peer-checked:bg-rose-500"></div>
                 </label>
               </div>
               <button
                 onClick={handleSavePrivacy}
                 disabled={saving}
-                className="w-full bg-gradient-to-r from-rose-700 to-rose-600 hover:from-rose-800 hover:to-rose-700 text-white px-6 py-3 rounded-xl font-medium shadow-lg shadow-rose-900/20 hover:shadow-rose-900/30 transition-all duration-200 disabled:opacity-50"
+                className="w-full bg-gradient-to-r from-rose-500 to-rose-400 hover:from-rose-700 hover:to-rose-600 text-white px-6 py-3 rounded-xl font-medium shadow-lg shadow-rose-900/20 hover:shadow-rose-900/30 transition-all duration-200 disabled:opacity-50"
               >
                 {saving ? 'Saving...' : 'Save Privacy Settings'}
               </button>

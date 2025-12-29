@@ -133,7 +133,7 @@ export function SpeechTest({ onComplete, onSkip }: SpeechTestProps) {
           <div className="flex flex-col sm:flex-row gap-3">
             <button
               onClick={startRecording}
-              className="flex-1 bg-gradient-to-r from-rose-700 to-rose-600 hover:from-rose-800 hover:to-rose-700 text-white px-6 py-3 rounded-xl font-medium text-sm sm:text-base shadow-lg shadow-rose-900/20 transition-all duration-200"
+              className="flex-1 bg-gradient-to-r from-rose-500 to-rose-400 hover:from-rose-700 hover:to-rose-600 text-white px-6 py-3 rounded-xl font-medium text-sm sm:text-base shadow-lg shadow-rose-900/20 transition-all duration-200"
             >
               Start Recording
             </button>
@@ -157,7 +157,7 @@ export function SpeechTest({ onComplete, onSkip }: SpeechTestProps) {
         <div className="max-w-2xl w-full bg-slate-850/80 backdrop-blur-xl rounded-2xl border border-slate-750/50 p-6 sm:p-8 text-center">
           <div className="mb-4 sm:mb-6">
             <div className="w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-4 relative">
-              <div className="absolute inset-0 bg-rose-600/60 rounded-full animate-pulse-recording"></div>
+              <div className="absolute inset-0 bg-rose-400/60 rounded-full animate-pulse-recording"></div>
               <div className="relative w-16 h-16 sm:w-20 sm:h-20 bg-rose-700 rounded-full flex items-center justify-center">
                 <div className="w-3 h-3 sm:w-4 sm:h-4 bg-white rounded-full animate-pulse-recording"></div>
               </div>
@@ -174,7 +174,7 @@ export function SpeechTest({ onComplete, onSkip }: SpeechTestProps) {
 
           <button
             onClick={stopRecording}
-            className="bg-gradient-to-r from-rose-700 to-rose-600 hover:from-rose-800 hover:to-rose-700 text-white px-6 sm:px-8 py-3 rounded-xl font-medium text-sm sm:text-base shadow-lg shadow-rose-900/20 transition-all duration-200"
+            className="bg-gradient-to-r from-rose-500 to-rose-400 hover:from-rose-700 hover:to-rose-600 text-white px-6 sm:px-8 py-3 rounded-xl font-medium text-sm sm:text-base shadow-lg shadow-rose-900/20 transition-all duration-200"
           >
             Stop Recording
           </button>
@@ -187,7 +187,7 @@ export function SpeechTest({ onComplete, onSkip }: SpeechTestProps) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-850 flex items-center justify-center p-4 py-8">
         <div className="max-w-2xl w-full bg-slate-850/80 backdrop-blur-xl rounded-2xl border border-slate-750/50 p-6 sm:p-8 text-center">
-          <div className="animate-spin rounded-full h-12 sm:h-16 w-12 sm:w-16 border-t-2 border-b-2 border-rose-600 mx-auto mb-4"></div>
+          <div className="animate-spin rounded-full h-12 sm:h-16 w-12 sm:w-16 border-t-2 border-b-2 border-rose-400 mx-auto mb-4"></div>
           <p className="text-white text-base sm:text-lg">Analyzing your speech...</p>
         </div>
       </div>

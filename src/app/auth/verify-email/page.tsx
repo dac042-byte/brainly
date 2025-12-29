@@ -25,7 +25,7 @@ export default function VerifyEmail() {
             </p>
             <Link
               href="/login"
-              className="block w-full px-4 py-3 bg-gradient-to-r from-rose-700 to-rose-600 hover:from-rose-800 hover:to-rose-700 text-white font-medium rounded-xl transition-all duration-200"
+              className="block w-full px-4 py-3 bg-gradient-to-r from-rose-500 to-rose-400 hover:from-rose-700 hover:to-rose-600 text-white font-medium rounded-xl transition-all duration-200"
             >
               Go to Login
             </Link>

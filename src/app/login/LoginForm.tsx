@@ -62,7 +62,7 @@ export function LoginForm() {
           onClick={() => setUseMagicLink(false)}
           className={`px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${
             !useMagicLink
-              ? 'bg-gradient-to-r from-rose-700 to-rose-600 text-white shadow-md shadow-rose-900/30'
+              ? 'bg-gradient-to-r from-rose-500 to-rose-400 text-white shadow-md shadow-rose-900/30'
               : 'bg-slate-800/50 text-slate-400 hover:bg-slate-800'
           }`}
         >
@@ -73,7 +73,7 @@ export function LoginForm() {
           onClick={() => setUseMagicLink(true)}
           className={`px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${
             useMagicLink
-              ? 'bg-gradient-to-r from-rose-700 to-rose-600 text-white shadow-md shadow-rose-900/30'
+              ? 'bg-gradient-to-r from-rose-500 to-rose-400 text-white shadow-md shadow-rose-900/30'
               : 'bg-slate-800/50 text-slate-400 hover:bg-slate-800'
           }`}
         >
@@ -95,7 +95,7 @@ export function LoginForm() {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="appearance-none rounded-none relative block w-full px-3 py-2 border border-slate-300 placeholder-slate-400 text-slate-900 rounded-t-md focus:outline-none focus:ring-1 focus:ring-rose-600 focus:border-rose-600 focus:z-10 sm:text-sm bg-white transition-all duration-200 [-webkit-text-fill-color:#0f172a] [&:-webkit-autofill]:[-webkit-text-fill-color:#0f172a] [&:-webkit-autofill]:bg-white [&:-webkit-autofill]:shadow-[inset_0_0_0px_1000px_white]"
+              className="appearance-none rounded-none relative block w-full px-3 py-2 border border-slate-300 placeholder-slate-400 text-slate-900 rounded-t-md focus:outline-none focus:ring-1 focus:ring-rose-400 focus:border-rose-400 focus:z-10 sm:text-sm bg-white transition-all duration-200 [-webkit-text-fill-color:#0f172a] [&:-webkit-autofill]:[-webkit-text-fill-color:#0f172a] [&:-webkit-autofill]:bg-white [&:-webkit-autofill]:shadow-[inset_0_0_0px_1000px_white]"
               placeholder="Email address"
             />
           </div>
@@ -112,7 +112,7 @@ export function LoginForm() {
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-slate-300 placeholder-slate-400 text-slate-900 rounded-b-md focus:outline-none focus:ring-1 focus:ring-rose-600 focus:border-rose-600 focus:z-10 sm:text-sm bg-white transition-all duration-200 [-webkit-text-fill-color:#0f172a] [&:-webkit-autofill]:[-webkit-text-fill-color:#0f172a] [&:-webkit-autofill]:bg-white [&:-webkit-autofill]:shadow-[inset_0_0_0px_1000px_white]"
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-slate-300 placeholder-slate-400 text-slate-900 rounded-b-md focus:outline-none focus:ring-1 focus:ring-rose-400 focus:border-rose-400 focus:z-10 sm:text-sm bg-white transition-all duration-200 [-webkit-text-fill-color:#0f172a] [&:-webkit-autofill]:[-webkit-text-fill-color:#0f172a] [&:-webkit-autofill]:bg-white [&:-webkit-autofill]:shadow-[inset_0_0_0px_1000px_white]"
                 placeholder="Password"
               />
             </div>
@@ -135,7 +135,7 @@ export function LoginForm() {
           <button
             type="submit"
             disabled={loading}
-            className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-xl text-white bg-gradient-to-r from-rose-700 to-rose-600 hover:from-rose-800 hover:to-rose-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-950 focus:ring-rose-600 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-rose-900/30 transition-all duration-200"
+            className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-xl text-white bg-gradient-to-r from-rose-500 to-rose-400 hover:from-rose-700 hover:to-rose-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-950 focus:ring-rose-400 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-rose-900/30 transition-all duration-200"
           >
             {loading ? 'Loading...' : useMagicLink ? 'Send Magic Link' : 'Sign In'}
           </button>

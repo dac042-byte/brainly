@@ -95,7 +95,7 @@ export function NewDashboardContent({ data, profile }: DashboardContentProps) {
             <div className="flex gap-2 sm:gap-3 w-full sm:w-auto">
               <button
                 onClick={() => router.push('/session')}
-                className="flex-1 sm:flex-none px-4 sm:px-6 py-2.5 sm:py-3 bg-gradient-to-r from-rose-700 to-rose-600 hover:from-rose-800 hover:to-rose-700 text-white text-sm sm:text-base font-medium rounded-xl shadow-lg shadow-rose-900/20 hover:shadow-rose-900/30 transition-all duration-200 hover:scale-[1.02] whitespace-nowrap"
+                className="flex-1 sm:flex-none px-4 sm:px-6 py-2.5 sm:py-3 bg-gradient-to-r from-rose-500 to-rose-400 hover:from-rose-700 hover:to-rose-600 text-white text-sm sm:text-base font-medium rounded-xl shadow-lg shadow-rose-900/20 hover:shadow-rose-900/30 transition-all duration-200 hover:scale-[1.02] whitespace-nowrap"
               >
                 Start Session
               </button>
@@ -121,7 +121,7 @@ export function NewDashboardContent({ data, profile }: DashboardContentProps) {
               </p>
               <button
                 onClick={() => router.push('/session')}
-                className="px-8 py-4 bg-gradient-to-r from-rose-700 to-rose-600 text-white rounded-xl hover:from-rose-800 hover:to-rose-700 transition-all shadow-lg shadow-rose-900/30 font-medium"
+                className="px-8 py-4 bg-gradient-to-r from-rose-500 to-rose-400 text-white rounded-xl hover:from-rose-700 hover:to-rose-600 transition-all shadow-lg shadow-rose-900/30 font-medium"
               >
                 Start First Session
               </button>
@@ -387,17 +387,17 @@ export function NewDashboardContent({ data, profile }: DashboardContentProps) {
                       <h3 className="text-sm font-semibold text-slate-300 mb-3">Trend Summary</h3>
                       <div className="grid grid-cols-3 gap-4 text-sm">
                         <div>
-                          <p className="text-gray-500 text-xs mb-1">Category</p>
+                          <p className="text-gray-300 text-xs mb-1">Category</p>
                           <p className="text-slate-300">Reaction</p>
                         </div>
                         <div>
-                          <p className="text-gray-500 text-xs mb-1">This Week</p>
+                          <p className="text-gray-300 text-xs mb-1">This Week</p>
                           <p className="text-white font-semibold">
                             {latestReactionMetric ? Number(latestReactionMetric.median_rt_ms).toFixed(0) : '--'}
                           </p>
                         </div>
                         <div>
-                          <p className="text-gray-500 text-xs mb-1">Δ</p>
+                          <p className="text-gray-300 text-xs mb-1">Δ</p>
                           <p className={`font-semibold ${
                             (latestDelta?.reaction_median_delta_pct || 0) > 0
                               ? 'text-amber-400'
@@ -434,7 +434,7 @@ export function NewDashboardContent({ data, profile }: DashboardContentProps) {
 
                   <button
                     onClick={() => router.push('/session')}
-                    className="w-full px-4 py-3 bg-gradient-to-r from-rose-700 to-rose-600 hover:from-rose-800 hover:to-rose-700 text-white font-medium rounded-xl shadow-lg shadow-rose-900/20 hover:shadow-rose-900/30 transition-all duration-200 hover:scale-[1.02]"
+                    className="w-full px-4 py-3 bg-gradient-to-r from-rose-500 to-rose-400 hover:from-rose-700 hover:to-rose-600 text-white font-medium rounded-xl shadow-lg shadow-rose-900/20 hover:shadow-rose-900/30 transition-all duration-200 hover:scale-[1.02]"
                   >
                     Start Check-In
                   </button>

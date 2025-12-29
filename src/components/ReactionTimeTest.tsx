@@ -201,7 +201,7 @@ export function ReactionTimeTest({ onComplete, onCancel }: ReactionTimeTestProps
         <div className="mt-6 flex flex-col sm:flex-row gap-3 sm:gap-4">
           <button
             onClick={() => setState('ready')}
-            className="flex-1 bg-gradient-to-r from-rose-700 to-rose-600 hover:from-rose-800 hover:to-rose-700 text-white px-6 py-3 rounded-xl font-medium text-sm sm:text-base transition-all duration-200"
+            className="flex-1 bg-gradient-to-r from-rose-500 to-rose-400 hover:from-rose-700 hover:to-rose-600 text-white px-6 py-3 rounded-xl font-medium text-sm sm:text-base transition-all duration-200"
           >
             Start Test
           </button>

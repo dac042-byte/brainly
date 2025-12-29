@@ -57,10 +57,10 @@ export function DashboardContent({ data, profile }: DashboardContentProps) {
     <div className="max-w-7xl mx-auto px-4 py-8">
       <div className="flex justify-between items-center mb-8">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">
+          <h1 className="text-3xl font-bold text-white">
             Dashboard
           </h1>
-          <p className="text-gray-600 dark:text-gray-400 mt-1">
+          <p className="text-gray-300 mt-1">
             Track your cognitive performance over time
           </p>
         </div>
@@ -110,10 +110,10 @@ export function DashboardContent({ data, profile }: DashboardContentProps) {
 
       {latestSession && (
         <div className="bg-gray-800/80 backdrop-blur-sm rounded-xl shadow-lg border border-gray-700 p-6 mb-6">
-          <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+          <h2 className="text-xl font-bold text-white mb-4">
             Latest Session
           </h2>
-          <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+          <p className="text-sm text-gray-300 mb-4">
             {format(new Date(latestSession.created_at), 'MMMM d, yyyy \'at\' h:mm a')}
           </p>
 
@@ -125,10 +125,10 @@ export function DashboardContent({ data, profile }: DashboardContentProps) {
                 </h3>
                 <div className="space-y-2">
                   <div>
-                    <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                    <p className="text-2xl font-bold text-white">
                       {Number(latestReactionMetric.median_rt_ms).toFixed(0)}ms
                     </p>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">Median</p>
+                    <p className="text-sm text-gray-300">Median</p>
                   </div>
                   {baseline && latestDelta?.reaction_median_delta_pct !== null && latestDelta?.reaction_median_delta_pct !== undefined && (
                     <div className="text-sm">
@@ -153,10 +153,10 @@ export function DashboardContent({ data, profile }: DashboardContentProps) {
                 </h3>
                 <div className="space-y-2">
                   <div>
-                    <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                    <p className="text-2xl font-bold text-white">
                       {(Number(latestSpeechMetric.speech_activity_ratio) * 100).toFixed(1)}%
                     </p>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">Activity Ratio</p>
+                    <p className="text-sm text-gray-300">Activity Ratio</p>
                   </div>
                   {baseline && latestDelta?.speech_activity_delta_pct !== null && latestDelta?.speech_activity_delta_pct !== undefined && (
                     <div className="text-sm">
@@ -179,7 +179,7 @@ export function DashboardContent({ data, profile }: DashboardContentProps) {
 
       {reactionTimeData.length > 0 && (
         <div className="bg-gray-800/80 backdrop-blur-sm rounded-xl shadow-lg border border-gray-700 p-6 mb-6">
-          <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+          <h2 className="text-xl font-bold text-white mb-4">
             Reaction Time Trend
           </h2>
           <ResponsiveContainer width="100%" height={300}>
@@ -206,7 +206,7 @@ export function DashboardContent({ data, profile }: DashboardContentProps) {
             </LineChart>
           </ResponsiveContainer>
           {baseline && (
-            <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
+            <p className="text-sm text-gray-300 mt-2">
               Baseline: {Number(baseline.baseline_median_rt_ms).toFixed(0)}ms
             </p>
           )}
@@ -215,7 +215,7 @@ export function DashboardContent({ data, profile }: DashboardContentProps) {
 
       {speechActivityData.length > 0 && (
         <div className="bg-gray-800/80 backdrop-blur-sm rounded-xl shadow-lg border border-gray-700 p-6 mb-6">
-          <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+          <h2 className="text-xl font-bold text-white mb-4">
             Speech Activity Trend
           </h2>
           <ResponsiveContainer width="100%" height={300}>
@@ -242,7 +242,7 @@ export function DashboardContent({ data, profile }: DashboardContentProps) {
             </LineChart>
           </ResponsiveContainer>
           {baseline && baseline.baseline_speech_activity && (
-            <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
+            <p className="text-sm text-gray-300 mt-2">
               Baseline: {(Number(baseline.baseline_speech_activity) * 100).toFixed(1)}%
             </p>
           )}
@@ -251,7 +251,7 @@ export function DashboardContent({ data, profile }: DashboardContentProps) {
 
       {sessions.length === 0 && (
         <div className="bg-gray-900 rounded-lg p-8 text-center">
-          <p className="text-gray-600 dark:text-gray-400 mb-4">
+          <p className="text-gray-300 mb-4">
             No sessions yet. Start your first session to begin tracking.
           </p>
           <a

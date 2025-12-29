@@ -37,7 +37,7 @@ export function HistoryContent({ sessions, baseline }: HistoryContentProps) {
               </p>
               <button
                 onClick={() => router.push('/session')}
-                className="px-8 py-4 bg-gradient-to-r from-rose-700 to-rose-600 text-white rounded-xl hover:from-rose-800 hover:to-rose-700 transition-all shadow-lg shadow-rose-900/30 font-medium"
+                className="px-8 py-4 bg-gradient-to-r from-rose-500 to-rose-400 text-white rounded-xl hover:from-rose-700 hover:to-rose-600 transition-all shadow-lg shadow-rose-900/30 font-medium"
               >
                 Start First Session
               </button>

@@ -57,7 +57,7 @@ export function Sidebar() {
       {/* Logo */}
       <div className="p-6">
         <div className="flex items-center gap-3 mb-2">
-          <div className="w-12 h-12 bg-gradient-to-br from-rose-700 to-rose-600 rounded-xl flex items-center justify-center overflow-hidden">
+          <div className="w-12 h-12 bg-gradient-to-br from-rose-500 to-rose-400 rounded-xl flex items-center justify-center overflow-hidden">
             <img
               src="/logo.png"
               alt="Cogna Logo"
@@ -92,8 +92,8 @@ export function Sidebar() {
       {/* Bottom section */}
       <div className="p-6">
         <div className="border-t border-slate-750 pt-4 space-y-3">
-          <p className="text-xs text-gray-500 leading-relaxed">
-            <strong className="text-slate-400">Not a medical device.</strong><br />
+          <p className="text-xs text-gray-300 leading-relaxed">
+            <strong className="text-slate-300">Not a medical device.</strong><br />
             Cogna is for performance monitoring and trend awareness only.
           </p>
           <div className="flex gap-4 text-xs">

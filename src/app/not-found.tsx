@@ -6,7 +6,7 @@ export default function NotFound() {
         <p className="text-xl text-slate-400 mb-8">Page not found</p>
         <a
           href="/dashboard"
-          className="inline-block px-6 py-3 bg-gradient-to-r from-rose-700 to-rose-600 text-white rounded-xl hover:from-rose-800 hover:to-rose-700 transition-all shadow-lg shadow-rose-900/30"
+          className="inline-block px-6 py-3 bg-gradient-to-r from-rose-500 to-rose-400 text-white rounded-xl hover:from-rose-700 hover:to-rose-600 transition-all shadow-lg shadow-rose-900/30"
         >
           Return to Dashboard
         </a>

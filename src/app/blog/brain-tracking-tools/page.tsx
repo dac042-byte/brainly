@@ -48,13 +48,13 @@ export default function BlogPost() {
         }}
       />
       <article className="container mx-auto px-4 py-12 max-w-4xl">
-        <Link href="/" className="text-rose-600 hover:underline mb-8 inline-block">← Back to Home</Link>
+        <Link href="/" className="text-rose-400 hover:underline mb-8 inline-block">← Back to Home</Link>
 
         <h1 className="text-4xl font-bold mb-4">
           Best Brain Tracking Tools for Cognitive Health Monitoring in 2025
         </h1>
 
-        <p className="text-gray-600 dark:text-gray-400 mb-8">
+        <p className="text-gray-300 mb-8">
           Published: January 2025 • 8 min read
         </p>
 
@@ -174,14 +174,14 @@ export default function BlogPost() {
           Test reaction time, speech patterns, and memory recall in just 2 minutes per week.
         </p>
 
-        <div className="bg-gradient-to-r from-rose-600 to-pink-600 text-white p-8 rounded-lg mt-8">
+        <div className="bg-gradient-to-r from-rose-400 to-pink-400 text-white p-8 rounded-lg mt-8">
           <h3 className="text-2xl font-bold mb-4">Ready to Start Brain Tracking?</h3>
           <p className="mb-6">
             Join thousands using Cogna for cognitive health monitoring. Free forever.
           </p>
           <Link
             href="/signup"
-            className="bg-white text-rose-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition inline-block"
+            className="bg-white text-rose-400 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition inline-block"
           >
             Get Started Free
           </Link>

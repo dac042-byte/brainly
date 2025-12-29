@@ -224,7 +224,7 @@ export function SessionContent({ profile }: SessionContentProps) {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <p className="text-gray-600 dark:text-slate-400">Loading...</p>
+        <p className="text-gray-300">Loading...</p>
       </div>
     )
   }
@@ -245,7 +245,7 @@ export function SessionContent({ profile }: SessionContentProps) {
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
             <button
               onClick={handleStartSession}
-              className="flex-1 bg-gradient-to-r from-rose-700 to-rose-600 hover:from-rose-800 hover:to-rose-700 text-white px-6 py-3 rounded-xl font-medium text-sm sm:text-base shadow-lg shadow-rose-900/20 transition-all duration-200"
+              className="flex-1 bg-gradient-to-r from-rose-500 to-rose-400 hover:from-rose-700 hover:to-rose-600 text-white px-6 py-3 rounded-xl font-medium text-sm sm:text-base shadow-lg shadow-rose-900/20 transition-all duration-200"
             >
               Continue Anyway
             </button>
@@ -293,7 +293,7 @@ export function SessionContent({ profile }: SessionContentProps) {
           <div className="mt-6 flex flex-col sm:flex-row gap-3 sm:gap-4">
             <button
               onClick={handleStartSession}
-              className="flex-1 bg-gradient-to-r from-rose-700 to-rose-600 hover:from-rose-800 hover:to-rose-700 text-white px-6 py-3 rounded-xl font-medium text-sm sm:text-base shadow-lg shadow-rose-900/20 transition-all duration-200 hover:shadow-rose-900/30"
+              className="flex-1 bg-gradient-to-r from-rose-500 to-rose-400 hover:from-rose-700 hover:to-rose-600 text-white px-6 py-3 rounded-xl font-medium text-sm sm:text-base shadow-lg shadow-rose-900/20 transition-all duration-200 hover:shadow-rose-900/30"
             >
               Begin Session
             </button>
@@ -349,7 +349,7 @@ export function SessionContent({ profile }: SessionContentProps) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-950 via-slate-900 to-slate-850 px-4 py-8 animate-fade-in">
         <div className="max-w-2xl w-full bg-slate-850/80 backdrop-blur-xl rounded-2xl border border-slate-750/50 p-6 sm:p-8 text-center animate-slide-up">
-          <div className="animate-spin rounded-full h-12 sm:h-16 w-12 sm:w-16 border-t-2 border-b-2 border-rose-600 mx-auto mb-4"></div>
+          <div className="animate-spin rounded-full h-12 sm:h-16 w-12 sm:w-16 border-t-2 border-b-2 border-rose-400 mx-auto mb-4"></div>
           <h2 className="text-2xl sm:text-3xl font-bold mb-2 text-white">
             Processing Session...
           </h2>
@@ -417,7 +417,7 @@ export function SessionContent({ profile }: SessionContentProps) {
 
           <button
             onClick={handleBackToDashboard}
-            className="bg-gradient-to-r from-rose-700 to-rose-600 hover:from-rose-800 hover:to-rose-700 text-white px-6 sm:px-8 py-3 rounded-xl font-medium text-sm sm:text-base shadow-lg shadow-rose-900/20 hover:shadow-rose-900/30 transition-all duration-200 hover:scale-[1.02]"
+            className="bg-gradient-to-r from-rose-500 to-rose-400 hover:from-rose-700 hover:to-rose-600 text-white px-6 sm:px-8 py-3 rounded-xl font-medium text-sm sm:text-base shadow-lg shadow-rose-900/20 hover:shadow-rose-900/30 transition-all duration-200 hover:scale-[1.02]"
           >
             View Dashboard
           </button>
