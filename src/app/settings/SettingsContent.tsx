@@ -15,6 +15,7 @@ interface SettingsContentProps {
 
 export function SettingsContent({ profile, user }: SettingsContentProps) {
   const router = useRouter()
+  const { theme, toggleTheme } = useTheme()
   const [audioStorageEnabled, setAudioStorageEnabled] = useState(profile.audio_storage_enabled)
   const [saving, setSaving] = useState(false)
   const [message, setMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null)
@@ -107,6 +108,61 @@ export function SettingsContent({ profile, user }: SettingsContentProps) {
                   Log Out
                 </button>
               </div>
+            </div>
+          </div>
+
+          {/* Theme Section */}
+          <div className="bg-white dark:bg-slate-850/80 backdrop-blur-xl rounded-2xl border border-gray-200 dark:border-slate-750/50 p-6 shadow-sm">
+            <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
+              Appearance
+            </h2>
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="font-medium text-gray-900 dark:text-white">Theme</p>
+                <p className="text-sm text-gray-600 dark:text-slate-400 mt-1">
+                  Switch between light and dark mode
+                </p>
+              </div>
+              <button
+                onClick={toggleTheme}
+                className="px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors flex items-center gap-2"
+              >
+                {theme === 'light' ? (
+                  <>
+                    <svg
+                      className="w-5 h-5 text-gray-700"
+                      fill="none"
+                      strokeWidth="2"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+                      />
+                    </svg>
+                    <span className="text-gray-900 font-medium">Dark</span>
+                  </>
+                ) : (
+                  <>
+                    <svg
+                      className="w-5 h-5 text-gray-300"
+                      fill="none"
+                      strokeWidth="2"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+                      />
+                    </svg>
+                    <span className="text-gray-100 font-medium">Light</span>
+                  </>
+                )}
+              </button>
             </div>
           </div>
 
