@@ -67,20 +67,20 @@ export function DashboardContent({ data, profile }: DashboardContentProps) {
         <div className="flex items-center gap-3">
           <a
             href="/history"
-            className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-gray-300 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-all"
+            className="px-4 py-2 text-sm font-medium text-gray-300 bg-gray-800/80 backdrop-blur-sm border border-gray-700 rounded-lg hover:bg-gray-700 transition-all"
           >
             History
           </a>
           <a
             href="/settings"
-            className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-gray-300 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-all"
+            className="px-4 py-2 text-sm font-medium text-gray-300 bg-gray-800/80 backdrop-blur-sm border border-gray-700 rounded-lg hover:bg-gray-700 transition-all"
           >
             Settings
           </a>
           <ThemeToggle />
           <button
             onClick={handleSignOut}
-            className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-gray-300 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-all"
+            className="px-4 py-2 text-sm font-medium text-gray-300 bg-gray-800/80 backdrop-blur-sm border border-gray-700 rounded-lg hover:bg-gray-700 transition-all"
           >
             Sign Out
           </button>
@@ -88,7 +88,7 @@ export function DashboardContent({ data, profile }: DashboardContentProps) {
       </div>
 
       {!baseline && sessions.length < 1 && (
-        <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4 mb-6">
+        <div className="bg-blue-900/20 border border-blue-800 rounded-lg p-4 mb-6">
           <h3 className="text-sm font-medium text-blue-900 dark:text-blue-200 mb-1">
             Building Your Baseline
           </h3>
@@ -109,7 +109,7 @@ export function DashboardContent({ data, profile }: DashboardContentProps) {
       </div>
 
       {latestSession && (
-        <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 p-6 mb-6">
+        <div className="bg-gray-800/80 backdrop-blur-sm rounded-xl shadow-lg border border-gray-700 p-6 mb-6">
           <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-4">
             Latest Session
           </h2>
@@ -120,7 +120,7 @@ export function DashboardContent({ data, profile }: DashboardContentProps) {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {latestReactionMetric && (
               <div>
-                <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <h3 className="text-sm font-medium text-gray-300 mb-2">
                   Reaction Time
                 </h3>
                 <div className="space-y-2">
@@ -134,8 +134,8 @@ export function DashboardContent({ data, profile }: DashboardContentProps) {
                     <div className="text-sm">
                       <span className={
                         Number(latestDelta?.reaction_median_delta_pct) > 0
-                          ? 'text-gray-700 dark:text-gray-300'
-                          : 'text-gray-700 dark:text-gray-300'
+                          ? 'text-gray-300'
+                          : 'text-gray-300'
                       }>
                         {Number(latestDelta?.reaction_median_delta_pct) > 0 ? '+' : ''}
                         {Number(latestDelta?.reaction_median_delta_pct).toFixed(1)}% from baseline
@@ -148,7 +148,7 @@ export function DashboardContent({ data, profile }: DashboardContentProps) {
 
             {latestSpeechMetric && (
               <div>
-                <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <h3 className="text-sm font-medium text-gray-300 mb-2">
                   Speech Activity
                 </h3>
                 <div className="space-y-2">
@@ -162,8 +162,8 @@ export function DashboardContent({ data, profile }: DashboardContentProps) {
                     <div className="text-sm">
                       <span className={
                         Number(latestDelta?.speech_activity_delta_pct) > 0
-                          ? 'text-gray-700 dark:text-gray-300'
-                          : 'text-gray-700 dark:text-gray-300'
+                          ? 'text-gray-300'
+                          : 'text-gray-300'
                       }>
                         {Number(latestDelta?.speech_activity_delta_pct) > 0 ? '+' : ''}
                         {Number(latestDelta?.speech_activity_delta_pct).toFixed(1)}% from baseline
@@ -178,7 +178,7 @@ export function DashboardContent({ data, profile }: DashboardContentProps) {
       )}
 
       {reactionTimeData.length > 0 && (
-        <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 p-6 mb-6">
+        <div className="bg-gray-800/80 backdrop-blur-sm rounded-xl shadow-lg border border-gray-700 p-6 mb-6">
           <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-4">
             Reaction Time Trend
           </h2>
@@ -214,7 +214,7 @@ export function DashboardContent({ data, profile }: DashboardContentProps) {
       )}
 
       {speechActivityData.length > 0 && (
-        <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 p-6 mb-6">
+        <div className="bg-gray-800/80 backdrop-blur-sm rounded-xl shadow-lg border border-gray-700 p-6 mb-6">
           <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-4">
             Speech Activity Trend
           </h2>
@@ -250,7 +250,7 @@ export function DashboardContent({ data, profile }: DashboardContentProps) {
       )}
 
       {sessions.length === 0 && (
-        <div className="bg-gray-50 dark:bg-gray-900 rounded-lg p-8 text-center">
+        <div className="bg-gray-900 rounded-lg p-8 text-center">
           <p className="text-gray-600 dark:text-gray-400 mb-4">
             No sessions yet. Start your first session to begin tracking.
           </p>

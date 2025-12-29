@@ -35,21 +35,21 @@ export default function LandingPage() {
           Comprehensive Brain Tracking Tools
         </h2>
         <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-          <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+          <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
             <h3 className="text-xl font-bold mb-3 text-rose-600 dark:text-rose-400">Reaction Time Test</h3>
             <p className="text-gray-700 dark:text-white">
               Track your cognitive speed and response consistency.
               Detect changes in processing speed over time.
             </p>
           </div>
-          <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+          <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
             <h3 className="text-xl font-bold mb-3 text-rose-600 dark:text-rose-400">Speech Analysis</h3>
             <p className="text-gray-700 dark:text-white">
               Monitor verbal fluency, articulation, and speech patterns.
               AI-powered analysis of cognitive communication.
             </p>
           </div>
-          <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+          <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
             <h3 className="text-xl font-bold mb-3 text-rose-600 dark:text-rose-400">Memory Tracking</h3>
             <p className="text-gray-700 dark:text-white">
               Test short-term memory retention and recall ability.
@@ -60,7 +60,7 @@ export default function LandingPage() {
       </section>
 
       {/* Benefits Section */}
-      <section className="bg-gray-50 dark:bg-gray-900 py-16">
+      <section className="bg-gray-900 py-16">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-12 text-gray-900 dark:text-white">
             Why Use Brain Tracking Tools?
