@@ -26,15 +26,11 @@ export default async function MissionPage() {
           <div className="bg-slate-850/80 backdrop-blur-xl rounded-2xl border border-slate-750/50 p-8">
             <div className="space-y-4 text-slate-300 leading-relaxed text-[15px]">
               <p>
-                Cogna was built by a college student and MMA fighter who wants to spread the reality of brain health in contact sports. After years of training and competing, the awareness of cumulative impact became impossible to ignore. The question wasn't whether contact sports affect the brain—it was how to track those changes over time in a way that's private, accessible, and actually useful for athletes who love what they do but want to be smart about it.
+                Cogna was built by a college student and MMA fighter who wants to spread the reality of brain health in contact sports. After years of training and competing, the awareness of cumulative impact became impossible to ignore. The question wasn't whether contact sports affect the brain—it was how to track those changes over time in a way that's private, accessible, and actually useful for all people.
               </p>
 
               <p>
-                This tool isn't only designed for athletes, but for anyone who wants to be more conscious of their brain health. This isn't about fear or stopping what you love. It's about having the data to make informed decisions. Track your cognitive performance over time. Notice patterns. Know when you need rest. Be proactive, not reactive.
-              </p>
-
-              <p>
-                Athletes shouldn't have to choose between tracking their brain health and keeping their career private. Cogna keeps all your data secure and personal. No data sharing with coaches, teams, or organizations. No third-party analytics or tracking, you own your data completely. All for completely free. 
+                This tool isn't only designed for athletes, but for anyone who wants to be more conscious of their brain health. Cogna keeps all your data secure and personal. No data sharing with coaches, teams, or organizations. No third-party analytics or tracking, you own your data completely. All for completely free. 
               </p>
 
               <p>
