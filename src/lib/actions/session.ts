@@ -1,7 +1,5 @@
-'use server'
-
-import { createClient } from '@/lib/supabase/server'
-import { revalidatePath } from 'next/cache'
+// Client-side session actions for mobile app compatibility
+import { createClient } from '@/lib/supabase/client'
 import { validateReactionTime, validateSpeechMetrics } from '@/lib/validation'
 import { checkRateLimit, RATE_LIMITS } from '@/lib/ratelimit'
 
@@ -18,7 +16,7 @@ interface ReactionTrialInput {
 }
 
 export async function createSession() {
-  const supabase = await createClient()
+  const supabase = createClient()
   const { data: { user } } = await supabase.auth.getUser()
 
   if (!user) {
@@ -49,7 +47,7 @@ export async function createSession() {
 }
 
 export async function saveReactionTrials(sessionId: string, trials: ReactionTrialInput[], focusLossCount: number) {
-  const supabase = await createClient()
+  const supabase = createClient()
   const { data: { user } } = await supabase.auth.getUser()
 
   if (!user) {
@@ -129,7 +127,7 @@ export async function saveSpeechData(
     skipped: boolean
   }
 ) {
-  const supabase = await createClient()
+  const supabase = createClient()
   const { data: { user } } = await supabase.auth.getUser()
 
   if (!user) {
@@ -186,7 +184,7 @@ export async function saveSpeechMetrics(
     words_per_minute?: number
   }
 ) {
-  const supabase = await createClient()
+  const supabase = createClient()
   const { data: { user } } = await supabase.auth.getUser()
 
   if (!user) {
@@ -218,7 +216,7 @@ export async function saveSpeechMetrics(
 }
 
 export async function completeSession(sessionId: string) {
-  const supabase = await createClient()
+  const supabase = createClient()
   const { data: { user } } = await supabase.auth.getUser()
 
   if (!user) {
@@ -234,12 +232,10 @@ export async function completeSession(sessionId: string) {
 
   await computeBaseline(user.id)
   await computeSessionDeltas(sessionId, user.id)
-
-  revalidatePath('/dashboard')
 }
 
 async function computeBaseline(userId: string) {
-  const supabase = await createClient()
+  const supabase = createClient()
 
   const { data: existingBaseline } = await supabase
     .from('baseline_tracking')
@@ -328,7 +324,7 @@ async function computeBaseline(userId: string) {
 }
 
 async function computeSessionDeltas(sessionId: string, userId: string) {
-  const supabase = await createClient()
+  const supabase = createClient()
 
   const { data: baseline } = await supabase
     .from('baseline_tracking')
@@ -475,7 +471,7 @@ async function computeSessionDeltas(sessionId: string, userId: string) {
 }
 
 export async function checkRecentSessions() {
-  const supabase = await createClient()
+  const supabase = createClient()
   const { data: { user } } = await supabase.auth.getUser()
 
   if (!user) {

@@ -1,10 +1,9 @@
-'use server'
-
-import { createClient } from '@/lib/supabase/server'
+// Client-side dashboard actions for mobile app compatibility
+import { createClient } from '@/lib/supabase/client'
 import type { DashboardData } from '@/lib/types'
 
 export async function getDashboardData(): Promise<DashboardData> {
-  const supabase = await createClient()
+  const supabase = createClient()
   const { data: { user } } = await supabase.auth.getUser()
 
   if (!user) {
@@ -48,7 +47,7 @@ export async function getDashboardData(): Promise<DashboardData> {
 }
 
 export async function getUserProfile() {
-  const supabase = await createClient()
+  const supabase = createClient()
   const { data: { user } } = await supabase.auth.getUser()
 
   if (!user) {
