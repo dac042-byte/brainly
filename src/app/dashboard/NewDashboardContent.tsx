@@ -174,9 +174,6 @@ export function NewDashboardContent({ data, profile }: DashboardContentProps) {
                       </div>
                       <div className="flex flex-col gap-1">
                         <span className="text-xs text-rose-400">Reaction Time</span>
-                        <span className={`px-2 py-0.5 rounded-full text-xs font-medium w-fit ${reactionStatus.color}`}>
-                          {reactionStatus.label}
-                        </span>
                       </div>
                     </div>
                   )}
@@ -191,9 +188,6 @@ export function NewDashboardContent({ data, profile }: DashboardContentProps) {
                       </div>
                       <div className="flex flex-col gap-1">
                         <span className="text-xs text-blue-400">Speech</span>
-                        <span className={`px-2 py-0.5 rounded-full text-xs font-medium w-fit ${speechStatus.color}`}>
-                          {speechStatus.label}
-                        </span>
                       </div>
                     </div>
                   )}
