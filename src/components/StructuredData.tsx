@@ -6,7 +6,7 @@ export function StructuredData() {
     "@type": "Organization",
     "name": "Cogna",
     "url": "https://cognaapp.com",
-    "logo": "https://cognaapp.com/icon.png",
+    "logo": "https://cognaapp.com/logo.png",
     "description": "Free brain tracking tools to monitor cognitive health through reaction time, speech pattern, and memory recall assessments.",
     "sameAs": [
       // Add your social media URLs here when available
