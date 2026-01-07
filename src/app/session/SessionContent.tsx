@@ -108,7 +108,7 @@ export function SessionContent({ profile }: SessionContentProps) {
       })
 
       await saveReactionTrials(sessionId, trials, focusLossCount)
-      setState('memory-recall')
+      setState('speech')
     } catch (error) {
       console.error('Failed to save reaction trials:', error)
       alert('Failed to save reaction time data. Please try again.')
@@ -170,19 +170,7 @@ export function SessionContent({ profile }: SessionContentProps) {
       }
 
       setSpeechMetrics(metrics)
-
-      // Update streak
-      const { data: { user } } = await supabase.auth.getUser()
-      if (user) {
-        await supabase.rpc('update_user_streak', {
-          p_user_id: user.id,
-          p_test_date: new Date().toISOString().split('T')[0]
-        })
-      }
-
-      // Complete session
-      await completeSession(sessionId)
-      setState('complete')
+      setState('memory-recall')
     } catch (error) {
       console.error('[Speech] Failed to save speech data:', error)
       alert('Failed to save speech data. Please try again.')
@@ -208,7 +196,19 @@ export function SessionContent({ profile }: SessionContentProps) {
       })
 
       setMemoryScore(score)
-      setState('speech')
+
+      // Update streak
+      const { data: { user } } = await supabase.auth.getUser()
+      if (user) {
+        await supabase.rpc('update_user_streak', {
+          p_user_id: user.id,
+          p_test_date: new Date().toISOString().split('T')[0]
+        })
+      }
+
+      // Complete session
+      await completeSession(sessionId)
+      setState('complete')
     } catch (error) {
       console.error('Failed to save memory test:', error)
       alert('Failed to save memory test data. Please try again.')
@@ -275,8 +275,8 @@ export function SessionContent({ profile }: SessionContentProps) {
             <ol className="list-decimal list-inside space-y-2 text-sm sm:text-base">
               <li>Memorize words (10 seconds)</li>
               <li>Complete reaction time test</li>
-              <li>Recall the words from memory</li>
               <li>Record speech sample</li>
+              <li>Recall the words from memory</li>
             </ol>
             <div className="bg-rose-900/20 border border-rose-700/30 rounded-xl p-4">
               <h3 className="text-sm font-medium text-rose-400 mb-2">
